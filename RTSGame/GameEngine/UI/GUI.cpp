@@ -222,12 +222,19 @@ void GUI::update(sf::Time deltaTime)
 
 void GUI::renderResources(sf::RenderTarget & target, sf::View & view)
 {
-	this->resourceBar.setPosition(view.getCenter().x - (view.getSize().x / 2), view.getCenter().y - (view.getSize().y / 2) - 2);
-	this->woodText.setPosition(sf::Vector2f(view.getCenter().x - (view.getSize().x / 2) + 50, view.getCenter().y - (view.getSize().y / 2) + 10));
-	this->stoneText.setPosition(sf::Vector2f(view.getCenter().x - (view.getSize().x / 2) + 350, view.getCenter().y - (view.getSize().y / 2) + 10));
-	this->coalText.setPosition(sf::Vector2f(view.getCenter().x - (view.getSize().x / 2) + 650, view.getCenter().y - (view.getSize().y / 2) + 10));
-	this->goldText.setPosition(sf::Vector2f(view.getCenter().x - (view.getSize().x / 2) + 950, view.getCenter().y - (view.getSize().y / 2) + 10));
+	this->resourceBar.setPosition(0.f, -2.f);
+	this->woodText.setPosition(50,10);
+	this->stoneText.setPosition(350,10);
+	this->coalText.setPosition(650,10);
+	this->goldText.setPosition(950, 10);
 
+	//this->resourceBar.setPosition(view.getCenter().x - (view.getSize().x / 2), view.getCenter().y - (view.getSize().y / 2) - 2);
+	//this->woodText.setPosition(sf::Vector2f(view.getCenter().x - (view.getSize().x / 2) + 50, view.getCenter().y - (view.getSize().y / 2) + 10));
+	//this->stoneText.setPosition(sf::Vector2f(view.getCenter().x - (view.getSize().x / 2) + 350, view.getCenter().y - (view.getSize().y / 2) + 10));
+	//this->coalText.setPosition(sf::Vector2f(view.getCenter().x - (view.getSize().x / 2) + 650, view.getCenter().y - (view.getSize().y / 2) + 10));
+	//this->goldText.setPosition(sf::Vector2f(view.getCenter().x - (view.getSize().x / 2) + 950, view.getCenter().y - (view.getSize().y / 2) + 10));
+
+	target.setView(sf::View(sf::FloatRect(0, 0, 1920, 1080)));
 	target.draw(resourceBar);
 	target.draw(woodText);
 	target.draw(stoneText);
@@ -237,17 +244,17 @@ void GUI::renderResources(sf::RenderTarget & target, sf::View & view)
 
 void GUI::render(sf::RenderTarget & target, sf::View & view)
 {
-	this->pauseButton.setPosition(view.getCenter().x + (view.getSize().x / 2) - 110.f, view.getCenter().y - (view.getSize().y / 2) + 10.f);
-	this->settingsButton.setPosition(view.getCenter().x + (view.getSize().x / 2) - 60.f, view.getCenter().y - (view.getSize().y / 2) + 10.f);
-	this->guiBox[0].setPosition(view.getCenter().x - (view.getSize().x / 2), view.getCenter().y + (view.getSize().y / 2) - guiBox[0].getSize().y);
-	this->guiBox[1].setPosition(view.getCenter().x - (view.getSize().x / 2) + guiBox[0].getSize().x, view.getCenter().y + (view.getSize().y / 2) - guiBox[1].getSize().y);
-	this->guiBox[2].setPosition(guiBox[1].getPosition().x + guiBox[1].getSize().x, view.getCenter().y + (view.getSize().y / 2) - guiBox[2].getSize().y);
-	this->guiBox[3].setPosition(guiBox[2].getPosition().x + guiBox[2].getSize().x, view.getCenter().y + (view.getSize().y / 2) - guiBox[3].getSize().y);
+	this->pauseButton.setPosition(1810.f, 10.f);
+	this->settingsButton.setPosition(1870.f, 10.f);
+	this->guiBox[0].setPosition(0, 1080 - guiBox[0].getSize().y);
+	this->guiBox[1].setPosition(0 + guiBox[0].getSize().x, 1080 - guiBox[1].getSize().y);
+	this->guiBox[2].setPosition(guiBox[1].getPosition().x + guiBox[1].getSize().x, 1080 - guiBox[2].getSize().y);
+	this->guiBox[3].setPosition(guiBox[2].getPosition().x + guiBox[2].getSize().x, 1080 - guiBox[3].getSize().y);
 	this->miniMapBox.setPosition(this->guiBox[3].getPosition().x + 45, this->guiBox[3].getPosition().y + 10);
 	this->chatBox.setPosition(this->guiBox[0].getPosition().x + 10, this->guiBox[0].getPosition().y + 10);
 	this->chatScrollBar.setPosition(this->chatBox.getPosition().x + this->chatBox.getSize().x + 10, this->guiBox[0].getPosition().y + 10);
-	this->dayText.setPosition(view.getCenter().x + (view.getSize().x / 4) + 10, view.getCenter().y - (view.getSize().y / 2) + 10);
-	this->timerText.setPosition(view.getCenter().x + (view.getSize().x / 4) + 170, view.getCenter().y - (view.getSize().y / 2) + 10);
+	this->dayText.setPosition(1450, 10);
+	this->timerText.setPosition(1610, 10);
 	this->renderResources(target, view);
 
 	int max = 0;

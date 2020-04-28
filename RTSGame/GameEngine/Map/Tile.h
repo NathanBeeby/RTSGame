@@ -1,21 +1,30 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <ctime>
 struct Tile
 {
-
-	//// Initialization
-	//void initVariables();
-	//void initTextures();
-	//void initSprite();
-	//Tile();
-	//virtual ~Tile();
-public:
 	// Private variables
-	sf::RectangleShape tile;
-	sf::Texture tileTexture;
+	sf::Vector2i tileMax;
+	std::vector<std::vector<sf::RectangleShape>> tiles;
+	std::vector<sf::Texture> tileTexture;
 	//float posX, posY;
 	//int sizeX, sizeY;
 
+	//// Initialization
+	void initVariables();
+	void initTextures();
+	void initSprite();
+public:
+	// Constructor / Destructor
+	Tile();
+	virtual ~Tile();
+	// Public Variables
+	int fromX, fromY, toX, toY;
+	// Public Functions
+	void updateTileView();
+	void update();
+	void render(sf::RenderTarget &target);
 	//// Modifiers
 	//void setPosition(sf::Vector2f pos);
 	//const sf::Vector2f getPosition() const;

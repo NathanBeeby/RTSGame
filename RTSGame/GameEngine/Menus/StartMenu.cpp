@@ -4,6 +4,7 @@
 
 void StartMenu::initVariables()
 {
+	
 }
 
 void StartMenu::initSprites()

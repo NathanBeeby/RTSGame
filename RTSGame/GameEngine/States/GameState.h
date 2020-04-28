@@ -9,7 +9,7 @@
 #include "../Menus/GameSuccessMenu.h"
 // GameStates
 #include "Game.h"
-
+#include "../Constants.h"
 class GameState
 {
 private:
@@ -29,10 +29,9 @@ private:
 	// Game 
 	Game game;
 
-
 	// Initialization
 	void initVariables();
-
+	void initSprites();
 public:
 	// Constructor / Destructor
 	GameState();
@@ -42,7 +41,6 @@ public:
 	sf::Vector2f viewMovement;
 	int gState;
 	enum gameState { start = 0, options, instructions, credits, initGame, gameOn, gameFailure, gameSuccess };
-
 	// Accessors
 	const float& getZoomAmt() const;
 
@@ -57,8 +55,7 @@ public:
 	void updateMouseDragged();
 	void updateGameState(sf::Time deltaTime);
 	void update(sf::Time deltaTime);
-	void renderGameState(sf::RenderTarget &target, sf::View &view);
-	void render(sf::RenderTarget &target, sf::View &view);
-
+	void renderGameState(sf::RenderWindow &window, sf::View &view);
+	void render(sf::RenderWindow &window, sf::View &view);
 };
 

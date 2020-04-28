@@ -1,49 +1,41 @@
 #pragma once
-#include "States/GameState.h"
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include "Constants.h"
+
 class MainWindow
 {
 private:
 	// Private Variables
-	sf::RenderWindow* window;
-	sf::VideoMode videoMode;
+	void Setup(const std::string& l_title,
+		const sf::Vector2u& l_size);
+	void Destroy();
+	void Create();
+
 	sf::Vector2f screenSize;
-
-	sf::Vector2u mousePosScreen;
-	sf::Vector2i mousePosWindow;
-	sf::Vector2f mousePosView;
-	sf::Vector2u mousePosGrid;
-
-	sf::View view;
-	bool isRunning;
-	float viewSpeed;
-	sf::Event ev;
-
-	GameState gameState;
-	sf::Clock clock;
-	// Initialization
-	void initWindow();
-	void initView();
-
+	bool m_isFullscreen;
+	bool m_isDone;
+	sf::Vector2u m_windowSize;
+	std::string m_windowTitle;
 
 public:
 	// Constructor / Destructor
 	MainWindow();
-	virtual ~MainWindow();
+	MainWindow(const std::string& l_title, const sf::Vector2u& l_size);
+	~MainWindow();
 
+	// Public Variables
+	sf::RenderWindow m_window;
 	// Accessors
-	const bool running() const;
-	const sf::Vector2i& getMousePosScreen() const;
-	const sf::Vector2i& getMousePosWindow() const;
-	const sf::Vector2f& getMousePosView() const;
-	const sf::Vector2u& getMousePosGrid() const;
+
 
 	// Public functions
-	void keyInput(sf::Keyboard::Key key);
-	void mouseInput();
-	void updateView();
-	void updatePollEvents(sf::Time deltaTime);
-	void update(sf::Time deltaTime);
-	void render();
-	void run();
+	void BeginDraw(); // Clear the window.
+	void EndDraw(); // Display the changes.
+	bool IsFullscreen();
+	bool IsDone();
+	void close();
+	void ToggleFullscreen();
+	sf::Vector2u GetWindowSize();
 };
 

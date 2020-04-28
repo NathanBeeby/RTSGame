@@ -11,10 +11,15 @@ void GameState::initVariables()
 	this->viewMovement = sf::Vector2f(0, 0);
 }
 
+void GameState::initSprites()
+{
+}
+
 // Constructor / Destructor
 GameState::GameState()
 {
 	this->initVariables();
+	this->initSprites();
 }
 
 
@@ -25,14 +30,14 @@ GameState::~GameState()
 
 const float & GameState::getZoomAmt() const
 {
-	std::cout << "ZoomAmt: " << this->zoomAmt << std::endl;
+	//std::cout << "ZoomAmt: " << this->zoomAmt << std::endl;
 	return this->zoomAmt;
 }
 
 void GameState::zoomOut()
 {
 	if (zoomInt < 20) {
-		this->zoomAmt += 0.1f;
+		this->zoomAmt += 0.05f;
 		this->zoomInt++;
 		std::cout << "Zooming Out" << std::endl;
 	}
@@ -41,7 +46,7 @@ void GameState::zoomOut()
 void GameState::zoomIn()
 {
 	if (zoomInt > -20) {
-		this->zoomAmt -= 0.1f;
+		this->zoomAmt -= 0.05f;
 		this->zoomInt--;
 		std::cout << "Zooming In" << std::endl;
 	}
@@ -136,16 +141,16 @@ void GameState::updateMouseDragged()
 		my = sf::Mouse::getPosition().y;
 
 		if (mx > mx0) {
-			viewMovement.x -= 30.f;
+			viewMovement.x += 10.f;
 		}
 		else if (mx0 > mx) {
-			viewMovement.x += 30.f;
+			viewMovement.x -= 10.f;
 		}
 		if (my > my0) {
-			viewMovement.y -= 30.f;
+			viewMovement.y += 10.f;
 		}
 		else if (my0 > my) {
-			viewMovement.y += 30.f;
+			viewMovement.y -= 10.f;
 		}
 }
 
@@ -206,46 +211,46 @@ void GameState::updateGameState(sf::Time deltaTime)
 }
 
 void GameState::update(sf::Time deltaTime)
-{
+{	
 	viewMovement.x = 0;
 	viewMovement.y = 0;
-	this->zoomAmt = 1.f;
-	std::cout << "ZoomInt = " << this->zoomInt << std::endl;
+	//std::cout << "ZoomInt = " << this->zoomInt << std::endl;
 	this->updateGameState(deltaTime);
 	if (gState == gameOn && mouseHeld) {
 		this->updateMouseDragged();
 	}
 }
 
-void GameState::renderGameState(sf::RenderTarget &target, sf::View &view)
+void GameState::renderGameState(sf::RenderWindow &window, sf::View &view)
 {
 	if (this->gState == start) {
-		this->startMenu.render(target);
+		this->startMenu.render(window);
 	}
 	else if (this->gState == options) {
-		this->optionsMenu.render(target);
+		this->optionsMenu.render(window);
 	}
 	else if (this->gState == instructions) {
-		this->instructionsMenu.render(target);
+		this->instructionsMenu.render(window);
 	}
 	else if (this->gState == credits) {
-		this->creditsMenu.render(target);
+		this->creditsMenu.render(window);
 	}
 	else if (this->gState == initGame) {
-		this->initGameMenu.render(target);
+		this->initGameMenu.render(window);
 	}
 	else if (this->gState == gameOn) {
-		this->game.render(target, view);
+		this->game.render(window, view);
+		this->zoomAmt = 1.f;
 	}
 	else if (this->gState == gameFailure) {
-		this->failMenu.render(target);
+		this->failMenu.render(window);
 	}
 	else if (this->gState == gameSuccess) {
-		this->successMenu.render(target);
+		this->successMenu.render(window);
 	}
 }
 
-void GameState::render(sf::RenderTarget & target, sf::View &view)
+void GameState::render(sf::RenderWindow &window, sf::View &view)
 {
-	renderGameState(target, view);
+	renderGameState(window, view);
 }
