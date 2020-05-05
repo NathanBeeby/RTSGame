@@ -120,9 +120,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GameEngine\GameAssets\Animator.cpp" />
+    <ClCompile Include="GameEngine\GameAssets\AssetManager.cpp" />
     <ClCompile Include="GameEngine\Map\Objects\CoalOre.cpp" />
     <ClCompile Include="GameEngine\Characters\Character.cpp" />
     <ClCompile Include="GameEngine\Map\Tile.cpp" />
+    <ClCompile Include="GameEngine\Map\TileProperties.cpp" />
     <ClCompile Include="GameEngine\UI\chatBar.cpp" />
     <ClCompile Include="GameEngine\Characters\AI\Ally.cpp" />
     <ClCompile Include="AudioEngine\Music\GameMusic.cpp" />
@@ -152,6 +156,9 @@
     <ClCompile Include="GameEngine\Map\Objects\Trees.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="GameEngine\GameAssets\Animator.h" />
+    <ClInclude Include="GameEngine\GameAssets\AssetManager.h" />
     <ClInclude Include="GameEngine\Map\Objects\CoalOre.h" />
     <ClInclude Include="GameEngine\Characters\Character.h" />
     <ClInclude Include="GameEngine\Constants.h" />

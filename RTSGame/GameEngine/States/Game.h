@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "../UI/GUI.h"
 #include "../Map/Tile.h"
+#include "../Characters/Player.h"
 class Game {
 private:
 	// Private Variables
@@ -8,6 +9,9 @@ private:
 	unsigned gridSizeU = static_cast<unsigned>(gridSizeF);
 	GUI gui;
 	Tile tile;
+	Player player;
+	sf::View miniMap;
+
 	std::vector<sf::RectangleShape> sprite;
 	std::vector<sf::Texture> spriteTexture;
 	sf::RectangleShape tileSelector;
@@ -15,7 +19,7 @@ private:
 	sf::Vector2i mousePosWindow;
 	sf::Vector2f mousePosView;
 	sf::Vector2u mousePosGrid;
-
+	sf::Vector2f playerDestination;
 	// Initialization
 	void initVariables();
 	void initTextures();

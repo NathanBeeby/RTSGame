@@ -2,7 +2,10 @@
 #include <sstream>
 void Game::initVariables()
 {
-
+	this->miniMap.setViewport(sf::FloatRect(0.0235f, 0.824f, 0.208f, 0.165f));
+	this->miniMap.setCenter(sf::Vector2f(1700.f, 100.f));
+	this->miniMap.setSize(sf::Vector2f(200.f, 200.f));
+	this->playerDestination = sf::Vector2f(10, 10);
 }
 
 void Game::initTextures()
@@ -70,10 +73,23 @@ void Game::mouseHandler(sf::RenderWindow & window)
 	mousePosGrid.y = (mousePosView.y / gridSizeU);
 	std::stringstream ss;
 
-	ss << "Mouse Pos Window:  X - " << mousePosWindow.x << ", Y - " << mousePosWindow.y << "\n" <<
-		"Mouse Pos View:  X - " << mousePosView.x << ", Y - " << mousePosView.y << "\n" <<
-		"Mouse Pos Grid:  X - " << mousePosGrid.x << ", Y - " << mousePosGrid.y << "\n";
-	std::cout << ss.str() << std::endl;
+	//ss << "Mouse Pos Window:  X - " << mousePosWindow.x << ", Y - " << mousePosWindow.y << "\n" <<
+	//	"Mouse Pos View:  X - " << mousePosView.x << ", Y - " << mousePosView.y << "\n" <<
+	//	"Mouse Pos Grid:  X - " << mousePosGrid.x << ", Y - " << mousePosGrid.y << "\n";
+	//std::cout << ss.str() << std::endl;
+	
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+		if (mousePosGrid.x > 0) {
+			if (mousePosGrid.y > 0) {
+				playerDestination = mousePosView;
+			}
+		}
+	}
+
+	// Fix player not moving to destination  
+	//std::cout << "Player Destination X: " << playerDestination.x << ", Player Destination Y: " << playerDestination.y << std::endl;
+	player.movePlayer(playerDestination);
 }
 
 void Game::updateTileView(sf::View &view)
@@ -88,12 +104,17 @@ void Game::updateTileView(sf::View &view)
 	tile.toX = view.getCenter().x / gridSizeF + 15;
 	tile.fromY = view.getCenter().y / gridSizeF - 7;
 	tile.toY = view.getCenter().y / gridSizeF + 7;
+
+	tile.miniMapFromX = view.getCenter().x / gridSizeF - 15;
+	tile.miniMapToX = view.getCenter().x / gridSizeF + 36;
+	tile.miniMapFromY = view.getCenter().y / gridSizeF - 7;
+	tile.miniMapToY = view.getCenter().y / gridSizeF + 16;
 }
 
 
 void Game::update(sf::Time deltaTime)
 {
-	
+
 	this->tile.update();
 	this->gui.update(deltaTime);
 }
@@ -106,8 +127,17 @@ void Game::render(sf::RenderWindow &window, sf::View &view)
 	mousePosGrid.y = (mousePosView.y / gridSizeU);
 	this->tileSelector.setPosition(mousePosGrid.x * gridSizeF, mousePosGrid.y * gridSizeF);
 	tile.render(window);
+	player.render(window);
 	window.draw(tileSelector);
 	gui.render(window, view);
+	tile.renderMiniMap(window, view);
 	this->updateTileView(view);
+	window.setView(miniMap);
+
+	// Need to draw 1/4 of the map within the mini map view, if the main view is on one of the 4 quaters
+	// Display that quater on the minimap view
+	// TILE MINIMAP BELOW NEEDS FIXING - vector out of range when drawing
+	//tile.renderMiniMap(window);
+	window.setView(window.getDefaultView());
 
 }

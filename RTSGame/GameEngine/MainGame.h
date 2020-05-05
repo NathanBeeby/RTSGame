@@ -10,6 +10,7 @@ private:
 	sf::Clock clock;
 	sf::View view;
 	sf::Event ev;
+	sf::Vector2i startLocation;
 	MainWindow m_window;
 	bool isRunning;
 	float viewSpeed;

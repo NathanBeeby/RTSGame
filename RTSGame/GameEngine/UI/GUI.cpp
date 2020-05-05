@@ -4,10 +4,10 @@
 // Initialization
 void GUI::initVariables()
 {
-	this->woodValue = 0;
-	this->stoneValue = 0;
-	this->coalValue = 0;
-	this->goldValue = 0;
+	this->foodValue = 1000;
+	this->woodValue = 1000;
+	this->stoneValue = 1000;
+	this->goldValue = 1000;
 	this->invMax = 0;
 	this->guiTime = 0;
 	this->guiTimeMinute = 0;
@@ -17,6 +17,8 @@ void GUI::initVariables()
 
 void GUI::initTextures()
 {
+	this->inventoryBoxTexture.resize(24);
+	//manager.GetFont("../Assets/Font_Assets/Freshman.ttf");
 	if (!this->font.loadFromFile("../Assets/Font_Assets/Freshman.ttf")) {
 		std::cout << "Error: loading GUI Font" << std::endl;
 	}
@@ -42,12 +44,58 @@ void GUI::initTextures()
 	if (!this->miniMapTexture.loadFromFile("../Assets/Image_Assets/GUI/MiniMapBox.png")) {
 		std::cout << "Error: loading resourceBarTexture" << std::endl;
 	}
+	// inventoryBoxTexture
+	if (!this->inventoryBoxTexture[0].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Attack1.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[1].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Defense1.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[2].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Resource1.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[3].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Attack2.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[4].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Defense2.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[5].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Resource2.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[6].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Attack3.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[7].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Defense3.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[8].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Resource3.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[9].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Attack4.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[10].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Defense4.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[11].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Resource4.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[12].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Attack5.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[13].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Defense5.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
+	if (!this->inventoryBoxTexture[14].loadFromFile("../Assets/Image_Assets/GUI/StructureMenu/Resource5.png")) {
+		std::cout << "Error: loading resourceBarTexture" << std::endl;
+	}
 }
 
 void GUI::initSprites()
 {
 	screenSize = sf::Vector2f(1920, 1080);
-	this->invMaxX = 5;
+	this->invMaxX = 8;
 	this->invMaxY = 3;
 
 	// Set this to window width and height when we have it as a constant
@@ -67,37 +115,37 @@ void GUI::initSprites()
 	this->settingsButton.setOutlineThickness(2);
 
 	this->guiBox.resize(4);
-	this->guiBox[0].setSize(sf::Vector2f(screenSize.x / 4, 200.f));
-	this->guiBox[0].setTexture(&this->chatBoxTexture);
+	this->guiBox[0].setSize(sf::Vector2f(299.f, 298.f));
+	this->guiBox[0].setTexture(&this->miniMapTexture);
 	this->guiBox[0].setOutlineColor(sf::Color::Yellow);
 	this->guiBox[0].setOutlineThickness(2);
 
-	this->guiBox[1].setSize(sf::Vector2f(screenSize.x / 4, 200.f));
+	this->guiBox[1].setSize(sf::Vector2f(screenSize.x / 3 - 100.f, 200.f));
 	this->guiBox[1].setTexture(&this->emptyBoxTexture);
 	this->guiBox[1].setOutlineColor(sf::Color::Yellow);
 	this->guiBox[1].setOutlineThickness(2);
 
-	this->guiBox[2].setSize(sf::Vector2f(screenSize.x / 4, 200.f));
+	this->guiBox[2].setSize(sf::Vector2f(screenSize.x / 3 - 100.f, 200.f));
 	this->guiBox[2].setTexture(&this->inventoryTexture);
 	this->guiBox[2].setOutlineColor(sf::Color::Yellow);
 	this->guiBox[2].setOutlineThickness(2);
 
-	this->guiBox[3].setSize(sf::Vector2f(screenSize.x / 4, 200.f));
-	this->guiBox[3].setTexture(&this->miniMapTexture);
+	this->guiBox[3].setSize(sf::Vector2f(screenSize.x / 3 - 100.f, 200.f));
+	this->guiBox[3].setTexture(&this->chatBoxTexture);
 	this->guiBox[3].setOutlineColor(sf::Color::Yellow);
 	this->guiBox[3].setOutlineThickness(2);
 
-	this->miniMapBox.setSize(sf::Vector2f(400.f, 180.f));
-	this->miniMapBox.setFillColor(sf::Color::Black);
-	this->miniMapBox.setOutlineColor(sf::Color::Yellow);
-	this->miniMapBox.setOutlineThickness(2);
+	//this->miniMapBox.setSize(sf::Vector2f(200.f, 200.f));
+	//this->miniMapBox.setFillColor(sf::Color::Black);
+	//this->miniMapBox.setOutlineColor(sf::Color::Yellow);
+	//this->miniMapBox.setOutlineThickness(2);
 
-	this->chatBox.setSize(sf::Vector2f(guiBox[0].getSize().x - 50, guiBox[0].getSize().y - 20));
+	this->chatBox.setSize(sf::Vector2f(guiBox[3].getSize().x - 50, guiBox[0].getSize().y - 20));
 	this->chatBox.setFillColor(sf::Color::Black);
 	this->chatBox.setOutlineColor(sf::Color::Yellow);
 	this->chatBox.setOutlineThickness(2);
 
-	this->chatScrollBar.setSize(sf::Vector2f(20.f, guiBox[0].getSize().y - 20));
+	this->chatScrollBar.setSize(sf::Vector2f(20.f, guiBox[3].getSize().y - 20));
 	this->chatScrollBar.setFillColor(sf::Color::Black);
 	this->chatScrollBar.setOutlineColor(sf::Color::Yellow);
 	this->chatScrollBar.setOutlineThickness(2);
@@ -107,10 +155,11 @@ void GUI::initSprites()
 	for (int i = 0; i < invMaxX; i++) {
 		for (int j = 0; j < invMaxY; j++) {
 			this->inventoryBox[invMax].setSize(sf::Vector2f(60, 60));
-			this->inventoryBox[invMax].setFillColor(sf::Color::Black);
+			//this->inventoryBox[invMax].setFillColor(sf::Color::Black);
 			this->inventoryBox[invMax].setOutlineColor(sf::Color::Yellow);
 			this->inventoryBox[invMax].setOutlineThickness(2);
-			this->inventoryBox[invMax].setPosition((this->guiBox[2].getPosition().x + 90) + (float)(i * inventoryBox[invMax].getSize().x), (this->guiBox[2].getPosition().y + 10) + (float)(j * inventoryBox[invMax].getSize().y));
+			this->inventoryBox[invMax].setPosition((this->guiBox[2].getPosition().x) + (float)(i * inventoryBox[invMax].getSize().x), (this->guiBox[2].getPosition().y + 10) + (float)(j * inventoryBox[invMax].getSize().y));
+			this->inventoryBox[invMax].setTexture(&this->inventoryBoxTexture[invMax]);
 			this->invMax++;
 		}
 	}
@@ -127,9 +176,9 @@ void GUI::initText()
 	this->stoneText.setFillColor(sf::Color(125, 125, 125));
 	this->stoneText.setCharacterSize(30);
 
-	this->coalText.setFont(font);
-	this->coalText.setFillColor(sf::Color(55, 55, 55));
-	this->coalText.setCharacterSize(30);
+	this->foodText.setFont(font);
+	this->foodText.setFillColor(sf::Color(218, 146, 146));
+	this->foodText.setCharacterSize(30);
 
 	this->goldText.setFont(font);
 	this->goldText.setFillColor(sf::Color::Yellow);
@@ -160,14 +209,14 @@ void GUI::updateResources()
 {
 	this->woodString = std::to_string(this->woodValue); // converting the int to string, so player knows the stats
 	this->stoneString = std::to_string(this->stoneValue);
-	this->coalString = std::to_string(this->coalValue);
+	this->foodString = std::to_string(this->foodValue);
 	this->goldString = std::to_string(this->goldValue);
 
 	this->woodText.setString("Wood: " + woodString);
 
 	this->stoneText.setString("Stone: " + stoneString);
 
-	this->coalText.setString("Coal: " + coalString);
+	this->foodText.setString("Food: " + foodString);
 
 	this->goldText.setString("Gold: " + goldString);
 }
@@ -223,9 +272,9 @@ void GUI::update(sf::Time deltaTime)
 void GUI::renderResources(sf::RenderTarget & target, sf::View & view)
 {
 	this->resourceBar.setPosition(0.f, -2.f);
-	this->woodText.setPosition(50,10);
-	this->stoneText.setPosition(350,10);
-	this->coalText.setPosition(650,10);
+	this->foodText.setPosition(50, 10);
+	this->woodText.setPosition(350, 10);
+	this->stoneText.setPosition(650, 10);
 	this->goldText.setPosition(950, 10);
 
 	//this->resourceBar.setPosition(view.getCenter().x - (view.getSize().x / 2), view.getCenter().y - (view.getSize().y / 2) - 2);
@@ -238,7 +287,7 @@ void GUI::renderResources(sf::RenderTarget & target, sf::View & view)
 	target.draw(resourceBar);
 	target.draw(woodText);
 	target.draw(stoneText);
-	target.draw(coalText);
+	target.draw(foodText);
 	target.draw(goldText);
 }
 
@@ -247,12 +296,12 @@ void GUI::render(sf::RenderTarget & target, sf::View & view)
 	this->pauseButton.setPosition(1810.f, 10.f);
 	this->settingsButton.setPosition(1870.f, 10.f);
 	this->guiBox[0].setPosition(0, 1080 - guiBox[0].getSize().y);
-	this->guiBox[1].setPosition(0 + guiBox[0].getSize().x, 1080 - guiBox[1].getSize().y);
+	this->guiBox[1].setPosition(0 + guiBox[0].getSize().x + 2, 1080 - guiBox[1].getSize().y);
 	this->guiBox[2].setPosition(guiBox[1].getPosition().x + guiBox[1].getSize().x, 1080 - guiBox[2].getSize().y);
 	this->guiBox[3].setPosition(guiBox[2].getPosition().x + guiBox[2].getSize().x, 1080 - guiBox[3].getSize().y);
-	this->miniMapBox.setPosition(this->guiBox[3].getPosition().x + 45, this->guiBox[3].getPosition().y + 10);
-	this->chatBox.setPosition(this->guiBox[0].getPosition().x + 10, this->guiBox[0].getPosition().y + 10);
-	this->chatScrollBar.setPosition(this->chatBox.getPosition().x + this->chatBox.getSize().x + 10, this->guiBox[0].getPosition().y + 10);
+	//this->miniMapBox.setPosition(this->guiBox[0].getPosition().x + 50, this->guiBox[0].getPosition().y +50);
+	this->chatBox.setPosition(this->guiBox[3].getPosition().x + 10, this->guiBox[3].getPosition().y + 10);
+	this->chatScrollBar.setPosition(this->chatBox.getPosition().x + this->chatBox.getSize().x + 10, this->guiBox[3].getPosition().y + 10);
 	this->dayText.setPosition(1450, 10);
 	this->timerText.setPosition(1610, 10);
 	this->renderResources(target, view);
@@ -260,7 +309,7 @@ void GUI::render(sf::RenderTarget & target, sf::View & view)
 	int max = 0;
 	for (int i = 0; i < invMaxX; i++) {
 		for (int j = 0; j < invMaxY; j++) {
-			this->inventoryBox[max].setPosition((this->guiBox[2].getPosition().x + 90) + (float)(i * inventoryBox[max].getSize().x), (this->guiBox[2].getPosition().y + 10) + (float)(j * inventoryBox[max].getSize().y));
+			this->inventoryBox[max].setPosition((this->guiBox[2].getPosition().x + 30) + (float)(i * inventoryBox[max].getSize().x), (this->guiBox[2].getPosition().y + 10) + (float)(j * inventoryBox[max].getSize().y));
 			max++;
 		}
 	}
@@ -270,7 +319,7 @@ void GUI::render(sf::RenderTarget & target, sf::View & view)
 	for (int i = 0; i < guiBox.size(); i++) {
 		target.draw(guiBox[i]);
 	}
-	target.draw(miniMapBox);
+	//target.draw(miniMapBox);
 	for (int i = 0; i < inventoryBox.size(); i++) {
 		target.draw(inventoryBox[i]);
 	}

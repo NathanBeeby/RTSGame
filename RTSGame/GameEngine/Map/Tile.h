@@ -1,15 +1,22 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <ctime>
+#include <fstream>
+#include <cctype>
+#include <string>
+#include "TileProperties.h"
+
 struct Tile
 {
 	// Private variables
+	sf::Texture tileText;
+	sf::Sprite tile, miniMapTile;
+	sf::Vector2i map[100][100];
+
 	sf::Vector2i tileMax;
-	std::vector<std::vector<sf::RectangleShape>> tiles;
-	std::vector<sf::Texture> tileTexture;
-	//float posX, posY;
-	//int sizeX, sizeY;
+	std::vector<bool> isWater;
+	int miniMapOffsetX, miniMapOffsetY;
+	TileProperties tileProp;
 
 	//// Initialization
 	void initVariables();
@@ -21,9 +28,12 @@ public:
 	virtual ~Tile();
 	// Public Variables
 	int fromX, fromY, toX, toY;
+	int miniMapFromX, miniMapToX, miniMapFromY, miniMapToY;
 	// Public Functions
 	void updateTileView();
+	void updateMiniMapView();
 	void update();
+	void renderMiniMap(sf::RenderTarget &target, sf::View &view);
 	void render(sf::RenderTarget &target);
 	//// Modifiers
 	//void setPosition(sf::Vector2f pos);

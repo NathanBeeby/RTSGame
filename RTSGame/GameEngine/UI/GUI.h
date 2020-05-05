@@ -1,10 +1,12 @@
 #pragma once
 #include "UI.h"
+#include "../GameAssets/AssetManager.h"
 class GUI : public UI
 {
 private:
 	// Private Variables
-	int woodValue, stoneValue, goldValue, coalValue;
+	AssetManager manager;
+	int woodValue, stoneValue, goldValue, foodValue;
 	int invMaxX, invMaxY, invMax;
 	int guiTime, guiTimeMinute, day, minute;
 	sf::RectangleShape resourceBar, pauseButton, settingsButton, miniMapBox, chatBox, chatScrollBar;
@@ -18,8 +20,8 @@ private:
 	std::vector<sf::Texture> inventoryBoxTexture;
 
 	sf::Vector2f screenSize;
-	sf::Text woodText, stoneText, goldText, coalText, timerText, dayText;
-	std::string woodString, stoneString, goldString, coalString;
+	sf::Text woodText, stoneText, goldText, foodText, timerText, dayText;
+	std::string woodString, stoneString, goldString, foodString;
 
 	// Initialization
 	void initVariables();

@@ -5,13 +5,15 @@ void MainGame::initVariables()
 {
 	this->isRunning = true;
 	this->viewSpeed = 100.f;
+	this->startLocation.x = 10000;
+	this->startLocation.y = 10000;
 }
 
 void MainGame::initView()
 {
 	view.reset(sf::FloatRect(0, 0, WIDTH, HEIGHT)); // setting the view to the screen
 	view.setViewport(sf::FloatRect(0, 0, 1.0f, 1.0f)); // from the left point(start point to width scale), top(start to screen height scale), screen width scale, screen height scale
-	view.setCenter(WIDTH / 2.f, HEIGHT / 2.f);
+	view.setCenter(startLocation.x, startLocation.y);
 	view.zoom(gameState.getZoomAmt()); // zooming out 
 	//std::cout << "Gamestate zoom: " << gameState.getZoomAmt() << std::endl;
 }
@@ -48,11 +50,11 @@ void MainGame::keyInput(sf::Keyboard::Key key)
 	if (this->gameState.gState == this->gameState.gameOn) {
 		if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
 		{
-			view.move(0.f, -viewSpeed);
+				view.move(0.f, -viewSpeed);
 		}
 		else if (key == sf::Keyboard::S || key == sf::Keyboard::Down)
 		{
-			view.move(0.f, viewSpeed);
+				view.move(0.f, viewSpeed);
 		}
 		else if (key == sf::Keyboard::A || key == sf::Keyboard::Left)
 		{
@@ -62,10 +64,10 @@ void MainGame::keyInput(sf::Keyboard::Key key)
 		{
 			view.move(viewSpeed, 0.f);
 		}
-	else if (key == sf::Keyboard::F5)
-	{
-		m_window.ToggleFullscreen();
-	}
+		else if (key == sf::Keyboard::F5)
+		{
+			m_window.ToggleFullscreen();
+		}
 	}
 }
 
@@ -77,7 +79,7 @@ void MainGame::mouseInput()
 
 void MainGame::updatePollEvents(sf::Time deltaTime)
 {
-	
+
 	// use window events for keyboard input
 	while (m_window.m_window.pollEvent(this->ev))
 	{
@@ -107,10 +109,14 @@ void MainGame::updatePollEvents(sf::Time deltaTime)
 
 void MainGame::updateView()
 {
-		//std::cout << "Gamestate zoom is now: " << gameState.getZoomAmt() << std::endl;
-		this->view.zoom(gameState.getZoomAmt());
+	//std::cout << "Gamestate zoom is now: " << gameState.getZoomAmt() << std::endl;
+	this->view.zoom(gameState.getZoomAmt());
 
-		this->view.move(gameState.viewMovement.x, gameState.viewMovement.y);
+	this->view.move(gameState.viewMovement.x, gameState.viewMovement.y);
+
+	//if (view.getCenter().x < m_window.GetWindowSize().x / 2 && view.getCenter().y < m_window.GetWindowSize().y / 2) {
+	//		view.setCenter(m_window.GetWindowSize().x / 2, m_window.GetWindowSize().y / 2 + 240);
+	//	}
 }
 
 void MainGame::update(sf::Time deltaTime)
