@@ -52,7 +52,7 @@ void GameState::zoomIn()
 	}
 }
 
-void GameState::keyInput(sf::Keyboard::Key key)
+void GameState::keyInput(sf::Keyboard::Key key, sf::View &view)
 {
 	if (this->gState == start) {
 		this->startMenu.keyHandler(key);
@@ -70,7 +70,7 @@ void GameState::keyInput(sf::Keyboard::Key key)
 		this->initGameMenu.keyHandler(key);
 	}
 	else if (this->gState == gameOn) {
-		this->game.keyHandler(key);
+		this->game.keyHandler(key, view);
 	}
 	else if (this->gState == gameFailure) {
 		this->failMenu.keyHandler(key);

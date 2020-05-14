@@ -13,7 +13,7 @@ private:
 	sf::Vector2i startLocation;
 	MainWindow m_window;
 	bool isRunning;
-	float viewSpeed;
+	/*float viewSpeed;*/
 	// Initialization
 	void initVariables();
 	void initView();
@@ -29,7 +29,7 @@ public:
 	const bool running() const;
 
 	// Public Functions
-	void keyInput(sf::Keyboard::Key key);
+	void keyInput(sf::Keyboard::Key key, sf::View &view);
 	void mouseInput();
 	void updateView();
 	void updatePollEvents(sf::Time deltaTime);

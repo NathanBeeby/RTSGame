@@ -5,7 +5,7 @@ void Game::initVariables()
 	this->miniMap.setViewport(sf::FloatRect(0.0235f, 0.824f, 0.208f, 0.165f));
 	this->miniMap.setCenter(sf::Vector2f(1700.f, 100.f));
 	this->miniMap.setSize(sf::Vector2f(200.f, 200.f));
-	this->playerDestination = sf::Vector2f(10, 10);
+	this->viewSpeed = 10.f;
 }
 
 void Game::initTextures()
@@ -61,8 +61,46 @@ Game::~Game()
 }
 
 
-void Game::keyHandler(sf::Keyboard::Key key)
+void Game::keyHandler(sf::Keyboard::Key key, sf::View &view)
 {
+	deltaTime = clock.getElapsedTime().asSeconds();
+	if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
+	{
+		if (view.getCenter().y > 1310) {
+			view.move(0.f, -(viewSpeed * deltaTime));
+		}
+		else {
+			view.setCenter(sf::Vector2f(view.getCenter().x, 1310));
+		}
+	}
+	else if (key == sf::Keyboard::S || key == sf::Keyboard::Down)
+	{
+		if (view.getCenter().y + view.getCenter().y <= ((tile.tileMax.y + 2) * gridSizeF) + (view.getCenter().y / 2) + 100) {
+			view.move(0.f, (viewSpeed * deltaTime));
+		}
+		else {
+			//view.setCenter(sf::Vector2f(view.getCenter().x, 4500));
+		}
+	}
+	else if (key == sf::Keyboard::A || key == sf::Keyboard::Left)
+	{
+		if (view.getCenter().x > 2620) {
+			view.move(-(viewSpeed * deltaTime), 0.f);
+		}
+		else {
+			view.setCenter(sf::Vector2f(2620, view.getCenter().y));
+		}
+	}
+	else if (key == sf::Keyboard::D || key == sf::Keyboard::Right)
+	{
+		if (view.getCenter().x + view.getCenter().x <= ((tile.tileMax.x + 1) * gridSizeF) + (view.getCenter().x / 2) - 60) {
+			view.move((viewSpeed * deltaTime), 0.f);
+		}
+		else {
+			//view.setCenter(sf::Vector2f(4800, view.getCenter().y));
+		}
+	}
+	//clock.restart();
 }
 
 void Game::mouseHandler(sf::RenderWindow & window)
@@ -71,29 +109,24 @@ void Game::mouseHandler(sf::RenderWindow & window)
 	mousePosView = window.mapPixelToCoords(mousePosWindow);
 	mousePosGrid.x = (mousePosView.x / gridSizeU);
 	mousePosGrid.y = (mousePosView.y / gridSizeU);
-	std::stringstream ss;
-
-	//ss << "Mouse Pos Window:  X - " << mousePosWindow.x << ", Y - " << mousePosWindow.y << "\n" <<
-	//	"Mouse Pos View:  X - " << mousePosView.x << ", Y - " << mousePosView.y << "\n" <<
-	//	"Mouse Pos Grid:  X - " << mousePosGrid.x << ", Y - " << mousePosGrid.y << "\n";
-	//std::cout << ss.str() << std::endl;
-	
-
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-		if (mousePosGrid.x > 0) {
-			if (mousePosGrid.y > 0) {
-				playerDestination = mousePosView;
-			}
-		}
-	}
-
-	// Fix player not moving to destination  
-	//std::cout << "Player Destination X: " << playerDestination.x << ", Player Destination Y: " << playerDestination.y << std::endl;
-	player.movePlayer(playerDestination);
 }
 
 void Game::updateTileView(sf::View &view)
 {
+	//if (view.getCenter().y <= 1310) {
+	//	view.setCenter(sf::Vector2f(view.getCenter().x, 1310));
+	//}
+	//if (view.getCenter().y + view.getCenter().y >= 4500) {
+	//	view.setCenter(sf::Vector2f(view.getCenter().x, 4500));
+	//}
+	//if (view.getCenter().x <= 2620) {
+	//	view.setCenter(sf::Vector2f(2620, view.getCenter().y));
+	//}
+	//if (view.getCenter().x + view.getCenter().x >= 4800) {
+	//	view.setCenter(sf::Vector2f(4800, view.getCenter().y));
+	//}
+
+
 	// Rendering Tiles via mouse position
 	//tile.fromX = mousePosGrid.x - 25;
 	//tile.toX = mousePosGrid.x + 25;
@@ -102,8 +135,8 @@ void Game::updateTileView(sf::View &view)
 	// Rendering tiles via view position
 	tile.fromX = view.getCenter().x / gridSizeF - 15;
 	tile.toX = view.getCenter().x / gridSizeF + 15;
-	tile.fromY = view.getCenter().y / gridSizeF - 7;
-	tile.toY = view.getCenter().y / gridSizeF + 7;
+	tile.fromY = view.getCenter().y / gridSizeF - 8;
+	tile.toY = view.getCenter().y / gridSizeF + 8;
 
 	tile.miniMapFromX = view.getCenter().x / gridSizeF - 15;
 	tile.miniMapToX = view.getCenter().x / gridSizeF + 36;
@@ -125,9 +158,16 @@ void Game::render(sf::RenderWindow &window, sf::View &view)
 	mousePosView = window.mapPixelToCoords(mousePosWindow);
 	mousePosGrid.x = (mousePosView.x / gridSizeU);
 	mousePosGrid.y = (mousePosView.y / gridSizeU);
+
+	std::stringstream ss;
+
+	ss << "Mouse Pos Window:  X - " << mousePosWindow.x << ", Y - " << mousePosWindow.y << "\n" <<
+		"Mouse Pos View:  X - " << mousePosView.x << ", Y - " << mousePosView.y << "\n" <<
+		"Mouse Pos Grid:  X - " << mousePosGrid.x << ", Y - " << mousePosGrid.y << "\n";
+	std::cout << ss.str() << std::endl;
+
 	this->tileSelector.setPosition(mousePosGrid.x * gridSizeF, mousePosGrid.y * gridSizeF);
 	tile.render(window);
-	player.render(window);
 	window.draw(tileSelector);
 	gui.render(window, view);
 	tile.renderMiniMap(window, view);

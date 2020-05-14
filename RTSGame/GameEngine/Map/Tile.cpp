@@ -2,8 +2,8 @@
 
 void Tile::initVariables()
 {
-	this->tileMax.x = 100;
-	this->tileMax.y = 100;
+	this->tileMax.x = 35;
+	this->tileMax.y = 30;
 	this->miniMapOffsetX = 0;
 	this->miniMapOffsetY = 0;
 	this->isWater.resize(tileMax.x * tileMax.y);
@@ -178,12 +178,12 @@ void Tile::renderMiniMap(sf::RenderTarget & target, sf::View &view)
 	//std::cout << "Rendering miniMapFromX: " << this->miniMapFromX << ", miniMapFromY: " << this->miniMapFromY << std::endl;
 	//std::cout << "Rendering miniMapToX: " << this->miniMapToX << ", miniMapToY: " << this->miniMapToY << std::endl;
 	
-	for (int x = 0; x < 99; x++) {
-		for (int y = 0; y <  99; y++) {
+	for (int x = 0; x < 34; x++) {
+		for (int y = 0; y <  29; y++) {
 			if (map[x][y].x != -1 && map[x][y].y != -1) {
-				miniMapTile.setPosition((view.getCenter().x - view.getCenter().x) + x * 3, (target.getView().getCenter().y + target.getView().getCenter().y - 298) + y * 3);
+				miniMapTile.setPosition((target.getView().getCenter().x + target.getView().getCenter().x - 205) + x * 6, (target.getView().getCenter().y + target.getView().getCenter().y - 175) + y * 6);
 				miniMapTile.setTextureRect(sf::IntRect(map[x][y].x * 200, map[x][y].y * 200, 200, 200));
-				miniMapTile.setScale(0.02f, 0.02f);
+				miniMapTile.setScale(0.04f, 0.04f);
 				target.draw(miniMapTile);
 			}
 		}

@@ -11,7 +11,7 @@ struct Tile
 	// Private variables
 	sf::Texture tileText;
 	sf::Sprite tile, miniMapTile;
-	sf::Vector2i map[100][100];
+	sf::Vector2i map[35][30];
 
 	sf::Vector2i tileMax;
 	std::vector<bool> isWater;

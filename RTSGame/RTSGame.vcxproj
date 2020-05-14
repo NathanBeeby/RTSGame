@@ -128,10 +128,8 @@
     <ClCompile Include="GameEngine\Map\Tile.cpp" />
     <ClCompile Include="GameEngine\Map\TileProperties.cpp" />
     <ClCompile Include="GameEngine\UI\chatBar.cpp" />
-    <ClCompile Include="GameEngine\Characters\AI\Ally.cpp" />
     <ClCompile Include="AudioEngine\Music\GameMusic.cpp" />
     <ClCompile Include="AudioEngine\SFX\SFX.cpp" />
-    <ClCompile Include="GameEngine\Characters\AI\Enemy.cpp" />
     <ClCompile Include="GameEngine\Menus\CreditsMenu.cpp" />
     <ClCompile Include="GameEngine\Menus\GameFailureMenu.cpp" />
     <ClCompile Include="GameEngine\Menus\GameSuccessMenu.cpp" />
@@ -146,8 +144,6 @@
     <ClCompile Include="GameEngine\Map\Objects\GoldOre.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameEngine\MainWindow.cpp" />
-    <ClCompile Include="GameEngine\Characters\AI\NPC.cpp" />
-    <ClCompile Include="GameEngine\Characters\Player.cpp" />
     <ClCompile Include="GameEngine\UI\UI.cpp" />
     <ClCompile Include="GameEngine\UI\MiniMap.cpp" />
     <ClCompile Include="GameEngine\UI\StructureInventory.cpp" />
@@ -163,10 +159,8 @@
     <ClInclude Include="GameEngine\Characters\Character.h" />
     <ClInclude Include="GameEngine\Constants.h" />
     <ClInclude Include="GameEngine\UI\chatBar.h" />
-    <ClInclude Include="GameEngine\Characters\AI\Ally.h" />
     <ClInclude Include="AudioEngine\Music\GameMusic.h" />
     <ClInclude Include="AudioEngine\SFX\SFX.h" />
-    <ClInclude Include="GameEngine\Characters\AI\Enemy.h" />
     <ClInclude Include="GameEngine\Map\Tile.h" />
     <ClInclude Include="GameEngine\Menus\CreditsMenu.h" />
     <ClInclude Include="GameEngine\Menus\GameFailureMenu.h" />
@@ -179,8 +173,6 @@
     <ClInclude Include="GameEngine\States\Game.h" />
     <ClInclude Include="GameEngine\States\GameState.h" />
     <ClInclude Include="GameEngine\MainWindow.h" />
-    <ClInclude Include="GameEngine\Characters\AI\NPC.h" />
-    <ClInclude Include="GameEngine\Characters\Player.h" />
     <ClInclude Include="GameEngine\UI\GUI.h" />
     <ClInclude Include="GameEngine\UI\UI.h" />
     <ClInclude Include="GameEngine\UI\MiniMap.h" />

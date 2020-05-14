@@ -47,7 +47,7 @@ public:
 	// Public Functions
 	void zoomOut();
 	void zoomIn();
-	void keyInput(sf::Keyboard::Key key);
+	void keyInput(sf::Keyboard::Key key, sf::View &view);
 	void mouseInput(sf::RenderWindow &window);
 	void mousePressed();
 	void mouseReleased();

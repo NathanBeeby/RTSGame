@@ -4,9 +4,9 @@
 void MainGame::initVariables()
 {
 	this->isRunning = true;
-	this->viewSpeed = 100.f;
-	this->startLocation.x = 10000;
-	this->startLocation.y = 10000;
+	/*this->viewSpeed = 100.f;*/
+	this->startLocation.x = 3000;
+	this->startLocation.y = 2500;
 }
 
 void MainGame::initView()
@@ -40,15 +40,15 @@ const bool MainGame::running() const
 }
 
 
-void MainGame::keyInput(sf::Keyboard::Key key)
+void MainGame::keyInput(sf::Keyboard::Key key, sf::View &view)
 {
 	std::cout << "Key Pressed " << std::endl;
-	gameState.keyInput(key);
+	gameState.keyInput(key, view);
 	if (key == sf::Keyboard::Escape) {
 		m_window.close();
 	}
 	if (this->gameState.gState == this->gameState.gameOn) {
-		if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
+		/*if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
 		{
 				view.move(0.f, -viewSpeed);
 		}
@@ -63,8 +63,8 @@ void MainGame::keyInput(sf::Keyboard::Key key)
 		else if (key == sf::Keyboard::D || key == sf::Keyboard::Right)
 		{
 			view.move(viewSpeed, 0.f);
-		}
-		else if (key == sf::Keyboard::F5)
+		}*/
+		if (key == sf::Keyboard::F5)
 		{
 			m_window.ToggleFullscreen();
 		}
@@ -86,16 +86,16 @@ void MainGame::updatePollEvents(sf::Time deltaTime)
 		switch (this->ev.type) {
 		case sf::Event::KeyPressed: // handling the Key pressed events (mostly in other classes)
 			std::cout << "Key Press" << std::endl;
-			this->keyInput(this->ev.key.code);
+			this->keyInput(this->ev.key.code, this->view);
 			break;
 		case sf::Event::KeyReleased:
 
 			break;
 		case sf::Event::MouseButtonPressed: // case for mouse used
-			gameState.mousePressed();
+			//gameState.mousePressed();
 			break;
 		case sf::Event::MouseButtonReleased:
-			gameState.mouseReleased();
+			//gameState.mouseReleased();
 			break;
 		case sf::Event::MouseWheelScrolled:
 			gameState.mouseScrolled(this->ev);
