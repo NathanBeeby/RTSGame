@@ -22,6 +22,7 @@ void MainWindow::Create()
 	m_window.create({ m_windowSize.x, m_windowSize.y, 32 },
 		m_windowTitle, style);
 	m_window.setFramerateLimit(120);
+	m_window.setMouseCursorVisible(false);
 }
 
 // Constructor / Destructor

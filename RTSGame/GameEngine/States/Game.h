@@ -1,12 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include "../UI/GUI.h"
 #include "../Map/Tile.h"
-
 class Game {
 private:
 	// Private Variables
-	float gridSizeF = 200.f;
 	float viewSpeed;
+	float gridSizeF = 200.f;
 	unsigned gridSizeU = static_cast<unsigned>(gridSizeF);
 	GUI gui;
 	Tile tile;
@@ -32,7 +31,7 @@ public:
 
 	// Public Functions
 	void keyHandler(sf::Keyboard::Key key, sf::View &view);
-	void mouseHandler(sf::RenderWindow &window);
+	void mouseHandler(sf::RenderWindow &window, sf::View &view);
 	void updateTileView(sf::View &view);
 	void update(sf::Time deltaTime);
 	void render(sf::RenderWindow &window, sf::View &view);

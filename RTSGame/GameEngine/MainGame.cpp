@@ -18,10 +18,38 @@ void MainGame::initView()
 	//std::cout << "Gamestate zoom: " << gameState.getZoomAmt() << std::endl;
 }
 
+void MainGame::initCursor()
+{
+	cursorSprite.setPosition(sf::Mouse::getPosition().x - 20.f, sf::Mouse::getPosition().y - 20.f);
+	cursorSprite.setTexture(&this->cursor);
+	cursorSprite.setSize(sf::Vector2f(20.f, 20.f));
+}
+
+void MainGame::initCursorTextures()
+{
+	if (!cursorAttack.loadFromFile("../Assets/Image_Assets/GUI/MouseCursors/MouseAttack.png")) {
+		std::cout << "Could not load cursorAttack Texture" << std::endl;
+	}
+	if (!cursorDefend.loadFromFile("../Assets/Image_Assets/GUI/MouseCursors/MouseDefend.png")) {
+		std::cout << "Could not load cursorDefend Texture" << std::endl;
+	}
+	if (!cursor.loadFromFile("../Assets/Image_Assets/GUI/MouseCursors/MouseCursor.png")) {
+		std::cout << "Could not load cursor Texture" << std::endl;
+	}
+	if (!cursorGrabbed.loadFromFile("../Assets/Image_Assets/GUI/MouseCursors/MouseGrabbed.png")) {
+		std::cout << "Could not load cursorGrabbed Texture" << std::endl;
+	}
+	if (!cursorHover.loadFromFile("../Assets/Image_Assets/GUI/MouseCursors/MouseHover.png")) {
+		std::cout << "Could not load cursorHover Texture" << std::endl;
+	}
+}
+
 MainGame::MainGame() : m_window("Nathans Game", sf::Vector2u(WIDTH, HEIGHT))
 {
 	this->initVariables();
 	this->initView();
+	this->initCursorTextures();
+	this->initCursor();
 }
 
 
@@ -37,6 +65,31 @@ MainWindow * MainGame::GetWindow()
 const bool MainGame::running() const
 {
 	return this->isRunning;
+}
+
+void MainGame::mouseAttack()
+{
+	cursorSprite.setTexture(&this->cursorAttack);
+}
+
+void MainGame::mouseDefend()
+{
+	cursorSprite.setTexture(&this->cursorDefend);
+}
+
+void MainGame::mouseCursor()
+{
+	cursorSprite.setTexture(&this->cursor);
+}
+
+void MainGame::mouseGrabbed()
+{
+	cursorSprite.setTexture(&this->cursorGrabbed);
+}
+
+void MainGame::mouseHover()
+{
+	cursorSprite.setTexture(&this->cursorHover);
 }
 
 
@@ -119,12 +172,23 @@ void MainGame::updateView()
 	//	}
 }
 
+void MainGame::updateMouseCursor()
+{
+	cursorSprite.setPosition(sf::Mouse::getPosition().x - 20.f, sf::Mouse::getPosition().y - 20.f);
+}
+
 void MainGame::update(sf::Time deltaTime)
 {
 	this->updatePollEvents(deltaTime);
 	this->gameState.update(deltaTime);
 	this->updateView();
 	this->mouseInput();
+	this->updateMouseCursor();
+}
+
+void MainGame::renderMouseCursor()
+{
+	m_window.m_window.draw(cursorSprite);
 }
 
 void MainGame::render()
@@ -133,6 +197,7 @@ void MainGame::render()
 	m_window.m_window.setView(view);
 	gameState.render(m_window.m_window, view);
 	m_window.m_window.setView(m_window.m_window.getDefaultView());
+	this->renderMouseCursor();
 	m_window.EndDraw();
 }
 

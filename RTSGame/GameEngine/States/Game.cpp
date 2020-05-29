@@ -63,6 +63,7 @@ Game::~Game()
 
 void Game::keyHandler(sf::Keyboard::Key key, sf::View &view)
 {
+	gui.keyHandler(key);
 	deltaTime = clock.getElapsedTime().asSeconds();
 	if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
 	{
@@ -103,12 +104,17 @@ void Game::keyHandler(sf::Keyboard::Key key, sf::View &view)
 	//clock.restart();
 }
 
-void Game::mouseHandler(sf::RenderWindow & window)
+void Game::mouseHandler(sf::RenderWindow & window, sf::View &view)
 {
 	mousePosWindow = sf::Mouse::getPosition(window);
 	mousePosView = window.mapPixelToCoords(mousePosWindow);
 	mousePosGrid.x = (mousePosView.x / gridSizeU);
 	mousePosGrid.y = (mousePosView.y / gridSizeU);
+	gui.mouseHandler(mousePosWindow, mousePosGrid);
+
+	std::cout << "Mouse Pos Window: X - " << mousePosWindow.x << ", Y - " << mousePosWindow.y << std::endl;
+	std::cout << "Mouse Pos View: X - " << mousePosView.x << ", Y - " << mousePosView.y << std::endl;
+	std::cout << "Mouse Pos Grid: X - " << mousePosGrid.x << ", Y - " << mousePosGrid.y << std::endl;
 }
 
 void Game::updateTileView(sf::View &view)
@@ -126,12 +132,6 @@ void Game::updateTileView(sf::View &view)
 	//	view.setCenter(sf::Vector2f(4800, view.getCenter().y));
 	//}
 
-
-	// Rendering Tiles via mouse position
-	//tile.fromX = mousePosGrid.x - 25;
-	//tile.toX = mousePosGrid.x + 25;
-	//tile.fromY = mousePosGrid.y - 15;
-	//tile.toY = mousePosGrid.y + 15;
 	// Rendering tiles via view position
 	tile.fromX = view.getCenter().x / gridSizeF - 15;
 	tile.toX = view.getCenter().x / gridSizeF + 15;
@@ -159,15 +159,11 @@ void Game::render(sf::RenderWindow &window, sf::View &view)
 	mousePosGrid.x = (mousePosView.x / gridSizeU);
 	mousePosGrid.y = (mousePosView.y / gridSizeU);
 
-	std::stringstream ss;
-
-	ss << "Mouse Pos Window:  X - " << mousePosWindow.x << ", Y - " << mousePosWindow.y << "\n" <<
-		"Mouse Pos View:  X - " << mousePosView.x << ", Y - " << mousePosView.y << "\n" <<
-		"Mouse Pos Grid:  X - " << mousePosGrid.x << ", Y - " << mousePosGrid.y << "\n";
-	std::cout << ss.str() << std::endl;
+	mouseHandler(window, view);
 
 	this->tileSelector.setPosition(mousePosGrid.x * gridSizeF, mousePosGrid.y * gridSizeF);
 	tile.render(window);
+	gui.renderTowers(window);
 	window.draw(tileSelector);
 	gui.render(window, view);
 	tile.renderMiniMap(window, view);

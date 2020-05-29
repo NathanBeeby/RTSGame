@@ -98,7 +98,7 @@ void GameState::mouseInput(sf::RenderWindow & window)
 		this->initGameMenu.mouseHandler(window);
 	}
 	else if (this->gState == gameOn) {
-		this->game.mouseHandler(window);
+		//this->game.mouseHandler(window);
 	}
 	else if (this->gState == gameFailure) {
 		this->failMenu.mouseHandler(window);
