@@ -17,7 +17,8 @@ private:
 	bool mouseHeld;
 	sf::Texture fireNoTexture, waterNoTexture, windNoTexture, iceNoTexture, earthNoTexture, energyNoTexture,
 		lightNoTexture, darkNoTexture, elemAmpNoTexture, elemOverNoTexture, manaAmpNoTexture, observNoTexture, regenNoTexture, voidNoTexture;
-
+	sf::Texture fireTexture, waterTexture, windTexture, iceTexture, earthTexture, energyTexture,
+		lightTexture, darkTexture, elemAmpTexture, elemOverTexture, manaAmpTexture, observTexture, regenTexture, voidTexture;
 	std::string fireTower, waterTower, windTower, iceTower, earthTower, energyTower, lightTower, darkTower, voidTower, regenTower, observTower, manaAmpTower, elementOverTower, elementAmpTower;
 
 	std::vector<sf::RectangleShape> guiBox;

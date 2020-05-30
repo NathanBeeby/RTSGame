@@ -154,6 +154,48 @@ void GUI::initTextures()
 	if (!this->voidNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/VoidTower.png")) {
 		std::cout << "Error: loading no texture void tower" << std::endl;
 	}
+	if (!this->fireTexture.loadFromFile("../Assets/Image_Assets/Towers/FireTower.png")) {
+		std::cout << "Error: loading texture fire tower" << std::endl;
+	}
+	if (!this->waterTexture.loadFromFile("../Assets/Image_Assets/Towers/WaterTower.png")) {
+		std::cout << "Error: loading texture water tower" << std::endl;
+	}
+	if (!this->windTexture.loadFromFile("../Assets/Image_Assets/Towers/WindTower.png")) {
+		std::cout << "Error: loading texture wind tower" << std::endl;
+	}
+	if (!this->iceTexture.loadFromFile("../Assets/Image_Assets/Towers/IceTower.png")) {
+		std::cout << "Error: loading texture ice tower" << std::endl;
+	}
+	if (!this->earthTexture.loadFromFile("../Assets/Image_Assets/Towers/EarthTower.png")) {
+		std::cout << "Error: loading texture earth tower" << std::endl;
+	}
+	if (!this->energyTexture.loadFromFile("../Assets/Image_Assets/Towers/EnergyTower.png")) {
+		std::cout << "Error: loading texture energy tower" << std::endl;
+	}
+	if (!this->lightTexture.loadFromFile("../Assets/Image_Assets/Towers/LightTower.png")) {
+		std::cout << "Error: loading texture light tower" << std::endl;
+	}
+	if (!this->darkTexture.loadFromFile("../Assets/Image_Assets/Towers/DarkTower.png")) {
+		std::cout << "Error: loading texture dark tower" << std::endl;
+	}
+	if (!this->elemAmpTexture.loadFromFile("../Assets/Image_Assets/Towers/ElementalAmplifier.png")) {
+		std::cout << "Error: loading texture elemental amplifier tower" << std::endl;
+	}
+	if (!this->elemOverTexture.loadFromFile("../Assets/Image_Assets/Towers/ElementalOverclocker.png")) {
+		std::cout << "Error: loading texture elemental overclocker tower" << std::endl;
+	}
+	if (!this->manaAmpTexture.loadFromFile("../Assets/Image_Assets/Towers/ManaAmplifier.png")) {
+		std::cout << "Error: loading texture mana amplifier tower" << std::endl;
+	}
+	if (!this->observTexture.loadFromFile("../Assets/Image_Assets/Towers/Observatory.png")) {
+		std::cout << "Error: loading texture observatory tower" << std::endl;
+	}
+	if (!this->regenTexture.loadFromFile("../Assets/Image_Assets/Towers/Regenerator.png")) {
+		std::cout << "Error: loading texture regenerator tower" << std::endl;
+	}
+	if (!this->voidTexture.loadFromFile("../Assets/Image_Assets/Towers/VoidTower.png")) {
+		std::cout << "Error: loading texture void tower" << std::endl;
+	}
 }
 
 void GUI::initSprites()
@@ -365,53 +407,97 @@ void GUI::update(sf::Time deltaTime)
 
 void GUI::updateTowerTextures()
 {
-
 	if (mana < structInv.fireTower.towerCost) {
 		inventoryBox[0].setTexture(&fireNoTexture);
-	} 
+	}
+	else {
+		inventoryBox[0].setTexture(&fireTexture);
+	}
 	if (mana < structInv.waterTower.towerCost) {
 		inventoryBox[7].setTexture(&waterNoTexture);
+	}
+	else {
+		inventoryBox[7].setTexture(&waterTexture);
 	}
 	if (mana < structInv.windTower.towerCost) {
 		inventoryBox[1].setTexture(&windNoTexture);
 	}
+	else {
+		inventoryBox[1].setTexture(&windTexture);
+	}
 	if (mana < structInv.iceTower.towerCost) {
 		inventoryBox[8].setTexture(&iceNoTexture);
+	}
+	else {
+		inventoryBox[8].setTexture(&iceTexture);
 	}
 	if (mana < structInv.earthTower.towerCost) {
 		inventoryBox[2].setTexture(&earthNoTexture);
 	}
+	else {
+		inventoryBox[2].setTexture(&earthTexture);
+	}
 	if (mana < structInv.energyTower.towerCost) {
 		inventoryBox[9].setTexture(&energyNoTexture);
+	}
+	else {
+		inventoryBox[9].setTexture(&energyTexture);
 	}
 	if (mana < structInv.lightTower.towerCost) {
 		inventoryBox[3].setTexture(&lightNoTexture);
 	}
+	else {
+		inventoryBox[3].setTexture(&lightTexture);
+	}
 	if (mana < structInv.darkTower.towerCost) {
 		inventoryBox[10].setTexture(&darkNoTexture);
+	}
+	else {
+		inventoryBox[10].setTexture(&darkTexture);
 	}
 	if (mana < structInv.elementalAmplifier.towerCost) {
 		inventoryBox[4].setTexture(&elemAmpNoTexture);
 	}
+	else {
+		inventoryBox[4].setTexture(&elemAmpTexture);
+	}
 	if (mana < structInv.elementalOverclocker.towerCost) {
 		inventoryBox[5].setTexture(&elemOverNoTexture);
+	}
+	else {
+		inventoryBox[5].setTexture(&elemOverTexture);
 	}
 	if (mana < structInv.manaAmplifier.towerCost) {
 		inventoryBox[6].setTexture(&manaAmpNoTexture);
 	}
+	else {
+		inventoryBox[6].setTexture(&manaAmpTexture);
+	}
 	if (mana < structInv.regenTower.towerCost) {
 		inventoryBox[12].setTexture(&regenNoTexture);
+	}
+	else {
+		inventoryBox[12].setTexture(&regenTexture);
 	}
 	if (mana < structInv.observatory.towerCost) {
 		inventoryBox[11].setTexture(&observNoTexture);
 	}
+	else {
+		inventoryBox[11].setTexture(&observTexture);
+	}
 	if (mana < structInv.voidTower.towerCost) {
 		inventoryBox[13].setTexture(&voidNoTexture);
+	}
+	else {
+		inventoryBox[13].setTexture(&voidTexture);
 	}
 }
 
 void GUI::keyHandler(sf::Keyboard::Key key)
 {
+	if (key == sf::Keyboard::Key::Q) {
+		mana += 1000;
+	}
 }
 
 void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
@@ -421,7 +507,7 @@ void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
 			if (windowPos.x >= inventoryBox[0].getPosition().x && windowPos.x <= inventoryBox[0].getPosition().x + inventoryBox[0].getSize().x) {
 
 				if (windowPos.y >= inventoryBox[0].getPosition().y && windowPos.y <= inventoryBox[0].getPosition().y + inventoryBox[0].getSize().y) {
-					if (mana > structInv.fireTower.towerCost) {
+					if (mana >= structInv.fireTower.towerCost) {
 						std::cout << "Clicking Fire Tower" << std::endl;
 						this->structInv.towerFollow(this->fireTower);
 						this->mouseHeld = true;
@@ -526,8 +612,10 @@ void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
 			}
 		}
 		else {
-			if (this->mouseHeld == false && mana > this->structInv.getTowerCost()) {
+			if (this->mouseHeld == false && mana >= this->structInv.getTowerCost()) {
+					if(this->structInv.towerPlacable(sf::Vector2i(gridPos.x * gridSizeU, gridPos.y * gridSizeU)) == true){
 					this->mana -= this->structInv.towerPlace(sf::Vector2i(gridPos.x * gridSizeU, gridPos.y * gridSizeU));
+					}
 					this->mouseHeld = true;
 			}
 		}

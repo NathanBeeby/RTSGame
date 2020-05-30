@@ -34,11 +34,12 @@ private:
 	sf::RectangleShape tower;
 	sf::Texture towerTexture;
 	bool towerFollowing;
+	bool towerIsPlacable;
 	sf::Vector2i mousePosWindow;
 	std::string towerToFollow;
 	std::string fireString, waterString, windString, iceString, earthString, energyString, lightString, darkString, voidString, regenString, observString, manaAmpString, elementOverString, elementAmpString;
 	int structurePrice;
-
+	std::vector<sf::Vector2i> towerPlacementPositions;
 	// Initialization
 	void initVariables();
 	void initSprites();
@@ -76,7 +77,7 @@ public:
 	void towerFollow(std::string &towerString);
 	// Needs Tile Position & tower being placed
 	int towerPlace(sf::Vector2i position);
-
+	bool towerPlacable(sf::Vector2i position);
 	void updateFollowing();
 	void update();
 	

@@ -5,6 +5,8 @@
 void StructureInventory::initVariables()
 {
 	this->towerFollowing = false;
+	this->towerIsPlacable = true;
+
 	this->towerToFollow = "";
 	this->fireString = "../Assets/Image_Assets/Towers/FireTower.png";
 	this->waterString = "../Assets/Image_Assets/Towers/WaterTower.png";
@@ -81,78 +83,105 @@ void StructureInventory::towerFollow(std::string &towerString)
 	this->towerToFollow = towerString;
 }
 
+bool StructureInventory::towerPlacable(sf::Vector2i position)
+{
+	this->towerIsPlacable = true;
+	for (int i = 0; i < towerPlacementPositions.size(); i++) {
+		if (position == towerPlacementPositions[i]) {
+			this->towerIsPlacable = false;
+		}
+	}
+	return towerIsPlacable;
+}
+
 int StructureInventory::towerPlace(sf::Vector2i position)
 {
-	if (towerIsFollowing() == fireString) {
-		// Create fire tower here, give parameters of tower tile position etc.
-		fireTower.CreateTower(position);
-		structurePrice = fireTower.towerCost;
-		std::cout << "Fire Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == waterString) {
-		waterTower.CreateTower(position);
-		structurePrice = waterTower.towerCost;
-		std::cout << "Water Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == windString) {
-		windTower.CreateTower(position);
-		structurePrice = windTower.towerCost;
-		std::cout << "Wind Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == iceString) {
-		iceTower.CreateTower(position);
-		structurePrice = iceTower.towerCost;
-		std::cout << "Ice Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == earthString) {
-		earthTower.CreateTower(position);
-		structurePrice = earthTower.towerCost;
-		std::cout << "Earth Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == energyString) {
-		energyTower.CreateTower(position);
-		structurePrice = energyTower.towerCost;
-		std::cout << "Energy Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == lightString) {
-		lightTower.CreateTower(position);
-		structurePrice = lightTower.towerCost;
-		std::cout << "Light Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == darkString) {
-		darkTower.CreateTower(position);
-		structurePrice = darkTower.towerCost;
-		std::cout << "Dark Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == elementAmpString) {
-		elementalAmplifier.CreateTower(position);
-		structurePrice = elementalAmplifier.towerCost;
-		std::cout << "Elemental Amplifier Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == elementOverString) {
-		elementalOverclocker.CreateTower(position);
-		structurePrice = elementalOverclocker.towerCost;
-		std::cout << "Elemental Overclocker Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == manaAmpString) {
-		manaAmplifier.CreateTower(position);
-		structurePrice = manaAmplifier.towerCost;
-		std::cout << "Mana Amplifier Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == observString) {
-		observatory.CreateTower(position);
-		structurePrice = observatory.towerCost;
-		std::cout << "Observatory Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == regenString) {
-		regenTower.CreateTower(position);
-		structurePrice = regenTower.towerCost;
-		std::cout << "Regen Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
-	}
-	else if (towerIsFollowing() == voidString) {
-		voidTower.CreateTower(position);
-		structurePrice = voidTower.towerCost;
-		std::cout << "Void Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+	if (towerPlacable(position) == true) {
+		if (towerIsFollowing() == fireString) {
+			// Create fire tower here, give parameters of tower tile position etc.
+			fireTower.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = fireTower.towerCost;
+			std::cout << "Fire Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == waterString) {
+			waterTower.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = waterTower.towerCost;
+			std::cout << "Water Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == windString) {
+			windTower.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = windTower.towerCost;
+			std::cout << "Wind Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == iceString) {
+			iceTower.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = iceTower.towerCost;
+			std::cout << "Ice Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == earthString) {
+			earthTower.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = earthTower.towerCost;
+			std::cout << "Earth Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == energyString) {
+			energyTower.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = energyTower.towerCost;
+			std::cout << "Energy Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == lightString) {
+			lightTower.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = lightTower.towerCost;
+			std::cout << "Light Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == darkString) {
+			darkTower.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = darkTower.towerCost;
+			std::cout << "Dark Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == elementAmpString) {
+			elementalAmplifier.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = elementalAmplifier.towerCost;
+			std::cout << "Elemental Amplifier Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == elementOverString) {
+			elementalOverclocker.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = elementalOverclocker.towerCost;
+			std::cout << "Elemental Overclocker Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == manaAmpString) {
+			manaAmplifier.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = manaAmplifier.towerCost;
+			std::cout << "Mana Amplifier Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == observString) {
+			observatory.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = observatory.towerCost;
+			std::cout << "Observatory Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == regenString) {
+			regenTower.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = regenTower.towerCost;
+			std::cout << "Regen Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
+		else if (towerIsFollowing() == voidString) {
+			voidTower.CreateTower(position);
+			towerPlacementPositions.push_back(position);
+			structurePrice = voidTower.towerCost;
+			std::cout << "Void Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
+		}
 	}
 
 	return structurePrice;
@@ -182,8 +211,8 @@ void StructureInventory::mouseHandler(sf::Vector2i windowPos)
 
 void StructureInventory::render(sf::RenderTarget & target)
 {
-	if(towerFollowing == true){
-	target.draw(tower);
+	if (towerFollowing == true) {
+		target.draw(tower);
 	}
 }
 
