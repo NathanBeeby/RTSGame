@@ -71,6 +71,10 @@ void WaterTower::DeleteTower(int towerId)
 {
 }
 
+void WaterTower::deleteTowers()
+{
+}
+
 void WaterTower::update()
 {
 }

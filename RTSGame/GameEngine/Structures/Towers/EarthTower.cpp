@@ -70,6 +70,10 @@ void EarthTower::DeleteTower(int towerId)
 {
 }
 
+void EarthTower::deleteTowers()
+{
+}
+
 void EarthTower::update()
 {
 }

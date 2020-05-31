@@ -21,7 +21,7 @@ private:
 public:
 	// Constructor / Destructor
 	FireTower();
-	~FireTower();
+	virtual ~FireTower();
 
 	// Public Variables
 	int towerCost;
@@ -31,6 +31,7 @@ public:
 	void CreateTower(sf::Vector2i towerPos);
 	void SetTowerTexture(int towerId, std::string &towerTexture);
 	void DeleteTower(int towerId);
+	void deleteTowers();
 	void update();
 	void render(sf::RenderTarget &target);
 

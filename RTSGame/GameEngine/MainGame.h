@@ -13,7 +13,6 @@ private:
 	sf::Vector2i startLocation;
 	MainWindow m_window;
 	bool isRunning;
-	/*float viewSpeed;*/
 	// Initialization
 	void initVariables();
 	void initView();

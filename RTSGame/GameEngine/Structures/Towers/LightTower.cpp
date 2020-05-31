@@ -69,6 +69,10 @@ void LightTower::DeleteTower(int towerId)
 {
 }
 
+void LightTower::deleteTowers()
+{
+}
+
 void LightTower::update()
 {
 }

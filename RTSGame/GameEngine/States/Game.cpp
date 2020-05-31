@@ -65,6 +65,12 @@ void Game::keyHandler(sf::Keyboard::Key key, sf::View &view)
 {
 	gui.keyHandler(key);
 	deltaTime = clock.getElapsedTime().asSeconds();
+	if (key == sf::Keyboard::Key::L) {
+		tile.previousMap();
+	}
+	else if(key == sf::Keyboard::Key::O) {
+		tile.nextMap();
+	}
 	if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
 	{
 		if (view.getCenter().y > 1310) {
@@ -112,9 +118,9 @@ void Game::mouseHandler(sf::RenderWindow & window, sf::View &view)
 	mousePosGrid.y = (mousePosView.y / gridSizeU);
 	gui.mouseHandler(mousePosWindow, mousePosGrid);
 
-	std::cout << "Mouse Pos Window: X - " << mousePosWindow.x << ", Y - " << mousePosWindow.y << std::endl;
-	std::cout << "Mouse Pos View: X - " << mousePosView.x << ", Y - " << mousePosView.y << std::endl;
-	std::cout << "Mouse Pos Grid: X - " << mousePosGrid.x << ", Y - " << mousePosGrid.y << std::endl;
+	//std::cout << "Mouse Pos Window: X - " << mousePosWindow.x << ", Y - " << mousePosWindow.y << std::endl;
+	//std::cout << "Mouse Pos View: X - " << mousePosView.x << ", Y - " << mousePosView.y << std::endl;
+	//std::cout << "Mouse Pos Grid: X - " << mousePosGrid.x << ", Y - " << mousePosGrid.y << std::endl;
 }
 
 void Game::updateTileView(sf::View &view)
@@ -165,6 +171,7 @@ void Game::render(sf::RenderWindow &window, sf::View &view)
 	tile.render(window);
 	gui.renderTowers(window);
 	window.draw(tileSelector);
+	gui.renderTowerSelector(window, sf::Vector2i(mousePosGrid.x * gridSizeF, mousePosGrid.y * gridSizeF));
 	gui.render(window, view);
 	tile.renderMiniMap(window, view);
 	this->updateTileView(view);

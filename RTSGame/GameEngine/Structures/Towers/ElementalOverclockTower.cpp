@@ -69,6 +69,10 @@ void ElementalOverclockTower::DeleteTower(int towerId)
 {
 }
 
+void ElementalOverclockTower::deleteTowers()
+{
+}
+
 void ElementalOverclockTower::update()
 {
 }

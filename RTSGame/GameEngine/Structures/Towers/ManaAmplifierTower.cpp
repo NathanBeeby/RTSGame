@@ -69,6 +69,10 @@ void ManaAmplifierTower::DeleteTower(int towerId)
 {
 }
 
+void ManaAmplifierTower::deleteTowers()
+{
+}
+
 void ManaAmplifierTower::update()
 {
 }

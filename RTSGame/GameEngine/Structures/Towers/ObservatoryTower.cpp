@@ -69,6 +69,10 @@ void ObservatoryTower::DeleteTower(int towerId)
 {
 }
 
+void ObservatoryTower::deleteTowers()
+{
+}
+
 void ObservatoryTower::update()
 {
 }

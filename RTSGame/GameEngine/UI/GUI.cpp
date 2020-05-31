@@ -112,7 +112,7 @@ void GUI::initTextures()
 		std::cout << "Error: loading void tower" << std::endl;
 	}
 
-	if(!this->fireNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/FireTower.png")) {
+	if (!this->fireNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/FireTower.png")) {
 		std::cout << "Error: loading no texture fire tower" << std::endl;
 	}
 	if (!this->waterNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/WaterTower.png")) {
@@ -200,6 +200,12 @@ void GUI::initTextures()
 
 void GUI::initSprites()
 {
+	this->tileSelector.setSize(sf::Vector2f(gridSizeF, gridSizeF));
+	this->tileSelector.setFillColor(sf::Color(255, 0, 0, 32));
+	this->tileSelector.setOutlineThickness(2.f);
+	this->tileSelector.setOutlineColor(sf::Color::Red);
+
+
 	screenSize = sf::Vector2f(1920, 1080);
 	this->invMaxX = 2;
 	this->invMaxY = 7;
@@ -613,10 +619,10 @@ void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
 		}
 		else {
 			if (this->mouseHeld == false && mana >= this->structInv.getTowerCost()) {
-					if(this->structInv.towerPlacable(sf::Vector2i(gridPos.x * gridSizeU, gridPos.y * gridSizeU)) == true){
+				if (this->structInv.towerPlacable(sf::Vector2i(gridPos.x * gridSizeU, gridPos.y * gridSizeU)) == true) {
 					this->mana -= this->structInv.towerPlace(sf::Vector2i(gridPos.x * gridSizeU, gridPos.y * gridSizeU));
-					}
-					this->mouseHeld = true;
+				}
+				this->mouseHeld = true;
 			}
 		}
 	}
@@ -684,8 +690,39 @@ void GUI::render(sf::RenderTarget & target, sf::View & view)
 	target.draw(manaText);
 	target.draw(waveText);
 	this->structInv.render(target);
-	//target.draw(chatBox);
-	//target.draw(chatScrollBar);
+}
+
+void GUI::renderTowerSelector(sf::RenderTarget & target, sf::Vector2i pos)
+{
+	/*
+	TODO: Make it so that pathway tiles are not placable tiles
+	also make water tiles unplacable unless it's a water tower
+	
+	*/
+	if (structInv.isFollowing()) {
+		structInv.returnUnplacablePosition(pos);
+		if (!structInv.towerPlacable(sf::Vector2i(pos.x, pos.y))) {
+			this->tileSelector.setFillColor(sf::Color(255, 0, 0, 32));
+			this->tileSelector.setOutlineColor(sf::Color::Red);
+			this->tileSelector.setPosition(pos.x, pos.y);
+			target.draw(tileSelector);
+		}
+		else {
+			this->tileSelector.setFillColor(sf::Color(0, 255, 0, 32));
+			this->tileSelector.setOutlineColor(sf::Color::Green);
+			this->tileSelector.setPosition(pos.x, pos.y);
+			target.draw(tileSelector);
+		}
+	}
+	else {
+		structInv.returnUnplacablePosition(pos);
+		if (!structInv.towerPlacable(sf::Vector2i(pos.x, pos.y))) {
+			this->tileSelector.setFillColor(sf::Color(0, 255, 0, 32));
+			this->tileSelector.setOutlineColor(sf::Color::Green);
+			this->tileSelector.setPosition(pos.x, pos.y);
+			target.draw(tileSelector);
+		}
+	}
 }
 
 void GUI::renderTowers(sf::RenderTarget & target)

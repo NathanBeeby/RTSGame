@@ -11,7 +11,7 @@ private:
 	int levelValue, scoreValue;
 	int invMaxX, invMaxY, invMax, health, mana, wave;
 	int guiTime, guiTimeMinute, day, minute;
-	sf::RectangleShape resourceBar, pauseButton, settingsButton, miniMapBox, chatBox, chatScrollBar;
+	sf::RectangleShape resourceBar, pauseButton, settingsButton, miniMapBox, chatBox, chatScrollBar, tileSelector;
 	sf::Texture resourceBarTexture, waveTexture, pauseTexture, settingsTexture, chatBoxTexture, emptyBoxTexture, inventoryTexture, miniMapTexture, healthTexture, manaTexture;
 	sf::Clock guiClock;
 	bool mouseHeld;
@@ -23,7 +23,7 @@ private:
 
 	std::vector<sf::RectangleShape> guiBox;
 	std::vector<sf::RectangleShape> inventoryBox;
-
+	
 	std::vector<sf::Texture> guiBoxTextures;
 	std::vector<sf::Texture> inventoryBoxTexture;
 
@@ -60,6 +60,7 @@ public:
 	void mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos);
 	void renderResources(sf::RenderTarget &target, sf::View &view);
 	void render(sf::RenderTarget &target, sf::View &view);
+	void renderTowerSelector(sf::RenderTarget &target, sf::Vector2i pos);
 	void renderTowers(sf::RenderTarget &target);
 };
 

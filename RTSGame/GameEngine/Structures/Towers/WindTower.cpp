@@ -69,6 +69,10 @@ void WindTower::DeleteTower(int towerId)
 {
 }
 
+void WindTower::deleteTowers()
+{
+}
+
 void WindTower::update()
 {
 }

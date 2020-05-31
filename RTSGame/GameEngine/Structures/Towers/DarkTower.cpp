@@ -69,6 +69,10 @@ void DarkTower::DeleteTower(int towerId)
 {
 }
 
+void DarkTower::deleteTowers()
+{
+}
+
 void DarkTower::update()
 {
 }

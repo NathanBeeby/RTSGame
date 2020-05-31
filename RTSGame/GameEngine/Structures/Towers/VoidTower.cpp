@@ -70,6 +70,10 @@ void VoidTower::DeleteTower(int towerId)
 {
 }
 
+void VoidTower::deleteTowers()
+{
+}
+
 void VoidTower::update()
 {
 }

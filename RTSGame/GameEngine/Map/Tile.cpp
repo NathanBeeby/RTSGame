@@ -6,42 +6,30 @@ void Tile::initVariables()
 	this->tileMax.y = 30;
 	this->miniMapOffsetX = 0;
 	this->miniMapOffsetY = 0;
-	this->isWater.resize(tileMax.x * tileMax.y);
+	this->mapNo = 0;
+	this->mapMax = 10;
+	this->mapFile.resize(10);
 }
 
 void Tile::initTextures()
 {
-	//this->tileTexture.resize(8);
-	//if (!this->tileTexture[0].loadFromFile("../Assets/Image_Assets/Tiles/Dirt1.png")) {
-	//	std::cout << "Dirt 1 Failed to load" << std::endl;
-	//}
-	//if (!this->tileTexture[1].loadFromFile("../Assets/Image_Assets/Tiles/Dirt2.png")) {
-	//	std::cout << "Dirt 1 Failed to load" << std::endl;
-	//}
-	//if (!this->tileTexture[2].loadFromFile("../Assets/Image_Assets/Tiles/Grass1.png")) {
-	//	std::cout << "Dirt 1 Failed to load" << std::endl;
-	//}
-	//if (!this->tileTexture[3].loadFromFile("../Assets/Image_Assets/Tiles/Grass2.png")) {
-	//	std::cout << "Dirt 1 Failed to load" << std::endl;
-	//}
-	//if (!this->tileTexture[4].loadFromFile("../Assets/Image_Assets/Tiles/Grass3.png")) {
-	//	std::cout << "Dirt 1 Failed to load" << std::endl;
-	//}
-	//if (!this->tileTexture[5].loadFromFile("../Assets/Image_Assets/Tiles/Sand1.png")) {
-	//	std::cout << "Dirt 1 Failed to load" << std::endl;
-	//}
-	//if (!this->tileTexture[6].loadFromFile("../Assets/Image_Assets/Tiles/Sand2.png")) {
-	//	std::cout << "Dirt 1 Failed to load" << std::endl;
-	//}
-	//if (!this->tileTexture[7].loadFromFile("../Assets/Image_Assets/Tiles/Water.png")) {
-	//	std::cout << "Dirt 1 Failed to load" << std::endl;
-	//}
+	this->mapFile[0] = "../Assets/Map_Assets/Map0.txt";
+	this->mapFile[1] = "../Assets/Map_Assets/Map1.txt";
+	this->mapFile[2] = "../Assets/Map_Assets/Map2.txt";
+	this->mapFile[3] = "../Assets/Map_Assets/Map3.txt";
+	this->mapFile[4] = "../Assets/Map_Assets/Map4.txt";
+	this->mapFile[5] = "../Assets/Map_Assets/Map5.txt";
+	this->mapFile[6] = "../Assets/Map_Assets/Map6.txt";
+	this->mapFile[7] = "../Assets/Map_Assets/Map7.txt";
+	this->mapFile[8] = "../Assets/Map_Assets/Map8.txt";
+	this->mapFile[9] = "../Assets/Map_Assets/Map9.txt";
 }
 
-void Tile::initSprite()
+void Tile::initSprite(int mapNum)
 {
+	//std::ifstream openfile("../Assets/Map_Assets/Map1.txt");
 	try{
-	std::ifstream openfile("../Assets/Map_Assets/Map1.txt");
+	std::ifstream openfile(this->mapFile[mapNum]);
 	if (openfile.is_open()) {
 		std::string tileLocation;
 		sf::Vector2i loadCounter = sf::Vector2i(0, 0);
@@ -49,17 +37,35 @@ void Tile::initSprite()
 		tileText.loadFromFile(tileLocation);
 		tile.setTexture(tileText);
 		miniMapTile.setTexture(tileText);
-		int isWaterCount = 0;
 		while (!openfile.eof()) {
 			std::string str;
 			openfile >> str;
 			char x = str[0], y = str[2];
-			if (!isdigit(x) || !isdigit(y)) {
-				map[loadCounter.x][loadCounter.y] = sf::Vector2i(-1, -1);
-			}
-			else {
-				map[loadCounter.x][loadCounter.y] = sf::Vector2i(x - '0', y - '0');
-			}
+			int xa, ya;
+			//if (!isdigit(x) || !isdigit(y)) {
+			//	map[loadCounter.x][loadCounter.y] = sf::Vector2i(-1, -1);
+			//}
+			//else {
+				xa = x - '0';
+				ya = y - '0';
+				if (x == 'a') {
+					xa = 10;
+				}
+				else if (x == 'b') {
+					xa = 11;
+				}
+				else if (x == 'c') {
+					xa = 12;
+				}
+				else if (x == 'd') {
+					xa = 13;
+				}
+				else if (x == 'e') {
+					xa = 14;
+				}
+				if (xa <= 14 || ya <= 5) {
+				map[loadCounter.x][loadCounter.y] = sf::Vector2i(xa, ya);
+				}
 
 			if (openfile.peek() == '\n') {
 				loadCounter.x = 0;
@@ -68,13 +74,12 @@ void Tile::initSprite()
 			else {
 				loadCounter.x++;
 			}
-			if (x >= 1 && y < 5 || x == 0 && y == 5) {
-				this->isWater[isWaterCount] = true;
+			if (xa >= 1 && ya < 5 && xa < 8 || xa == 0 && ya == 5) {
+				this->waterTiles.push_back(sf::Vector2i(xa, ya));
 			}
-			else {
-				this->isWater[isWaterCount] = false;
+			if (xa > 8 && ya < 5 && xa < 14) {
+				this->unplacableTiles.push_back(sf::Vector2i(xa, ya));
 			}
-			isWaterCount++;
 		}
 		loadCounter.y++;
 		this->toX = loadCounter.x;
@@ -101,11 +106,21 @@ Tile::Tile()
 {
 	this->initVariables();
 	this->initTextures();
-	this->initSprite();
+	this->initSprite(0);
 }
 
 Tile::~Tile()
 {
+}
+
+const int Tile::getMapNo() const
+{
+	return this->mapNo;
+}
+
+const int Tile::getMapMax() const
+{
+	return this->mapMax;
 }
 
 void Tile::updateTileView()
@@ -168,6 +183,33 @@ void Tile::updateMiniMapView()
 	}
 }
 
+void Tile::updateMap(int mapNum)
+{
+	// Render the new map dependant on the map number
+
+
+}
+
+void Tile::nextMap()
+{
+	if (this->mapNo < mapMax) {
+		this->mapNo++;
+		std::cout << "NEXT: Map Number: " << mapNo << std::endl;
+		this->initSprite(mapNo);
+		this->structInv.deleteAllTowers();
+	}
+}
+
+void Tile::previousMap()
+{
+	if (this->mapNo > 0) {
+		this->mapNo--;
+		std::cout << "PREVIOUS: Map Number: " << mapNo << std::endl;
+		this->initSprite(mapNo);
+		this->structInv.deleteAllTowers();
+	}
+}
+
 void Tile::update()
 {
 	this->updateTileView();
@@ -206,6 +248,7 @@ void Tile::render(sf::RenderTarget &target)
 				tile.setPosition(x * 200, y * 200);
 				tile.setTextureRect(sf::IntRect(map[x][y].x * 200, map[x][y].y * 200, 200, 200));
 				target.draw(tile);
+				
 			}
 		}
 	}

@@ -70,6 +70,10 @@ void RegenTower::DeleteTower(int towerId)
 {
 }
 
+void RegenTower::deleteTowers()
+{
+}
+
 void RegenTower::update()
 {
 }

@@ -69,6 +69,10 @@ void IceTower::DeleteTower(int towerId)
 {
 }
 
+void IceTower::deleteTowers()
+{
+}
+
 void IceTower::update()
 {
 }

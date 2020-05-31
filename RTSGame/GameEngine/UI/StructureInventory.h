@@ -40,6 +40,7 @@ private:
 	std::string fireString, waterString, windString, iceString, earthString, energyString, lightString, darkString, voidString, regenString, observString, manaAmpString, elementOverString, elementAmpString;
 	int structurePrice;
 	std::vector<sf::Vector2i> towerPlacementPositions;
+	sf::Vector2i unplacablePos;
 	// Initialization
 	void initVariables();
 	void initSprites();
@@ -78,7 +79,12 @@ public:
 	// Needs Tile Position & tower being placed
 	int towerPlace(sf::Vector2i position);
 	bool towerPlacable(sf::Vector2i position);
+	void unplacablePosition(sf::Vector2i position);
+	void waterTilePositions(sf::Vector2i position);
+	sf::Vector2i returnUnplacablePosition(sf::Vector2i position);
+	void deleteAllTowers();
 	void updateFollowing();
+	void updateTowers();
 	void update();
 	
 	void mouseHandler(sf::Vector2i windowPos);

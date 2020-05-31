@@ -69,6 +69,10 @@ void ElementalAmplifierTower::DeleteTower(int towerId)
 {
 }
 
+void ElementalAmplifierTower::deleteTowers()
+{
+}
+
 void ElementalAmplifierTower::update()
 {
 }

@@ -22,6 +22,9 @@ void StructureInventory::initVariables()
 	this->observString = "../Assets/Image_Assets/Towers/Observatory.png";
 	this->regenString = "../Assets/Image_Assets/Towers/Regenerator.png";
 	this->voidString = "../Assets/Image_Assets/Towers/VoidTower.png";
+
+	this->unplacablePos.x = -200;
+	this->unplacablePos.y = -200;
 }
 
 void StructureInventory::initSprites()
@@ -93,6 +96,28 @@ bool StructureInventory::towerPlacable(sf::Vector2i position)
 	}
 	return towerIsPlacable;
 }
+
+void StructureInventory::unplacablePosition(sf::Vector2i position)
+{
+	towerPlacementPositions.push_back(position);
+}
+
+void StructureInventory::waterTilePositions(sf::Vector2i position)
+{
+}
+
+sf::Vector2i StructureInventory::returnUnplacablePosition(sf::Vector2i position)
+{
+	for (int i = 0; i < towerPlacementPositions.size(); i++) {
+		if (position == towerPlacementPositions[i]) {
+			this->unplacablePos = position;
+			std::cout << "UNPLACABLE" << std::endl;
+		}
+	}
+
+	return this->unplacablePos;
+}
+
 
 int StructureInventory::towerPlace(sf::Vector2i position)
 {
@@ -187,13 +212,56 @@ int StructureInventory::towerPlace(sf::Vector2i position)
 	return structurePrice;
 }
 
+void StructureInventory::deleteAllTowers()
+{
+	fireTower.deleteTowers();
+	waterTower.deleteTowers();
+	windTower.deleteTowers();
+	iceTower.deleteTowers();
+	earthTower.deleteTowers();
+	energyTower.deleteTowers();
+	lightTower.deleteTowers();
+	darkTower.deleteTowers();
+	elementalAmplifier.deleteTowers();
+	elementalOverclocker.deleteTowers();
+	manaAmplifier.deleteTowers();
+	regenTower.deleteTowers();
+	observatory.deleteTowers();
+	voidTower.deleteTowers();
+
+	for (int i = 0; i < towerPlacementPositions.size(); i++) {
+		towerPlacementPositions.erase(towerPlacementPositions.begin() + i);
+	}
+}
+
 void StructureInventory::updateFollowing()
 {
+}
+
+void StructureInventory::updateTowers()
+{
+	// Attack Towers
+	fireTower.update();
+	waterTower.update();
+	windTower.update();
+	iceTower.update();
+	earthTower.update();
+	energyTower.update();
+	lightTower.update();
+	darkTower.update();
+	// Support Towers
+	elementalAmplifier.update();
+	elementalOverclocker.update();
+	manaAmplifier.update();
+	observatory.update();
+	regenTower.update();
+	voidTower.update();
 }
 
 void StructureInventory::update()
 {
 	this->updateFollowing();
+	this->updateTowers();
 }
 
 void StructureInventory::mouseHandler(sf::Vector2i windowPos)

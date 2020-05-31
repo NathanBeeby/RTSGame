@@ -70,6 +70,10 @@ void EnergyTower::DeleteTower(int towerId)
 {
 }
 
+void EnergyTower::deleteTowers()
+{
+}
+
 void EnergyTower::update()
 {
 }

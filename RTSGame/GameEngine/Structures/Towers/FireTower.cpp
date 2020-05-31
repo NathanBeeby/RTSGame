@@ -67,15 +67,24 @@ void FireTower::SetTowerTexture(int towerId, std::string & towerTexture)
 
 void FireTower::DeleteTower(int towerId)
 {
+	this->fireTower.erase(fireTower.begin() + towerId);
+}
+
+void FireTower::deleteTowers()
+{
+	for (int i = 0; i < this->fireTower.size(); i++) {
+		this->fireTower.erase(fireTower.begin() + i);
+	}
 }
 
 void FireTower::update()
 {
+
 }
 
 void FireTower::render(sf::RenderTarget & target)
 {
-	for (int i = 0; i < fireTower.size(); i++) {
-		target.draw(fireTower[i]);
+	for (int i = 0; i < this->fireTower.size(); i++) {
+		target.draw(this->fireTower[i]);
 	}
 }

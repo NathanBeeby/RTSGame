@@ -32,6 +32,7 @@ public:
 	void CreateTower(sf::Vector2i towerPos);
 	void SetTowerTexture(int towerId, std::string &towerTexture);
 	void DeleteTower(int towerId);
+	void deleteTowers();
 	void update();
 	void render(sf::RenderTarget &target);
 

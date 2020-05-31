@@ -99,24 +99,9 @@ void MainGame::keyInput(sf::Keyboard::Key key, sf::View &view)
 	gameState.keyInput(key, view);
 	if (key == sf::Keyboard::Escape) {
 		m_window.close();
+		this->isRunning = false;
 	}
 	if (this->gameState.gState == this->gameState.gameOn) {
-		/*if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
-		{
-				view.move(0.f, -viewSpeed);
-		}
-		else if (key == sf::Keyboard::S || key == sf::Keyboard::Down)
-		{
-				view.move(0.f, viewSpeed);
-		}
-		else if (key == sf::Keyboard::A || key == sf::Keyboard::Left)
-		{
-			view.move(-viewSpeed, 0.f);
-		}
-		else if (key == sf::Keyboard::D || key == sf::Keyboard::Right)
-		{
-			view.move(viewSpeed, 0.f);
-		}*/
 		if (key == sf::Keyboard::F5)
 		{
 			m_window.ToggleFullscreen();
