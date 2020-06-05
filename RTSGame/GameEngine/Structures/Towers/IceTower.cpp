@@ -7,6 +7,9 @@ void IceTower::initVariables()
 	this->towerNum = 0;
 	this->iceTower.resize(towerNum);
 	this->towerCost = 300;
+	this->iceClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void IceTower::initTextures()
@@ -45,6 +48,21 @@ IceTower::IceTower()
 
 IceTower::~IceTower()
 {
+}
+
+sf::Vector2f IceTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->iceTower.size(); i++) {
+		if (clickPos.x >= this->iceTower[i].getGlobalBounds().left && clickPos.x <= (this->iceTower[i].getGlobalBounds().left + this->iceTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->iceTower[i].getGlobalBounds().top && clickPos.y <= (this->iceTower[i].getGlobalBounds().top + this->iceTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->iceTower[i].getPosition();
+				this->iceClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void IceTower::CreateTower(sf::Vector2i towerPos)

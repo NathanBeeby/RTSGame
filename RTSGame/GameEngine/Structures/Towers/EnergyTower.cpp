@@ -8,6 +8,9 @@ void EnergyTower::initVariables()
 	this->towerNum = 0;
 	this->energyTower.resize(towerNum);
 	this->towerCost = 300;
+	this->energyClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void EnergyTower::initTextures()
@@ -46,6 +49,21 @@ EnergyTower::EnergyTower()
 
 EnergyTower::~EnergyTower()
 {
+}
+
+sf::Vector2f EnergyTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->energyTower.size(); i++) {
+		if (clickPos.x >= this->energyTower[i].getGlobalBounds().left && clickPos.x <= (this->energyTower[i].getGlobalBounds().left + this->energyTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->energyTower[i].getGlobalBounds().top && clickPos.y <= (this->energyTower[i].getGlobalBounds().top + this->energyTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->energyTower[i].getPosition();
+				this->energyClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void EnergyTower::CreateTower(sf::Vector2i towerPos)

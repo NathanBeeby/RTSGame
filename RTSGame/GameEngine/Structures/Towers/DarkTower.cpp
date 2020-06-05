@@ -7,6 +7,9 @@ void DarkTower::initVariables()
 	this->towerNum = 0;
 	this->darkTower.resize(towerNum);
 	this->towerCost = 300;
+	this->darkClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void DarkTower::initTextures()
@@ -45,6 +48,21 @@ DarkTower::DarkTower()
 
 DarkTower::~DarkTower()
 {
+}
+
+sf::Vector2f DarkTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->darkTower.size(); i++) {
+		if (clickPos.x >= this->darkTower[i].getGlobalBounds().left && clickPos.x <= (this->darkTower[i].getGlobalBounds().left + this->darkTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->darkTower[i].getGlobalBounds().top && clickPos.y <= (this->darkTower[i].getGlobalBounds().top + this->darkTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->darkTower[i].getPosition();
+				this->darkClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void DarkTower::CreateTower(sf::Vector2i towerPos)

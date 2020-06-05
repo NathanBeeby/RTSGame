@@ -348,7 +348,7 @@ void GUI::updateResources()
 
 	this->healthString = std::to_string(this->health);
 	this->manaString = std::to_string(this->mana);
-	this->waveString = std::to_string(this->wave);
+	this->waveString = std::to_string(wave.getWaveNumber());
 
 	this->levelText.setString("Level: " + levelString);
 
@@ -406,6 +406,7 @@ void GUI::updateClock()
 void GUI::update(sf::Time deltaTime)
 {
 	this->structInv.update();
+	this->wave.update();
 	this->updateClock();
 	this->updateResources();
 	this->updateTowerTextures();
@@ -503,6 +504,10 @@ void GUI::keyHandler(sf::Keyboard::Key key)
 {
 	if (key == sf::Keyboard::Key::Q) {
 		mana += 1000;
+	}
+	if (key == sf::Keyboard::Key::M) {
+		std::cout << "Wave Began" << std::endl;
+		wave.beginWave();
 	}
 }
 
@@ -616,6 +621,8 @@ void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
 					}
 				}
 			}
+			// Add here
+			structInv.towerClicked(sf::Vector2i(gridPos.x * gridSizeU, gridPos.y * gridSizeU));
 		}
 		else {
 			if (this->mouseHeld == false && mana >= this->structInv.getTowerCost()) {
@@ -689,7 +696,9 @@ void GUI::render(sf::RenderTarget & target, sf::View & view)
 	target.draw(healthText);
 	target.draw(manaText);
 	target.draw(waveText);
+	this->renderWave(target);
 	this->structInv.render(target);
+	
 }
 
 void GUI::renderTowerSelector(sf::RenderTarget & target, sf::Vector2i pos)
@@ -728,4 +737,9 @@ void GUI::renderTowerSelector(sf::RenderTarget & target, sf::Vector2i pos)
 void GUI::renderTowers(sf::RenderTarget & target)
 {
 	this->structInv.renderTowers(target);
+}
+
+void GUI::renderWave(sf::RenderTarget & target)
+{
+	this->wave.render(target);
 }

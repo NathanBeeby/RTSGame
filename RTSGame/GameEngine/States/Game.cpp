@@ -170,6 +170,7 @@ void Game::render(sf::RenderWindow &window, sf::View &view)
 	this->tileSelector.setPosition(mousePosGrid.x * gridSizeF, mousePosGrid.y * gridSizeF);
 	tile.render(window);
 	gui.renderTowers(window);
+	gui.renderWave(window);
 	window.draw(tileSelector);
 	gui.renderTowerSelector(window, sf::Vector2i(mousePosGrid.x * gridSizeF, mousePosGrid.y * gridSizeF));
 	gui.render(window, view);

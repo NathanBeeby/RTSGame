@@ -8,6 +8,9 @@ void EarthTower::initVariables()
 	this->towerNum = 0;
 	this->earthTower.resize(towerNum);
 	this->towerCost = 300;
+	this->earthClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void EarthTower::initTextures()
@@ -46,6 +49,21 @@ EarthTower::EarthTower()
 
 EarthTower::~EarthTower()
 {
+}
+
+sf::Vector2f EarthTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->earthTower.size(); i++) {
+		if (clickPos.x >= this->earthTower[i].getGlobalBounds().left && clickPos.x <= (this->earthTower[i].getGlobalBounds().left + this->earthTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->earthTower[i].getGlobalBounds().top && clickPos.y <= (this->earthTower[i].getGlobalBounds().top + this->earthTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->earthTower[i].getPosition();
+				this->earthClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void EarthTower::CreateTower(sf::Vector2i towerPos)

@@ -9,6 +9,9 @@ void WaterTower::initVariables()
 	this->towerNum = 0;
 	this->waterTower.resize(towerNum);
 	this->towerCost = 300;
+	this->waterClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void WaterTower::initTextures()
@@ -47,6 +50,21 @@ WaterTower::WaterTower()
 
 WaterTower::~WaterTower()
 {
+}
+
+sf::Vector2f WaterTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->waterTower.size(); i++) {
+		if (clickPos.x >= this->waterTower[i].getGlobalBounds().left && clickPos.x <= (this->waterTower[i].getGlobalBounds().left + this->waterTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->waterTower[i].getGlobalBounds().top && clickPos.y <= (this->waterTower[i].getGlobalBounds().top + this->waterTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->waterTower[i].getPosition();
+				this->waterClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void WaterTower::CreateTower(sf::Vector2i towerPos)

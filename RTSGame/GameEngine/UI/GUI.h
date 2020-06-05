@@ -2,14 +2,16 @@
 #include "UI.h"
 #include "../GameAssets/AssetManager.h"
 #include "StructureInventory.h"
+#include "../Wave/Wave.h"
 class GUI : public UI
 {
 private:
 	// Private Variables
 	AssetManager manager;
+	Wave wave;
 	StructureInventory structInv;
 	int levelValue, scoreValue;
-	int invMaxX, invMaxY, invMax, health, mana, wave;
+	int invMaxX, invMaxY, invMax, health, mana, waveAmt;
 	int guiTime, guiTimeMinute, day, minute;
 	sf::RectangleShape resourceBar, pauseButton, settingsButton, miniMapBox, chatBox, chatScrollBar, tileSelector;
 	sf::Texture resourceBarTexture, waveTexture, pauseTexture, settingsTexture, chatBoxTexture, emptyBoxTexture, inventoryTexture, miniMapTexture, healthTexture, manaTexture;
@@ -62,5 +64,6 @@ public:
 	void render(sf::RenderTarget &target, sf::View &view);
 	void renderTowerSelector(sf::RenderTarget &target, sf::Vector2i pos);
 	void renderTowers(sf::RenderTarget &target);
+	void renderWave(sf::RenderTarget &target);
 };
 

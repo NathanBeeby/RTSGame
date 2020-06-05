@@ -8,6 +8,9 @@ void VoidTower::initVariables()
 	this->towerNum = 0;
 	this->voidTower.resize(towerNum);
 	this->towerCost = 300;
+	this->voidClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void VoidTower::initTextures()
@@ -46,6 +49,21 @@ VoidTower::VoidTower()
 
 VoidTower::~VoidTower()
 {
+}
+
+sf::Vector2f VoidTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->voidTower.size(); i++) {
+		if (clickPos.x >= this->voidTower[i].getGlobalBounds().left && clickPos.x <= (this->voidTower[i].getGlobalBounds().left + this->voidTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->voidTower[i].getGlobalBounds().top && clickPos.y <= (this->voidTower[i].getGlobalBounds().top + this->voidTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->voidTower[i].getPosition();
+				this->voidClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void VoidTower::CreateTower(sf::Vector2i towerPos)

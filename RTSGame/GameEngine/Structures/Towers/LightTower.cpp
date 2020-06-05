@@ -7,6 +7,9 @@ void LightTower::initVariables()
 	this->towerNum = 0;
 	this->lightTower.resize(towerNum);
 	this->towerCost = 300;
+	this->lightClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void LightTower::initTextures()
@@ -45,6 +48,21 @@ LightTower::LightTower()
 
 LightTower::~LightTower()
 {
+}
+
+sf::Vector2f LightTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->lightTower.size(); i++) {
+		if (clickPos.x >= this->lightTower[i].getGlobalBounds().left && clickPos.x <= (this->lightTower[i].getGlobalBounds().left + this->lightTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->lightTower[i].getGlobalBounds().top && clickPos.y <= (this->lightTower[i].getGlobalBounds().top + this->lightTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->lightTower[i].getPosition();
+				this->lightClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void LightTower::CreateTower(sf::Vector2i towerPos)

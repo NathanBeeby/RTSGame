@@ -7,6 +7,9 @@ void ManaAmplifierTower::initVariables()
 	this->towerNum = 0;
 	this->mAmplifierTower.resize(towerNum);
 	this->towerCost = 300;
+	this->manaAmpClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void ManaAmplifierTower::initTextures()
@@ -45,6 +48,21 @@ ManaAmplifierTower::ManaAmplifierTower()
 
 ManaAmplifierTower::~ManaAmplifierTower()
 {
+}
+
+sf::Vector2f ManaAmplifierTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->mAmplifierTower.size(); i++) {
+		if (clickPos.x >= this->mAmplifierTower[i].getGlobalBounds().left && clickPos.x <= (this->mAmplifierTower[i].getGlobalBounds().left + this->mAmplifierTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->mAmplifierTower[i].getGlobalBounds().top && clickPos.y <= (this->mAmplifierTower[i].getGlobalBounds().top + this->mAmplifierTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->mAmplifierTower[i].getPosition();
+				this->manaAmpClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void ManaAmplifierTower::CreateTower(sf::Vector2i towerPos)

@@ -1,19 +1,30 @@
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "GameEngine/MainGame.h"
 
 	/* 
 
 	- Create 10 Unique maps, each with a path spanning from beginning to end
-	- Create an enemy class, which extends into several types of enemies, each with different health & abilities
-	- Create a wave system, which ends when all enemies in the wave are destroyed (when vector reaches 0)
+	- When wave ends all enemies in the wave are to be destroyed (when vector reaches 0)
 	- Make it so that only water towers can be placed on water tiles
 	- Make pathway tiles unplacable positions for towers
 	- Fix view going outside the bounds of the map
 	- Fix menu system overlapping with eachother
 	- Fix deletion of towers (for some reason tower array size is 0 on delete)
-	- Clean up entity system / Tower creation system 
+	- Clean up entity system / Tower creation system / Enemy Creation System
 	- When level is switched, change health and mana back to original value
+	- Set up Elemental enemy classes, adding in the textures, the push back for the arrays, the different types of enemies in that element, etc.
+	- Get an enemy moving from the starting point to the right
+
+
+	- Once Enemy path movement & destruction has finished, begin implementing multithreading into the game
+	- Implement a bloom shader into the game & set it on and off via key press
+	- Implement state where if lives are less or equal to 0, game over
+	- Implement state where if wave 30 complete, level success
+	- Implement collapsable tower menu
+	- Implement Start round button
 
 	----------------------------------- HOW WE COULD MAKE WAVE SYSTEM -----------------------------------
 	- Create a play button near the mini map or near pause button
@@ -36,6 +47,7 @@
 
 int main()
 {
+	srand(time(0));
 	MainGame game;
 
 	while (game.running()) {

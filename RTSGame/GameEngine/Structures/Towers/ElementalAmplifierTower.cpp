@@ -7,6 +7,10 @@ void ElementalAmplifierTower::initVariables()
 	this->towerNum = 0;
 	this->eAmplifierTower.resize(towerNum);
 	this->towerCost = 300;
+	this->elemAmpClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
+
 }
 
 void ElementalAmplifierTower::initTextures()
@@ -45,6 +49,21 @@ ElementalAmplifierTower::ElementalAmplifierTower()
 
 ElementalAmplifierTower::~ElementalAmplifierTower()
 {
+}
+
+sf::Vector2f ElementalAmplifierTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->eAmplifierTower.size(); i++) {
+		if (clickPos.x >= this->eAmplifierTower[i].getGlobalBounds().left && clickPos.x <= (this->eAmplifierTower[i].getGlobalBounds().left + this->eAmplifierTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->eAmplifierTower[i].getGlobalBounds().top && clickPos.y <= (this->eAmplifierTower[i].getGlobalBounds().top + this->eAmplifierTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->eAmplifierTower[i].getPosition();
+				this->elemAmpClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void ElementalAmplifierTower::CreateTower(sf::Vector2i towerPos)

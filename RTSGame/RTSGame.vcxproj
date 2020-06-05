@@ -120,6 +120,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameEngine\Enemies\DarkEnemy.cpp" />
+    <ClCompile Include="GameEngine\Enemies\EarthEnemy.cpp" />
+    <ClCompile Include="GameEngine\Enemies\Enemy.cpp" />
+    <ClCompile Include="GameEngine\Enemies\EnergyEnemy.cpp" />
+    <ClCompile Include="GameEngine\Enemies\FireEnemy.cpp" />
+    <ClCompile Include="GameEngine\Structures\Tower.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\ElementalAmplifierTower.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\ElementalOverclockTower.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\DarkTower.cpp" />
@@ -150,6 +156,8 @@
     <ClCompile Include="GameEngine\Map\Objects\GoldOre.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\IceTower.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\LightTower.cpp" />
+    <ClCompile Include="GameEngine\Enemies\IceEnemy.cpp" />
+    <ClCompile Include="GameEngine\Enemies\LightEnemy.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameEngine\MainWindow.cpp" />
     <ClCompile Include="GameEngine\UI\UI.cpp" />
@@ -164,8 +172,17 @@
     <ClCompile Include="GameEngine\Structures\Towers\ObservatoryTower.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\RegenTower.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\VoidTower.cpp" />
+    <ClCompile Include="GameEngine\Enemies\VoidEnemy.cpp" />
+    <ClCompile Include="GameEngine\Enemies\WaterEnemy.cpp" />
+    <ClCompile Include="GameEngine\Enemies\WindEnemy.cpp" />
+    <ClCompile Include="GameEngine\Wave\Wave.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameEngine\Enemies\DarkEnemy.h" />
+    <ClInclude Include="GameEngine\Enemies\EarthEnemy.h" />
+    <ClInclude Include="GameEngine\Enemies\Enemy.h" />
+    <ClInclude Include="GameEngine\Enemies\EnergyEnemy.h" />
+    <ClInclude Include="GameEngine\Enemies\FireEnemy.h" />
     <ClInclude Include="GameEngine\Structures\Towers\ElementalAmplifierTower.h" />
     <ClInclude Include="GameEngine\Structures\Towers\ElementalOverclockTower.h" />
     <ClInclude Include="GameEngine\Structures\Towers\DarkTower.h" />
@@ -211,6 +228,12 @@
     <ClInclude Include="GameEngine\Structures\Towers\ObservatoryTower.h" />
     <ClInclude Include="GameEngine\Structures\Towers\RegenTower.h" />
     <ClInclude Include="GameEngine\Structures\Towers\VoidTower.h" />
+    <ClInclude Include="GameEngine\Enemies\IceEnemy.h" />
+    <ClInclude Include="GameEngine\Enemies\LightEnemy.h" />
+    <ClInclude Include="GameEngine\Enemies\VoidEnemy.h" />
+    <ClInclude Include="GameEngine\Enemies\WaterEnemy.h" />
+    <ClInclude Include="GameEngine\Enemies\WindEnemy.h" />
+    <ClInclude Include="GameEngine\Wave\Wave.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

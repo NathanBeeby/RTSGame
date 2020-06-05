@@ -7,6 +7,9 @@ void ObservatoryTower::initVariables()
 	this->towerNum = 0;
 	this->observatoryTower.resize(towerNum);
 	this->towerCost = 300;
+	this->obsClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void ObservatoryTower::initTextures()
@@ -45,6 +48,21 @@ ObservatoryTower::ObservatoryTower()
 
 ObservatoryTower::~ObservatoryTower()
 {
+}
+
+sf::Vector2f ObservatoryTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->observatoryTower.size(); i++) {
+		if (clickPos.x >= this->observatoryTower[i].getGlobalBounds().left && clickPos.x <= (this->observatoryTower[i].getGlobalBounds().left + this->observatoryTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->observatoryTower[i].getGlobalBounds().top && clickPos.y <= (this->observatoryTower[i].getGlobalBounds().top + this->observatoryTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->observatoryTower[i].getPosition();
+				this->obsClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void ObservatoryTower::CreateTower(sf::Vector2i towerPos)

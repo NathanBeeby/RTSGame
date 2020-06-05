@@ -111,7 +111,7 @@ sf::Vector2i StructureInventory::returnUnplacablePosition(sf::Vector2i position)
 	for (int i = 0; i < towerPlacementPositions.size(); i++) {
 		if (position == towerPlacementPositions[i]) {
 			this->unplacablePos = position;
-			std::cout << "UNPLACABLE" << std::endl;
+			//std::cout << "UNPLACABLE" << std::endl;
 		}
 	}
 
@@ -212,6 +212,26 @@ int StructureInventory::towerPlace(sf::Vector2i position)
 	return structurePrice;
 }
 
+void StructureInventory::towerClicked(sf::Vector2i position)
+{
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		fireTower.towerClicked(position);
+		waterTower.towerClicked(position);
+		windTower.towerClicked(position);
+		iceTower.towerClicked(position);
+		earthTower.towerClicked(position);
+		energyTower.towerClicked(position);
+		lightTower.towerClicked(position);
+		darkTower.towerClicked(position);
+		elementalAmplifier.towerClicked(position);
+		elementalOverclocker.towerClicked(position);
+		manaAmplifier.towerClicked(position);
+		regenTower.towerClicked(position);
+		observatory.towerClicked(position);
+		voidTower.towerClicked(position);
+	}
+}
+
 void StructureInventory::deleteAllTowers()
 {
 	fireTower.deleteTowers();
@@ -268,12 +288,15 @@ void StructureInventory::mouseHandler(sf::Vector2i windowPos)
 {
 	//mousePosWindow = sf::Mouse::getPosition(window);
 
+
 	if (this->towerFollowing == true) {
 		this->tower.setPosition(windowPos.x, windowPos.y);
 	}
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
 		this->towerFollowing = false;
+		fireTower.DeselectTower();
+		std::cout << "Deselecting Tower" << std::endl;
 	}
 }
 

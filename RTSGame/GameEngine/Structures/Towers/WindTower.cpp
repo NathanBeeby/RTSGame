@@ -7,6 +7,9 @@ void WindTower::initVariables()
 	this->towerNum = 0;
 	this->windTower.resize(towerNum);
 	this->towerCost = 300;
+	this->windClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void WindTower::initTextures()
@@ -45,6 +48,21 @@ WindTower::WindTower()
 
 WindTower::~WindTower()
 {
+}
+
+sf::Vector2f WindTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->windTower.size(); i++) {
+		if (clickPos.x >= this->windTower[i].getGlobalBounds().left && clickPos.x <= (this->windTower[i].getGlobalBounds().left + this->windTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->windTower[i].getGlobalBounds().top && clickPos.y <= (this->windTower[i].getGlobalBounds().top + this->windTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->windTower[i].getPosition();
+				this->windClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void WindTower::CreateTower(sf::Vector2i towerPos)

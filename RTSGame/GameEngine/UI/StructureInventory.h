@@ -78,6 +78,7 @@ public:
 	void towerFollow(std::string &towerString);
 	// Needs Tile Position & tower being placed
 	int towerPlace(sf::Vector2i position);
+	void towerClicked(sf::Vector2i position);
 	bool towerPlacable(sf::Vector2i position);
 	void unplacablePosition(sf::Vector2i position);
 	void waterTilePositions(sf::Vector2i position);

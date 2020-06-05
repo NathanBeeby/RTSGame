@@ -10,8 +10,9 @@ private:
 	sf::Texture texture;
 	std::vector <sf::RectangleShape> iceTower;
 	std::vector<sf::Texture> iceTowerTexture;
-	sf::Vector2f towerSize;
+	sf::Vector2f towerSize, towerPos;
 	int towerNum;
+	bool iceClicked;
 	// Private Functions
 
 	// Initialization
@@ -28,6 +29,7 @@ public:
 	// Accessors
 
 	// Public Functions
+	sf::Vector2f towerClicked(sf::Vector2i clickPos);
 	void CreateTower(sf::Vector2i towerPos);
 	void SetTowerTexture(int towerId, std::string &towerTexture);
 	void DeleteTower(int towerId);

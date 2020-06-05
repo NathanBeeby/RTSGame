@@ -7,6 +7,9 @@ void ElementalOverclockTower::initVariables()
 	this->towerNum = 0;
 	this->eOverclockTower.resize(towerNum);
 	this->towerCost = 300;
+	this->elemOverClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void ElementalOverclockTower::initTextures()
@@ -45,6 +48,21 @@ ElementalOverclockTower::ElementalOverclockTower()
 
 ElementalOverclockTower::~ElementalOverclockTower()
 {
+}
+
+sf::Vector2f ElementalOverclockTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->eOverclockTower.size(); i++) {
+		if (clickPos.x >= this->eOverclockTower[i].getGlobalBounds().left && clickPos.x <= (this->eOverclockTower[i].getGlobalBounds().left + this->eOverclockTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->eOverclockTower[i].getGlobalBounds().top && clickPos.y <= (this->eOverclockTower[i].getGlobalBounds().top + this->eOverclockTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->eOverclockTower[i].getPosition();
+				this->elemOverClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void ElementalOverclockTower::CreateTower(sf::Vector2i towerPos)

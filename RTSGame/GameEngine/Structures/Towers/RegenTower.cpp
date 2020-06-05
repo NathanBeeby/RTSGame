@@ -8,6 +8,9 @@ void RegenTower::initVariables()
 	this->towerNum = 0;
 	this->regenTower.resize(towerNum);
 	this->towerCost = 300;
+	this->regenClicked = false;
+	this->towerPos.x = -1;
+	this->towerPos.y = -1;
 }
 
 void RegenTower::initTextures()
@@ -46,6 +49,21 @@ RegenTower::RegenTower()
 
 RegenTower::~RegenTower()
 {
+}
+
+sf::Vector2f RegenTower::towerClicked(sf::Vector2i clickPos)
+{
+	this->towerPos = sf::Vector2f(-1, -1);
+	for (int i = 0; i < this->regenTower.size(); i++) {
+		if (clickPos.x >= this->regenTower[i].getGlobalBounds().left && clickPos.x <= (this->regenTower[i].getGlobalBounds().left + this->regenTower[i].getGlobalBounds().width)) {
+			if (clickPos.y >= this->regenTower[i].getGlobalBounds().top && clickPos.y <= (this->regenTower[i].getGlobalBounds().top + this->regenTower[i].getGlobalBounds().height)) {
+				this->towerPos = this->regenTower[i].getPosition();
+				this->regenClicked = true;
+			}
+		}
+	}
+
+	return this->towerPos;
 }
 
 void RegenTower::CreateTower(sf::Vector2i towerPos)
