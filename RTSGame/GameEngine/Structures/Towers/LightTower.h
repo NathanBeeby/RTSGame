@@ -1,19 +1,9 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <vector>
-class LightTower
+#include "../Tower.h"
+class LightTower: virtual public Tower
 {
 private:
 	// Private variables
-	sf::RectangleShape light;
-	sf::Texture texture;
-	std::vector <sf::RectangleShape> lightTower;
-	std::vector<sf::Texture> lightTowerTexture;
-	sf::Vector2f towerSize, towerPos;
-	int towerNum;
-	bool lightClicked;
-	// Private Functions
 
 	// Initialization
 	void initVariables();
@@ -29,16 +19,6 @@ public:
 	// Accessors
 
 	// Public Functions
-	sf::Vector2f towerClicked(sf::Vector2i clickPos);
-	void CreateTower(sf::Vector2i towerPos);
-	void SetTowerTexture(int towerId, std::string &towerTexture);
-	void DeleteTower(int towerId);
-	void deleteTowers();
-	void update();
-	void render(sf::RenderTarget &target);
 
-	//void CreateTower();
-	//void SetTowerTexture(int towerId, std::string &towerTexture);
-	//void DeleteTower(int towerId);
 };
 

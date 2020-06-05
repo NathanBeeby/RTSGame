@@ -5,6 +5,10 @@
 #include "GameEngine/MainGame.h"
 
 	/* 
+	TODO NEXT:
+	- Fix the selection of tower bug where 2 towers or more get selected at once.
+	- Merge the Enemies into one enemy class, and call the functions from the parent class, like we did with the tower class.
+
 
 	- Create 10 Unique maps, each with a path spanning from beginning to end
 	- When wave ends all enemies in the wave are to be destroyed (when vector reaches 0)
@@ -12,7 +16,6 @@
 	- Make pathway tiles unplacable positions for towers
 	- Fix view going outside the bounds of the map
 	- Fix menu system overlapping with eachother
-	- Fix deletion of towers (for some reason tower array size is 0 on delete)
 	- Clean up entity system / Tower creation system / Enemy Creation System
 	- When level is switched, change health and mana back to original value
 	- Set up Elemental enemy classes, adding in the textures, the push back for the arrays, the different types of enemies in that element, etc.

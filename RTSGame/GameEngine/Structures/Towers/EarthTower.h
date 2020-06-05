@@ -1,19 +1,10 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <vector>
-class EarthTower
+#include "../Tower.h"
+class EarthTower : virtual public Tower
 {
 private:
 	// Private variables
-	sf::RectangleShape earth;
-	sf::Texture texture;
-	std::vector <sf::RectangleShape> earthTower;
-	std::vector<sf::Texture> earthTowerTexture;
-	sf::Vector2f towerSize, towerPos;
-	int towerNum;
-	bool earthClicked;
-	// Private Functions
+
 
 	// Initialization
 	void initVariables();
@@ -22,23 +13,13 @@ private:
 public:
 	// Constructor / Destructor
 	EarthTower();
-	~EarthTower();
+	virtual ~EarthTower();
 
 	// Public Variables
 	int towerCost;
 	// Accessors
 
 	// Public Functions
-	sf::Vector2f towerClicked(sf::Vector2i clickPos);
-	void CreateTower(sf::Vector2i towerPos);
-	void SetTowerTexture(int towerId, std::string &towerTexture);
-	void DeleteTower(int towerId);
-	void deleteTowers();
-	void update();
-	void render(sf::RenderTarget &target);
 
-	//void CreateTower();
-	//void SetTowerTexture(int towerId, std::string &towerTexture);
-	//void DeleteTower(int towerId);
 };
 

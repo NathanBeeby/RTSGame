@@ -82,6 +82,7 @@ public:
 	bool towerPlacable(sf::Vector2i position);
 	void unplacablePosition(sf::Vector2i position);
 	void waterTilePositions(sf::Vector2i position);
+	void DeselectTowers();
 	sf::Vector2i returnUnplacablePosition(sf::Vector2i position);
 	void deleteAllTowers();
 	void updateFollowing();

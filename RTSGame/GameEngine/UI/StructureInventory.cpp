@@ -106,6 +106,24 @@ void StructureInventory::waterTilePositions(sf::Vector2i position)
 {
 }
 
+void StructureInventory::DeselectTowers()
+{
+	fireTower.DeselectTower();
+	waterTower.DeselectTower();
+	windTower.DeselectTower();
+	iceTower.DeselectTower();
+	earthTower.DeselectTower();
+	energyTower.DeselectTower();
+	lightTower.DeselectTower();
+	darkTower.DeselectTower();
+	elementalAmplifier.DeselectTower();
+	elementalOverclocker.DeselectTower();
+	manaAmplifier.DeselectTower();
+	observatory.DeselectTower();
+	regenTower.DeselectTower();
+	voidTower.DeselectTower();
+}
+
 sf::Vector2i StructureInventory::returnUnplacablePosition(sf::Vector2i position)
 {
 	for (int i = 0; i < towerPlacementPositions.size(); i++) {
@@ -215,6 +233,7 @@ int StructureInventory::towerPlace(sf::Vector2i position)
 void StructureInventory::towerClicked(sf::Vector2i position)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		this->DeselectTowers();
 		fireTower.towerClicked(position);
 		waterTower.towerClicked(position);
 		windTower.towerClicked(position);
@@ -295,8 +314,7 @@ void StructureInventory::mouseHandler(sf::Vector2i windowPos)
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
 		this->towerFollowing = false;
-		fireTower.DeselectTower();
-		std::cout << "Deselecting Tower" << std::endl;
+		this->DeselectTowers();
 	}
 }
 
