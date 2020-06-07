@@ -9,10 +9,13 @@ void Wave::initVariables()
 	this->waveDifficulty = 1;
 	this->enemyAmount = 0;
 	this->enemyInRound = 0;
-	this->enemyStartPos = sf::Vector2i(0, 2000);
 	this->second = sf::seconds(1);
 	this->waveBegan = false;
 	this->element = 0; // element begins at fire
+
+
+	// Where the enemies begin (Possibly need to make if statement for each given maps start position)
+	this->enemyStartPos = sf::Vector2i(0, (200 * 14) + 20);
 }
 
 Wave::Wave()

@@ -9,6 +9,7 @@ void Tile::initVariables()
 	this->mapNo = 0;
 	this->mapMax = 10;
 	this->mapFile.resize(10);
+	this->tileSize = 200;
 }
 
 void Tile::initTextures()
@@ -23,6 +24,47 @@ void Tile::initTextures()
 	this->mapFile[7] = "../Assets/Map_Assets/Map7.txt";
 	this->mapFile[8] = "../Assets/Map_Assets/Map8.txt";
 	this->mapFile[9] = "../Assets/Map_Assets/Map9.txt";
+}
+
+void Tile::initWaypoints(int mapNum)
+{
+	if (mapNum == 0) {
+		/*waypoint.AddWayPoint(sf::Vector2i(0, (tileSize * 14) + 20));
+		waypoint.AddWayPoint(sf::Vector2i((tileSize * 6) + 20, (tileSize * 14) + 20));
+		waypoint.AddWayPoint(sf::Vector2i((tileSize * 6) + 20, (tileSize * 5) + 20));
+		waypoint.AddWayPoint(sf::Vector2i((tileSize * 11) + 20, (tileSize * 5) + 20));
+		waypoint.AddWayPoint(sf::Vector2i((tileSize * 11) + 20, (tileSize * 22) + 20));
+		waypoint.AddWayPoint(sf::Vector2i((tileSize * 22) + 20, (tileSize * 22) + 20));
+		waypoint.AddWayPoint(sf::Vector2i((tileSize * 22) + 20, (tileSize * 15) + 20));
+		waypoint.AddWayPoint(sf::Vector2i((tileSize * 33) + 20, (tileSize * 15) + 20));*/
+	}
+	else if (mapNum == 1) {
+
+	}
+	else if (mapNum == 2) {
+
+	}
+	else if (mapNum == 3) {
+
+	}
+	else if (mapNum == 4) {
+
+	}
+	else if (mapNum == 5) {
+
+	}
+	else if (mapNum == 6) {
+
+	}
+	else if (mapNum == 7) {
+
+	}
+	else if (mapNum == 8) {
+
+	}
+	else if (mapNum == 9) {
+
+	}
 }
 
 void Tile::initSprite(int mapNum)
@@ -107,6 +149,7 @@ Tile::Tile()
 	this->initVariables();
 	this->initTextures();
 	this->initSprite(0);
+	this->initWaypoints(0);
 }
 
 Tile::~Tile()
@@ -196,6 +239,7 @@ void Tile::nextMap()
 		this->mapNo++;
 		std::cout << "NEXT: Map Number: " << mapNo << std::endl;
 		this->initSprite(mapNo);
+		this->initWaypoints(mapNo);
 		this->structInv.deleteAllTowers();
 	}
 }
@@ -206,6 +250,7 @@ void Tile::previousMap()
 		this->mapNo--;
 		std::cout << "PREVIOUS: Map Number: " << mapNo << std::endl;
 		this->initSprite(mapNo);
+		this->initWaypoints(mapNo);
 		this->structInv.deleteAllTowers();
 	}
 }

@@ -7,7 +7,9 @@
 	/* 
 	TODO NEXT:
 	- Fix the selection of tower bug where 2 towers or more get selected at once.
-	- Merge the Enemies into one enemy class, and call the functions from the parent class, like we did with the tower class.
+	- Fix enemy wave bug where enemies get stuck on path.
+
+	- Implement different tower ranges depending on the tower and change the tower select radius based on tower clicked.
 
 
 	- Create 10 Unique maps, each with a path spanning from beginning to end

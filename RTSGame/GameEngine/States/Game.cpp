@@ -5,7 +5,7 @@ void Game::initVariables()
 	this->miniMap.setViewport(sf::FloatRect(0.0235f, 0.824f, 0.208f, 0.165f));
 	this->miniMap.setCenter(sf::Vector2f(1700.f, 100.f));
 	this->miniMap.setSize(sf::Vector2f(200.f, 200.f));
-	this->viewSpeed = 10.f;
+	this->viewSpeed = 2.f;
 }
 
 void Game::initTextures()

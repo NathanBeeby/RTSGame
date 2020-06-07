@@ -6,6 +6,7 @@
 #include <string>
 #include "TileProperties.h"
 #include "../UI/StructureInventory.h"
+//#include "../Map/PathWaypoints.h"
 struct Tile
 {
 	// Private variables
@@ -16,12 +17,15 @@ struct Tile
 	std::vector<sf::Vector2i> unplacableTiles;
 	std::vector<sf::Vector2i> waterTiles;
 	std::vector<std::string> mapFile;
+	//PathWaypoints waypoint;
 	int miniMapOffsetX, miniMapOffsetY, mapNo, mapMax;
+	int tileSize;
 	TileProperties tileProp;
 	StructureInventory structInv;
 	//// Initialization
 	void initVariables();
 	void initTextures();
+	void initWaypoints(int mapNum);
 	void initSprite(int mapNum);
 public:
 	// Constructor / Destructor
