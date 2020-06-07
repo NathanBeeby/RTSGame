@@ -6,6 +6,11 @@ void Game::initVariables()
 	this->miniMap.setCenter(sf::Vector2f(1700.f, 100.f));
 	this->miniMap.setSize(sf::Vector2f(200.f, 200.f));
 	this->viewSpeed = 2.f;
+
+
+	for (int i = 0; i < tile.unplacableTiles.size(); i++) {
+		gui.AddUnplacablePosition(tile.unplacableTiles[i]);
+	}
 }
 
 void Game::initTextures()
@@ -78,7 +83,7 @@ void Game::keyHandler(sf::Keyboard::Key key, sf::View &view)
 	if (key == sf::Keyboard::Key::L) {
 		tile.previousMap();
 	}
-	else if(key == sf::Keyboard::Key::O) {
+	else if (key == sf::Keyboard::Key::O) {
 		tile.nextMap();
 	}
 	if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
@@ -127,27 +132,10 @@ void Game::mouseHandler(sf::RenderWindow & window, sf::View &view)
 	mousePosGrid.x = (mousePosView.x / gridSizeU);
 	mousePosGrid.y = (mousePosView.y / gridSizeU);
 	gui.mouseHandler(mousePosWindow, mousePosGrid);
-
-	//std::cout << "Mouse Pos Window: X - " << mousePosWindow.x << ", Y - " << mousePosWindow.y << std::endl;
-	//std::cout << "Mouse Pos View: X - " << mousePosView.x << ", Y - " << mousePosView.y << std::endl;
-	//std::cout << "Mouse Pos Grid: X - " << mousePosGrid.x << ", Y - " << mousePosGrid.y << std::endl;
 }
 
 void Game::updateTileView(sf::View &view)
 {
-	//if (view.getCenter().y <= 1310) {
-	//	view.setCenter(sf::Vector2f(view.getCenter().x, 1310));
-	//}
-	//if (view.getCenter().y + view.getCenter().y >= 4500) {
-	//	view.setCenter(sf::Vector2f(view.getCenter().x, 4500));
-	//}
-	//if (view.getCenter().x <= 2620) {
-	//	view.setCenter(sf::Vector2f(2620, view.getCenter().y));
-	//}
-	//if (view.getCenter().x + view.getCenter().x >= 4800) {
-	//	view.setCenter(sf::Vector2f(4800, view.getCenter().y));
-	//}
-
 	// Rendering tiles via view position
 	tile.fromX = view.getCenter().x / gridSizeF - 15;
 	tile.toX = view.getCenter().x / gridSizeF + 15;
@@ -188,10 +176,6 @@ void Game::render(sf::RenderWindow &window, sf::View &view)
 	this->updateTileView(view);
 	window.setView(miniMap);
 
-	// Need to draw 1/4 of the map within the mini map view, if the main view is on one of the 4 quaters
-	// Display that quater on the minimap view
-	// TILE MINIMAP BELOW NEEDS FIXING - vector out of range when drawing
-	//tile.renderMiniMap(window);
 	window.setView(window.getDefaultView());
 
 }

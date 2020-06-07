@@ -5,8 +5,7 @@
 #include <cctype>
 #include <string>
 #include "TileProperties.h"
-#include "../UI/StructureInventory.h"
-//#include "../Map/PathWaypoints.h"
+//#include "../UI/StructureInventory.h"
 struct Tile
 {
 	// Private variables
@@ -14,14 +13,13 @@ struct Tile
 	sf::Sprite tile, miniMapTile;
 	sf::Vector2i map[35][30];
 	sf::Vector2i tileMax;
-	std::vector<sf::Vector2i> unplacableTiles;
 	std::vector<sf::Vector2i> waterTiles;
 	std::vector<std::string> mapFile;
 	//PathWaypoints waypoint;
 	int miniMapOffsetX, miniMapOffsetY, mapNo, mapMax;
 	int tileSize;
 	TileProperties tileProp;
-	StructureInventory structInv;
+	//StructureInventory structInv;
 	//// Initialization
 	void initVariables();
 	void initTextures();
@@ -33,12 +31,14 @@ public:
 	virtual ~Tile();
 
 	// Public Variables
+	std::vector<sf::Vector2i> unplacableTiles;
 	int fromX, fromY, toX, toY;
 	int miniMapFromX, miniMapToX, miniMapFromY, miniMapToY;
 
 	// Accessors
 	const int getMapNo() const;
 	const int getMapMax() const;
+
 
 	// Public Functions
 	void updateTileView();

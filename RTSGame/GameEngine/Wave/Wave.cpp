@@ -12,7 +12,7 @@ void Wave::initVariables()
 	this->second = sf::seconds(1);
 	this->waveBegan = false;
 	this->element = 0; // element begins at fire
-
+	this->manaReturn = 0;
 
 	// Where the enemies begin (Possibly need to make if statement for each given maps start position)
 	this->enemyStartPos = sf::Vector2i(0, (200 * 14) + 20);
@@ -50,9 +50,15 @@ const int Wave::enemiesKilled() const
 		this->energyEnemy.enemiesKilled() + this->lightEnemy.enemiesKilled() + this->darkEnemy.enemiesKilled() + this->voidEnemy.enemiesKilled();
 }
 
+const int Wave::returnedMana() const
+{
+	return this->manaReturn;
+}
+
 void Wave::beginWave()
 {
 	if (enemyAmount == 0 && waveBegan == false) {
+		this->mana += 150;
 		std::cout << "Element: " << this->element << std::endl;
 		this->waveBegan = true;
 		this->element = (rand() % 8 + 1);

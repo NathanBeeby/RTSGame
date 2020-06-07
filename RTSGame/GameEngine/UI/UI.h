@@ -1,13 +1,13 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include <iostream>
+#include "../Wave/Wave.h"
+#include "StructureInventory.h"
 class UI
 {
 private:
 	// Private Variables
-	int towerSize;
-
-
+	int towerSize, uiButtonSize;
 
 	// Initialization
 	void initVariables();
@@ -20,13 +20,20 @@ public:
 	virtual ~UI();
 
 	// Public Variables
+	Wave wave;
+	StructureInventory structInv;
+
+	// Boolean Variables
+	bool mouseHeld, isLevelWon, isLevelLost;
+
+	// Font Variables
 	sf::Font font;
 
 	// Clock Variables
 	sf::Clock uiClock;
 
 	// Integer Variables
-	int health, mana, scoreValue;
+	int health, scoreValue, levelValue, waveAmt, actualHealth, uiTime, uiTimeMinute, day, minute;
 
 	// Float Variables
 	float gridSizeF;
@@ -37,9 +44,7 @@ public:
 	sf::Vector2u mousePosGrid;
 	sf::Vector2f screenSize;
 
-	
-
-	// Shapre Variables
+	// Shape Variables
 	std::vector<sf::RectangleShape> uiButtons;  // settings button, pause button, start round button, fast forward button etc.
 	std::vector<sf::RectangleShape> guiBox;
 	std::vector<sf::RectangleShape> inventoryBox;
@@ -48,12 +53,18 @@ public:
 	std::vector<std::string> towerStrings;
 	std::vector<std::string> towerNoStrings;
 
+	// String Variables
+	std::string levelString, scoreString, waveString, healthString, manaString;
+
 	// Texture Vector Variables
 	std::vector<sf::Texture> uiButtonTextures;
 	std::vector<sf::Texture> towerTextures;
 	std::vector<sf::Texture> towerNoTextures;
 	std::vector<sf::Texture> guiBoxTextures;
 	std::vector<sf::Texture> inventoryBoxTexture;
+
+	// Text Variables
+	sf::Text levelText, scoreText, waveText, timerText, dayText, healthText, manaText;
 
 	// Accessors
 	const int getScoreValue() const;
@@ -68,6 +79,13 @@ public:
 	void RemoveScore(int sr);
 	void AddScore(int sr);
 
+	void uiButtonsMouseHandler(sf::Vector2i & windowPos);
+	void towerMenuMouseHandler(sf::Vector2i &windowPos);
+
+	void updateUIText();
+	void updateGameState();
+	void updateClock();
+	void updateUITime();
 
 };
 

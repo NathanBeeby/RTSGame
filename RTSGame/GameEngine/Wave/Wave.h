@@ -22,6 +22,7 @@ private:
 	int enemyPerWave;
 	int enemyAmount;
 	int enemyInRound;
+	int manaReturn;
 
 	sf::Clock waveClock;
 	sf::Vector2i enemyStartPos;
@@ -48,13 +49,13 @@ public:
 	virtual ~Wave();
 
 	// Public Variables
-
+	int mana;
 	// Accessors
 	const int getWaveNumber() const;
 	const int getWaveDifficulty() const;
 	const int enemiesPassedGoal() const;
 	const int enemiesKilled() const;
-
+	const int returnedMana() const;
 	// Public Functions
 	void beginWave();
 

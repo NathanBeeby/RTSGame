@@ -40,6 +40,8 @@ private:
 	std::string fireString, waterString, windString, iceString, earthString, energyString, lightString, darkString, voidString, regenString, observString, manaAmpString, elementOverString, elementAmpString;
 	int structurePrice;
 	std::vector<sf::Vector2i> towerPlacementPositions;
+	std::vector<sf::Vector2i> unplacablePositions;
+	std::vector<sf::Vector2i> waterTiles;
 	sf::Vector2i unplacablePos;
 	// Initialization
 	void initVariables();

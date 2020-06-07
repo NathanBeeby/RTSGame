@@ -117,10 +117,12 @@ void Tile::initSprite(int mapNum)
 				loadCounter.x++;
 			}
 			if (xa >= 1 && ya < 5 && xa < 8 || xa == 0 && ya == 5) {
-				this->waterTiles.push_back(sf::Vector2i(xa, ya));
+				//this->waterTiles.push_back(sf::Vector2i(xa, ya));
+				this->waterTiles.push_back(sf::Vector2i((loadCounter.x - 1) * 200, (loadCounter.y) * 200));
 			}
 			if (xa > 8 && ya < 5 && xa < 14) {
-				this->unplacableTiles.push_back(sf::Vector2i(xa, ya));
+				//this->unplacableTiles.push_back(sf::Vector2i(xa, ya));
+				this->unplacableTiles.push_back(sf::Vector2i((loadCounter.x - 1) * 200, (loadCounter.y) * 200));
 			}
 		}
 		loadCounter.y++;
@@ -240,7 +242,7 @@ void Tile::nextMap()
 		std::cout << "NEXT: Map Number: " << mapNo << std::endl;
 		this->initSprite(mapNo);
 		this->initWaypoints(mapNo);
-		this->structInv.deleteAllTowers();
+		//this->structInv.deleteAllTowers();
 	}
 }
 
@@ -251,7 +253,7 @@ void Tile::previousMap()
 		std::cout << "PREVIOUS: Map Number: " << mapNo << std::endl;
 		this->initSprite(mapNo);
 		this->initWaypoints(mapNo);
-		this->structInv.deleteAllTowers();
+		//this->structInv.deleteAllTowers();
 	}
 }
 
