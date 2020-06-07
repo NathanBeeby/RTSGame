@@ -135,23 +135,23 @@ void GameState::mouseScrolled(sf::Event ev)
 
 void GameState::updateMouseDragged()
 {
-		mx0 = mx;
-		my0 = my;
-		mx = sf::Mouse::getPosition().x;
-		my = sf::Mouse::getPosition().y;
+	mx0 = mx;
+	my0 = my;
+	mx = sf::Mouse::getPosition().x;
+	my = sf::Mouse::getPosition().y;
 
-		if (mx > mx0) {
-			viewMovement.x += 10.f;
-		}
-		else if (mx0 > mx) {
-			viewMovement.x -= 10.f;
-		}
-		if (my > my0) {
-			viewMovement.y += 10.f;
-		}
-		else if (my0 > my) {
-			viewMovement.y -= 10.f;
-		}
+	if (mx > mx0) {
+		viewMovement.x += 10.f;
+	}
+	else if (mx0 > mx) {
+		viewMovement.x -= 10.f;
+	}
+	if (my > my0) {
+		viewMovement.y += 10.f;
+	}
+	else if (my0 > my) {
+		viewMovement.y -= 10.f;
+	}
 }
 
 // Public Functions
@@ -200,7 +200,15 @@ void GameState::updateGameState(sf::Time deltaTime)
 		}
 	}
 	else if (this->gState == gameOn) {
-		this->game.update(deltaTime);
+		if (this->game.LevelIsLost()) {
+		this->gState = gameFailure;
+		}
+		else if (this->game.LevelIsWon()) {
+			this->gState = gameSuccess;
+		}
+		else {
+			this->game.update(deltaTime);
+		}
 	}
 	else if (this->gState == gameFailure) {
 		this->failMenu.update();
@@ -211,7 +219,7 @@ void GameState::updateGameState(sf::Time deltaTime)
 }
 
 void GameState::update(sf::Time deltaTime)
-{	
+{
 	viewMovement.x = 0;
 	viewMovement.y = 0;
 	//std::cout << "ZoomInt = " << this->zoomInt << std::endl;

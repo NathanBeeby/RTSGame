@@ -10,7 +10,9 @@
 	- Fix enemy wave bug where enemies get stuck on path.
 
 	- Implement different tower ranges depending on the tower and change the tower select radius based on tower clicked.
-
+	- Make collapsable tower menu
+	- Remove Level string on GUI, ammend GUI to be collapsable
+	- Add mana for end of round (around 100-200)
 
 	- Create 10 Unique maps, each with a path spanning from beginning to end
 	- When wave ends all enemies in the wave are to be destroyed (when vector reaches 0)
@@ -18,7 +20,6 @@
 	- Make pathway tiles unplacable positions for towers
 	- Fix view going outside the bounds of the map
 	- Fix menu system overlapping with eachother
-	- Clean up entity system / Tower creation system / Enemy Creation System
 	- When level is switched, change health and mana back to original value
 	- Set up Elemental enemy classes, adding in the textures, the push back for the arrays, the different types of enemies in that element, etc.
 	- Get an enemy moving from the starting point to the right

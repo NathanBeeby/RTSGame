@@ -60,6 +60,16 @@ Game::~Game()
 
 }
 
+const bool Game::LevelIsLost() const
+{
+	return this->gui.LevelLost();
+}
+
+const bool Game::LevelIsWon() const
+{
+	return this->gui.LevelWon();
+}
+
 
 void Game::keyHandler(sf::Keyboard::Key key, sf::View &view)
 {

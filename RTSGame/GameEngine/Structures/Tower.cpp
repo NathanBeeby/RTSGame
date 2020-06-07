@@ -87,7 +87,6 @@ sf::Vector2f Tower::towerClicked(sf::Vector2i clickPos)
 				this->towerPos.y = this->towers[i].getPosition().y + (this->towers[i].getSize().y / 2);
 				this->towerIsClicked = true;
 				this->SelectTower(i, towerPos);
-				std::cout << "Fire Clicked" << std::endl;
 			}
 		}
 	}
@@ -117,7 +116,6 @@ void Tower::SelectTower(int towerID, sf::Vector2f towerCenter)
 void Tower::DeselectTower()
 {
 	this->towerSelected = false;
-	std::cout << "Tower Deselected" << std::endl;
 }
 
 void Tower::DeleteTower(int towerId)

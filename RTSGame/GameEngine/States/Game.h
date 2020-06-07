@@ -29,6 +29,10 @@ public:
 	Game();
 	virtual ~Game();
 
+	// Accessor
+	const bool LevelIsLost() const;
+	const bool LevelIsWon() const;
+
 	// Public Functions
 	void keyHandler(sf::Keyboard::Key key, sf::View &view);
 	void mouseHandler(sf::RenderWindow &window, sf::View &view);

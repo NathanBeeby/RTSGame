@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "../Map/PathWaypoints.h"
-//#include "../UI/GUI.h"
 /*
 	- Split up functions into sub-functions which serve one purpose each
 	- Create Parent Class for enemy movement (AI class)
@@ -19,8 +18,6 @@ private:
 	sf::Vector2i enemySize;
 	int enemiesPassed;
 	int enemiesKill;
-
-	//GUI gui;
 
 	//Waypoints code
 	std::vector<int> currentPoint;

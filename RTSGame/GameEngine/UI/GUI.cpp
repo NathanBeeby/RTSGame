@@ -4,6 +4,7 @@
 // Initialization
 void GUI::initVariables()
 {
+	// Integer Variables
 	this->levelValue = 0;
 	this->scoreValue = 0;
 	this->invMax = 0;
@@ -13,22 +14,14 @@ void GUI::initVariables()
 	this->minute = 60;
 	this->health = 100;
 	this->mana = 500;
-	this->fireTower = "../Assets/Image_Assets/Towers/FireTower.png";
-	this->waterTower = "../Assets/Image_Assets/Towers/WaterTower.png";
-	this->windTower = "../Assets/Image_Assets/Towers/WindTower.png";
-	this->iceTower = "../Assets/Image_Assets/Towers/IceTower.png";
-	this->earthTower = "../Assets/Image_Assets/Towers/EarthTower.png";
-	this->energyTower = "../Assets/Image_Assets/Towers/EnergyTower.png";
-	this->lightTower = "../Assets/Image_Assets/Towers/LightTower.png";
-	this->darkTower = "../Assets/Image_Assets/Towers/DarkTower.png";
-	this->elementAmpTower = "../Assets/Image_Assets/Towers/ElementalAmplifier.png";
-	this->elementOverTower = "../Assets/Image_Assets/Towers/ElementalOverclocker.png";
-	this->manaAmpTower = "../Assets/Image_Assets/Towers/ManaAmplifier.png";
-	this->observTower = "../Assets/Image_Assets/Towers/Observatory.png";
-	this->regenTower = "../Assets/Image_Assets/Towers/Regenerator.png";
-	this->voidTower = "../Assets/Image_Assets/Towers/VoidTower.png";
-	this->mouseHeld = false;
+
+	// Float Variables
 	this->gridSizeF = 200.f;
+
+	// Boolean Variables
+	this->mouseHeld = false;
+	this->isLevelWon = false;
+	this->isLevelLost = false;
 }
 
 void GUI::initTextures()
@@ -70,132 +63,47 @@ void GUI::initTextures()
 		std::cout << "Error: loading wave Texture" << std::endl;
 	}
 	// inventoryBoxTexture
-	if (!this->inventoryBoxTexture[0].loadFromFile(this->fireTower)) {
+	if (!this->inventoryBoxTexture[0].loadFromFile(this->towerStrings[0])) {
 		std::cout << "Error: loading fire tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[1].loadFromFile(this->windTower)) {
+	if (!this->inventoryBoxTexture[1].loadFromFile(this->towerStrings[2])) {
 		std::cout << "Error: loading wind tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[2].loadFromFile(this->earthTower)) {
+	if (!this->inventoryBoxTexture[2].loadFromFile(this->towerStrings[4])) {
 		std::cout << "Error: loading earth tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[3].loadFromFile(this->lightTower)) {
+	if (!this->inventoryBoxTexture[3].loadFromFile(this->towerStrings[6])) {
 		std::cout << "Error: loading light tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[4].loadFromFile(this->elementAmpTower)) {
+	if (!this->inventoryBoxTexture[4].loadFromFile(this->towerStrings[8])) {
 		std::cout << "Error: loading elemental amplifier tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[5].loadFromFile(this->elementOverTower)) {
+	if (!this->inventoryBoxTexture[5].loadFromFile(this->towerStrings[9])) {
 		std::cout << "Error: loading elemental overclocker tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[6].loadFromFile(this->manaAmpTower)) {
+	if (!this->inventoryBoxTexture[6].loadFromFile(this->towerStrings[10])) {
 		std::cout << "Error: loading mana amplifier tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[7].loadFromFile(this->waterTower)) {
+	if (!this->inventoryBoxTexture[7].loadFromFile(this->towerStrings[1])) {
 		std::cout << "Error: loading water tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[8].loadFromFile(this->iceTower)) {
+	if (!this->inventoryBoxTexture[8].loadFromFile(this->towerStrings[3])) {
 		std::cout << "Error: loading ice tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[9].loadFromFile(this->energyTower)) {
+	if (!this->inventoryBoxTexture[9].loadFromFile(this->towerStrings[5])) {
 		std::cout << "Error: loading energy tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[10].loadFromFile(this->darkTower)) {
+	if (!this->inventoryBoxTexture[10].loadFromFile(this->towerStrings[7])) {
 		std::cout << "Error: loading darkness tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[11].loadFromFile(this->observTower)) {
+	if (!this->inventoryBoxTexture[11].loadFromFile(this->towerStrings[11])) {
 		std::cout << "Error: loading observatory tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[12].loadFromFile(this->regenTower)) {
+	if (!this->inventoryBoxTexture[12].loadFromFile(this->towerStrings[12])) {
 		std::cout << "Error: loading regenerator tower" << std::endl;
 	}
-	if (!this->inventoryBoxTexture[13].loadFromFile(this->voidTower)) {
+	if (!this->inventoryBoxTexture[13].loadFromFile(this->towerStrings[13])) {
 		std::cout << "Error: loading void tower" << std::endl;
-	}
-
-	if (!this->fireNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/FireTower.png")) {
-		std::cout << "Error: loading no texture fire tower" << std::endl;
-	}
-	if (!this->waterNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/WaterTower.png")) {
-		std::cout << "Error: loading no texture water tower" << std::endl;
-	}
-	if (!this->windNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/WindTower.png")) {
-		std::cout << "Error: loading no texture wind tower" << std::endl;
-	}
-	if (!this->iceNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/IceTower.png")) {
-		std::cout << "Error: loading no texture ice tower" << std::endl;
-	}
-	if (!this->earthNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/EarthTower.png")) {
-		std::cout << "Error: loading no texture earth tower" << std::endl;
-	}
-	if (!this->energyNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/EnergyTower.png")) {
-		std::cout << "Error: loading no texture energy tower" << std::endl;
-	}
-	if (!this->lightNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/LightTower.png")) {
-		std::cout << "Error: loading no texture light tower" << std::endl;
-	}
-	if (!this->darkNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/DarkTower.png")) {
-		std::cout << "Error: loading no texture dark tower" << std::endl;
-	}
-	if (!this->elemAmpNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/ElementalAmplifier.png")) {
-		std::cout << "Error: loading no texture elemental amplifier tower" << std::endl;
-	}
-	if (!this->elemOverNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/ElementalOverclocker.png")) {
-		std::cout << "Error: loading no texture elemental overclocker tower" << std::endl;
-	}
-	if (!this->manaAmpNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/ManaAmplifier.png")) {
-		std::cout << "Error: loading no texture mana amplifier tower" << std::endl;
-	}
-	if (!this->observNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/Observatory.png")) {
-		std::cout << "Error: loading no texture observatory tower" << std::endl;
-	}
-	if (!this->regenNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/Regenerator.png")) {
-		std::cout << "Error: loading no texture regenerator tower" << std::endl;
-	}
-	if (!this->voidNoTexture.loadFromFile("../Assets/Image_Assets/Towers/NoTexture/VoidTower.png")) {
-		std::cout << "Error: loading no texture void tower" << std::endl;
-	}
-	if (!this->fireTexture.loadFromFile("../Assets/Image_Assets/Towers/FireTower.png")) {
-		std::cout << "Error: loading texture fire tower" << std::endl;
-	}
-	if (!this->waterTexture.loadFromFile("../Assets/Image_Assets/Towers/WaterTower.png")) {
-		std::cout << "Error: loading texture water tower" << std::endl;
-	}
-	if (!this->windTexture.loadFromFile("../Assets/Image_Assets/Towers/WindTower.png")) {
-		std::cout << "Error: loading texture wind tower" << std::endl;
-	}
-	if (!this->iceTexture.loadFromFile("../Assets/Image_Assets/Towers/IceTower.png")) {
-		std::cout << "Error: loading texture ice tower" << std::endl;
-	}
-	if (!this->earthTexture.loadFromFile("../Assets/Image_Assets/Towers/EarthTower.png")) {
-		std::cout << "Error: loading texture earth tower" << std::endl;
-	}
-	if (!this->energyTexture.loadFromFile("../Assets/Image_Assets/Towers/EnergyTower.png")) {
-		std::cout << "Error: loading texture energy tower" << std::endl;
-	}
-	if (!this->lightTexture.loadFromFile("../Assets/Image_Assets/Towers/LightTower.png")) {
-		std::cout << "Error: loading texture light tower" << std::endl;
-	}
-	if (!this->darkTexture.loadFromFile("../Assets/Image_Assets/Towers/DarkTower.png")) {
-		std::cout << "Error: loading texture dark tower" << std::endl;
-	}
-	if (!this->elemAmpTexture.loadFromFile("../Assets/Image_Assets/Towers/ElementalAmplifier.png")) {
-		std::cout << "Error: loading texture elemental amplifier tower" << std::endl;
-	}
-	if (!this->elemOverTexture.loadFromFile("../Assets/Image_Assets/Towers/ElementalOverclocker.png")) {
-		std::cout << "Error: loading texture elemental overclocker tower" << std::endl;
-	}
-	if (!this->manaAmpTexture.loadFromFile("../Assets/Image_Assets/Towers/ManaAmplifier.png")) {
-		std::cout << "Error: loading texture mana amplifier tower" << std::endl;
-	}
-	if (!this->observTexture.loadFromFile("../Assets/Image_Assets/Towers/Observatory.png")) {
-		std::cout << "Error: loading texture observatory tower" << std::endl;
-	}
-	if (!this->regenTexture.loadFromFile("../Assets/Image_Assets/Towers/Regenerator.png")) {
-		std::cout << "Error: loading texture regenerator tower" << std::endl;
-	}
-	if (!this->voidTexture.loadFromFile("../Assets/Image_Assets/Towers/VoidTower.png")) {
-		std::cout << "Error: loading texture void tower" << std::endl;
 	}
 }
 
@@ -268,27 +176,11 @@ void GUI::initSprites()
 	this->guiBox[6].setOutlineColor(sf::Color::Yellow);
 	this->guiBox[6].setOutlineThickness(2);
 
-	//this->miniMapBox.setSize(sf::Vector2f(200.f, 200.f));
-	//this->miniMapBox.setFillColor(sf::Color::Black);
-	//this->miniMapBox.setOutlineColor(sf::Color::Yellow);
-	//this->miniMapBox.setOutlineThickness(2);
-
-	//this->chatBox.setSize(sf::Vector2f(guiBox[3].getSize().x - 50, guiBox[0].getSize().y - 20));
-	//this->chatBox.setFillColor(sf::Color::Black);
-	//this->chatBox.setOutlineColor(sf::Color::Yellow);
-	//this->chatBox.setOutlineThickness(2);
-
-	//this->chatScrollBar.setSize(sf::Vector2f(20.f, guiBox[3].getSize().y - 20));
-	//this->chatScrollBar.setFillColor(sf::Color::Black);
-	//this->chatScrollBar.setOutlineColor(sf::Color::Yellow);
-	//this->chatScrollBar.setOutlineThickness(2);
-
 	this->inventoryBox.resize(invMaxX * invMaxY);
 
 	for (int j = 0; j < invMaxY; j++) {
 		for (int i = 0; i < invMaxX; i++) {
 			this->inventoryBox[invMax].setSize(sf::Vector2f(80, 80));
-			//this->inventoryBox[invMax].setFillColor(sf::Color::Black);
 			this->inventoryBox[invMax].setOutlineColor(sf::Color::Yellow);
 			this->inventoryBox[invMax].setOutlineThickness(2);
 			this->inventoryBox[invMax].setPosition((this->guiBox[3].getPosition().x + 10) + (float)(i * inventoryBox[invMax].getSize().x), (this->guiBox[3].getPosition().y * (this->guiBox[3].getSize().y / 4) + 10) + (float)(j * inventoryBox[invMax].getSize().y));
@@ -342,74 +234,45 @@ GUI::~GUI()
 {
 }
 
-const int GUI::getScoreValue() const
+// Accessors
+const bool GUI::LevelWon() const
 {
-	return this->scoreValue;
+	return isLevelWon;
 }
 
-const int GUI::getHealthValue() const
+const bool GUI::LevelLost() const
 {
-	return this->health;
+	return isLevelLost;
 }
 
-const int GUI::getManaValue() const
-{
-	return this->mana;
-}
-
-void GUI::RemoveHealth(int hp)
-{
-	this->health -= hp;
-}
-
-void GUI::AddHealth(int hp)
-{
-	this->health += hp;
-}
-
-void GUI::RemoveMana(int mp)
-{
-	this->mana -= mp;
-}
-
-void GUI::AddMana(int mp)
-{
-	this->mana += mp;
-}
-
-void GUI::RemoveScore(int sr)
-{
-	this->scoreValue -= sr;
-}
-
-void GUI::AddScore(int sr)
-{
-	this->scoreValue += sr;
-}
-
+// Public Functions
 void GUI::updateResources()
 {
+	int actualHealth = this->health - wave.enemiesPassedGoal();
+	
+	if (actualHealth <= 0) {
+		this->isLevelLost = true;
+	}
+	if (this->waveAmt >= 30) {
+		this->isLevelWon = true;
+	}
+
 	this->levelString = std::to_string(this->levelValue); // converting the int to string, so player knows the stats
 	this->scoreString = std::to_string(this->scoreValue);
-	int actualHealth = this->health - wave.enemiesPassedGoal();
 	this->healthString = std::to_string(actualHealth);
 	this->manaString = std::to_string(this->mana);
 	this->waveString = std::to_string(wave.getWaveNumber());
 
 	this->levelText.setString("Level: " + levelString);
-
 	this->scoreText.setString("Score: " + scoreString);
-
 	this->healthText.setString(healthString);
-
 	this->manaText.setString(manaString);
-
 	this->waveText.setString(waveString);
 }
 
 void GUI::updateClock()
 {
-	sf::Time TimeElapsed = guiClock.getElapsedTime(); // setting the time to the hud clock, so it can count seconds
+	sf::Time TimeElapsed = uiClock.getElapsedTime(); // setting the time to the hud clock, so it can count seconds
 	sf::Time seconds = sf::seconds(1); // this is to compare to the time elapsed to get 1 second
 
 
@@ -419,7 +282,7 @@ void GUI::updateClock()
 
 	if (TimeElapsed >= seconds) { // if the time elapsed is a second, increment the HUDTime and restart the HUDClock 
 		guiTime++;
-		guiClock.restart();
+		uiClock.restart();
 		//std::cout << "Minutes: " << HUDTimeMinute << ", Seconds: " << HUDTime << std::endl;
 	}
 
@@ -461,88 +324,88 @@ void GUI::update(sf::Time deltaTime)
 void GUI::updateTowerTextures()
 {
 	if (mana < structInv.fireTower.towerCost) {
-		inventoryBox[0].setTexture(&fireNoTexture);
+		inventoryBox[0].setTexture(&towerNoTextures[0]);
 	}
 	else {
-		inventoryBox[0].setTexture(&fireTexture);
+		inventoryBox[0].setTexture(&this->towerTextures[0]);
 	}
 	if (mana < structInv.waterTower.towerCost) {
-		inventoryBox[7].setTexture(&waterNoTexture);
+		inventoryBox[7].setTexture(&towerNoTextures[1]);
 	}
 	else {
-		inventoryBox[7].setTexture(&waterTexture);
+		inventoryBox[7].setTexture(&this->towerTextures[1]);
 	}
 	if (mana < structInv.windTower.towerCost) {
-		inventoryBox[1].setTexture(&windNoTexture);
+		inventoryBox[1].setTexture(&towerNoTextures[2]);
 	}
 	else {
-		inventoryBox[1].setTexture(&windTexture);
+		inventoryBox[1].setTexture(&this->towerTextures[2]);
 	}
 	if (mana < structInv.iceTower.towerCost) {
-		inventoryBox[8].setTexture(&iceNoTexture);
+		inventoryBox[8].setTexture(&towerNoTextures[3]);
 	}
 	else {
-		inventoryBox[8].setTexture(&iceTexture);
+		inventoryBox[8].setTexture(&this->towerTextures[3]);
 	}
 	if (mana < structInv.earthTower.towerCost) {
-		inventoryBox[2].setTexture(&earthNoTexture);
+		inventoryBox[2].setTexture(&towerNoTextures[4]);
 	}
 	else {
-		inventoryBox[2].setTexture(&earthTexture);
+		inventoryBox[2].setTexture(&this->towerTextures[4]);
 	}
 	if (mana < structInv.energyTower.towerCost) {
-		inventoryBox[9].setTexture(&energyNoTexture);
+		inventoryBox[9].setTexture(&towerNoTextures[5]);
 	}
 	else {
-		inventoryBox[9].setTexture(&energyTexture);
+		inventoryBox[9].setTexture(&this->towerTextures[5]);
 	}
 	if (mana < structInv.lightTower.towerCost) {
-		inventoryBox[3].setTexture(&lightNoTexture);
+		inventoryBox[3].setTexture(&towerNoTextures[6]);
 	}
 	else {
-		inventoryBox[3].setTexture(&lightTexture);
+		inventoryBox[3].setTexture(&this->towerTextures[6]);
 	}
 	if (mana < structInv.darkTower.towerCost) {
-		inventoryBox[10].setTexture(&darkNoTexture);
+		inventoryBox[10].setTexture(&towerNoTextures[7]);
 	}
 	else {
-		inventoryBox[10].setTexture(&darkTexture);
+		inventoryBox[10].setTexture(&this->towerTextures[7]);
 	}
 	if (mana < structInv.elementalAmplifier.towerCost) {
-		inventoryBox[4].setTexture(&elemAmpNoTexture);
+		inventoryBox[4].setTexture(&towerNoTextures[8]);
 	}
 	else {
-		inventoryBox[4].setTexture(&elemAmpTexture);
+		inventoryBox[4].setTexture(&this->towerTextures[8]);
 	}
 	if (mana < structInv.elementalOverclocker.towerCost) {
-		inventoryBox[5].setTexture(&elemOverNoTexture);
+		inventoryBox[5].setTexture(&towerNoTextures[9]);
 	}
 	else {
-		inventoryBox[5].setTexture(&elemOverTexture);
+		inventoryBox[5].setTexture(&this->towerTextures[9]);
 	}
 	if (mana < structInv.manaAmplifier.towerCost) {
-		inventoryBox[6].setTexture(&manaAmpNoTexture);
+		inventoryBox[6].setTexture(&towerNoTextures[10]);
 	}
 	else {
-		inventoryBox[6].setTexture(&manaAmpTexture);
-	}
-	if (mana < structInv.regenTower.towerCost) {
-		inventoryBox[12].setTexture(&regenNoTexture);
-	}
-	else {
-		inventoryBox[12].setTexture(&regenTexture);
+		inventoryBox[6].setTexture(&this->towerTextures[10]);
 	}
 	if (mana < structInv.observatory.towerCost) {
-		inventoryBox[11].setTexture(&observNoTexture);
+		inventoryBox[11].setTexture(&towerNoTextures[11]);
 	}
 	else {
-		inventoryBox[11].setTexture(&observTexture);
+		inventoryBox[11].setTexture(&this->towerTextures[11]);
+	}
+	if (mana < structInv.regenTower.towerCost) {
+		inventoryBox[12].setTexture(&towerNoTextures[12]);
+	}
+	else {
+		inventoryBox[12].setTexture(&this->towerTextures[12]);
 	}
 	if (mana < structInv.voidTower.towerCost) {
-		inventoryBox[13].setTexture(&voidNoTexture);
+		inventoryBox[13].setTexture(&towerNoTextures[13]);
 	}
 	else {
-		inventoryBox[13].setTexture(&voidTexture);
+		inventoryBox[13].setTexture(&this->towerTextures[13]);
 	}
 }
 
@@ -566,7 +429,7 @@ void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
 				if (windowPos.y >= inventoryBox[0].getPosition().y && windowPos.y <= inventoryBox[0].getPosition().y + inventoryBox[0].getSize().y) {
 					if (mana >= structInv.fireTower.towerCost) {
 						std::cout << "Clicking Fire Tower" << std::endl;
-						this->structInv.towerFollow(this->fireTower);
+						this->structInv.towerFollow(this->towerStrings[0]);
 						this->mouseHeld = true;
 					}
 					else {
@@ -576,42 +439,42 @@ void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
 				if (windowPos.y >= inventoryBox[1].getPosition().y && windowPos.y <= inventoryBox[1].getPosition().y + inventoryBox[1].getSize().y) {
 					if (mana >= structInv.windTower.towerCost) {
 						std::cout << "Clicking Wind Tower" << std::endl;
-						this->structInv.towerFollow(this->windTower);
+						this->structInv.towerFollow(this->towerStrings[2]);
 						this->mouseHeld = true;
 					}
 				}
 				if (windowPos.y >= inventoryBox[2].getPosition().y && windowPos.y <= inventoryBox[2].getPosition().y + inventoryBox[2].getSize().y) {
 					if (mana >= structInv.earthTower.towerCost) {
 						std::cout << "Clicking Earth Tower" << std::endl;
-						this->structInv.towerFollow(this->earthTower);
+						this->structInv.towerFollow(this->towerStrings[4]);
 						this->mouseHeld = true;
 					}
 				}
 				if (windowPos.y >= inventoryBox[3].getPosition().y && windowPos.y <= inventoryBox[3].getPosition().y + inventoryBox[3].getSize().y) {
 					if (mana >= structInv.lightTower.towerCost) {
 						std::cout << "Clicking Light Tower" << std::endl;
-						this->structInv.towerFollow(this->lightTower);
+						this->structInv.towerFollow(this->towerStrings[6]);
 						this->mouseHeld = true;
 					}
 				}
 				if (windowPos.y >= inventoryBox[4].getPosition().y && windowPos.y <= inventoryBox[4].getPosition().y + inventoryBox[4].getSize().y) {
 					if (mana >= structInv.elementalAmplifier.towerCost) {
 						std::cout << "Clicking Elemental Amplifier Tower" << std::endl;
-						this->structInv.towerFollow(this->elementAmpTower);
+						this->structInv.towerFollow(this->towerStrings[8]);
 						this->mouseHeld = true;
 					}
 				}
 				if (windowPos.y >= inventoryBox[5].getPosition().y && windowPos.y <= inventoryBox[5].getPosition().y + inventoryBox[5].getSize().y) {
 					if (mana >= structInv.elementalOverclocker.towerCost) {
 						std::cout << "Clicking Elemental Overclocker tower" << std::endl;
-						this->structInv.towerFollow(this->elementOverTower);
+						this->structInv.towerFollow(this->towerStrings[9]);
 						this->mouseHeld = true;
 					}
 				}
 				if (windowPos.y >= inventoryBox[6].getPosition().y && windowPos.y <= inventoryBox[6].getPosition().y + inventoryBox[6].getSize().y) {
 					if (mana >= structInv.manaAmplifier.towerCost) {
 						std::cout << "Clicking Mana Amplifier" << std::endl;
-						this->structInv.towerFollow(this->manaAmpTower);
+						this->structInv.towerFollow(this->towerStrings[10]);
 						this->mouseHeld = true;
 					}
 				}
@@ -620,60 +483,60 @@ void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
 				if (windowPos.y >= inventoryBox[7].getPosition().y && windowPos.y <= inventoryBox[7].getPosition().y + inventoryBox[7].getSize().y) {
 					if (mana >= structInv.waterTower.towerCost) {
 						std::cout << "Clicking Water Tower" << std::endl;
-						this->structInv.towerFollow(this->waterTower);
+						this->structInv.towerFollow(this->towerStrings[1]);
 						this->mouseHeld = true;
 					}
 				}
 				if (windowPos.y >= inventoryBox[8].getPosition().y && windowPos.y <= inventoryBox[8].getPosition().y + inventoryBox[8].getSize().y) {
 					if (mana >= structInv.iceTower.towerCost) {
 						std::cout << "Clicking Ice Tower" << std::endl;
-						this->structInv.towerFollow(this->iceTower);
+						this->structInv.towerFollow(this->towerStrings[3]);
 						this->mouseHeld = true;
 					}
 				}
 				if (windowPos.y >= inventoryBox[9].getPosition().y && windowPos.y <= inventoryBox[9].getPosition().y + inventoryBox[9].getSize().y) {
 					if (mana >= structInv.energyTower.towerCost) {
 						std::cout << "Clicking Energy Tower" << std::endl;
-						this->structInv.towerFollow(this->energyTower);
+						this->structInv.towerFollow(this->towerStrings[5]);
 						this->mouseHeld = true;
 					}
 				}
 				if (windowPos.y >= inventoryBox[10].getPosition().y && windowPos.y <= inventoryBox[10].getPosition().y + inventoryBox[10].getSize().y) {
 					if (mana >= structInv.darkTower.towerCost) {
 						std::cout << "Clicking Dark Tower" << std::endl;
-						this->structInv.towerFollow(this->darkTower);
+						this->structInv.towerFollow(this->towerStrings[7]);
 						this->mouseHeld = true;
 					}
 				}
 				if (windowPos.y >= inventoryBox[11].getPosition().y && windowPos.y <= inventoryBox[11].getPosition().y + inventoryBox[11].getSize().y) {
 					if (mana >= structInv.observatory.towerCost) {
 						std::cout << "Clicking Observatory tower" << std::endl;
-						this->structInv.towerFollow(this->observTower);
+						this->structInv.towerFollow(this->towerStrings[11]);
 						this->mouseHeld = true;
 					}
 				}
 				if (windowPos.y >= inventoryBox[12].getPosition().y && windowPos.y <= inventoryBox[12].getPosition().y + inventoryBox[12].getSize().y) {
 					if (mana >= structInv.regenTower.towerCost) {
 						std::cout << "Clicking regenerator tower" << std::endl;
-						this->structInv.towerFollow(this->regenTower);
+						this->structInv.towerFollow(this->towerStrings[12]);
 						this->mouseHeld = true;
 					}
 				}
 				if (windowPos.y >= inventoryBox[13].getPosition().y && windowPos.y <= inventoryBox[13].getPosition().y + inventoryBox[13].getSize().y) {
 					if (mana >= structInv.voidTower.towerCost) {
 						std::cout << "Clicking void tower" << std::endl;
-						this->structInv.towerFollow(this->voidTower);
+						this->structInv.towerFollow(this->towerStrings[13]);
 						this->mouseHeld = true;
 					}
 				}
 			}
 			// Add here
-			structInv.towerClicked(sf::Vector2i(gridPos.x * gridSizeU, gridPos.y * gridSizeU));
+			structInv.towerClicked(sf::Vector2i(gridPos.x * gridSizeF, gridPos.y * gridSizeF));
 		}
 		else {
 			if (this->mouseHeld == false && mana >= this->structInv.getTowerCost()) {
-				if (this->structInv.towerPlacable(sf::Vector2i(gridPos.x * gridSizeU, gridPos.y * gridSizeU)) == true) {
-					this->mana -= this->structInv.towerPlace(sf::Vector2i(gridPos.x * gridSizeU, gridPos.y * gridSizeU));
+				if (this->structInv.towerPlacable(sf::Vector2i(gridPos.x * gridSizeF, gridPos.y * gridSizeF)) == true) {
+					this->mana -= this->structInv.towerPlace(sf::Vector2i(gridPos.x * gridSizeF, gridPos.y * gridSizeF));
 				}
 				this->mouseHeld = true;
 			}
@@ -742,8 +605,8 @@ void GUI::render(sf::RenderTarget & target, sf::View & view)
 	target.draw(healthText);
 	target.draw(manaText);
 	target.draw(waveText);
-	this->renderWave(target);
 	this->structInv.render(target);
+	
 	
 }
 

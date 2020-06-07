@@ -18,14 +18,14 @@
 #include "../Structures/Towers/VoidTower.h"
 /*
 TODO: URGENT:
-- Make it so that the tower cost is within each tower class for the price
-- When you place a tower, subtract the tower cost from the HUD mana, if you have enough mana
-- If not enough mana, use a cross out texture for the tower image on the HUD
-- Make the towers within this class public variables so they can be called by the GUI to access the tower cost.
-- Make it so that the towers are placed on tiles, find the tiles where a structure is placed, if another structure is placed there, make it unable to place a tower on that tile. (use red cross to show that you aren't able to do that)
 - For each tile on the map, give a boolean value for if the tile is water or a coastal tile. Coastal tiles can't place any tile. Bodies of water can only have water and ice towers.
 - Create a Magma tile, an ice tile etc. When an ice tile is placed on a water tile, the water tile must turn to ice.
 - Only fire towers should be placable on a magma tile.
+
+
+
+-------------MAIN------------------
+- Tower placement is broken, look into why and fix this
 */
 class StructureInventory
 {
