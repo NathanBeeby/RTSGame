@@ -8,6 +8,8 @@ void Enemy::initVariables()
 	this->enemySize.x = 150;
 	this->enemySize.y = 150;
 	this->enemyNum = 0;
+	this->enemiesPassed = 0;
+	this->enemiesKill = 0;
 
 	// Enemies array size initialization
 	this->enemies.resize(enemyNum);
@@ -57,6 +59,16 @@ Enemy::~Enemy()
 {
 }
 
+const int Enemy::enemiesPassedGoal() const
+{
+	return this->enemiesPassed;
+}
+
+const int Enemy::enemiesKilled() const
+{
+	return this->enemiesKill;
+}
+
 void Enemy::ResizeArrays()
 {
 	this->enemies.resize(enemyNum);
@@ -97,6 +109,19 @@ void Enemy::DeleteEnemy(int enemyId)
 	this->goalWaypoint.erase(goalWaypoint.begin() + enemyId);
 	this->currentPoint.erase(currentPoint.begin() + enemyId);
 	this->maxPoint.erase(maxPoint.begin() + enemyId);
+	//this->gui.RemoveHealth(1);
+}
+
+void Enemy::EnemyPassedGoal(int enemyId)
+{
+	this->DeleteEnemy(enemyId);
+	this->enemiesPassed++;
+}
+
+void Enemy::EnemyKilled(int enemyId)
+{
+	this->DeleteEnemy(enemyId);
+	this->enemiesKill++;
 }
 
 void Enemy::DeleteAllEnemies()
@@ -124,7 +149,7 @@ void Enemy::updateEnemyWaypointAndMovement()
 					this->goalWaypoint[i] = sf::Vector2i(this->waypoint.waypoints[currentPoint[i] + 1].x, this->waypoint.waypoints[currentPoint[i] + 1].y);
 				}
 				else {
-					this->DeleteEnemy(i);
+					this->EnemyPassedGoal(i);
 				}
 			}
 			else {
@@ -145,20 +170,6 @@ void Enemy::updateEnemyWaypointAndMovement()
 				this->enemies[i].move(enemyMoveX, enemyMoveY);
 			}
 		}
-
-		//if (maxPoint[i] == 8) {
-		//	if (this->currentPoint[i] == 7) {
-		//		this->DeleteEnemy(i);
-		//	}
-		//}
-		//else {
-		//	// Remove enemy here and Remove lives from hud here
-		//	this->enemies.erase(this->enemies.begin() + i);
-		//	this->currentPoint.erase(this->currentPoint.begin() + i);
-		//	this->maxPoint.erase(this->maxPoint.begin() + i);
-		//	// TODO: REMOVE LIVES FROM HUD HERE
-
-		//}
 	}
 }
 

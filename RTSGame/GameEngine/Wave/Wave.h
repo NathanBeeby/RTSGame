@@ -52,6 +52,8 @@ public:
 	// Accessors
 	const int getWaveNumber() const;
 	const int getWaveDifficulty() const;
+	const int enemiesPassedGoal() const;
+	const int enemiesKilled() const;
 
 	// Public Functions
 	void beginWave();

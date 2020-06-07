@@ -28,6 +28,7 @@ void GUI::initVariables()
 	this->regenTower = "../Assets/Image_Assets/Towers/Regenerator.png";
 	this->voidTower = "../Assets/Image_Assets/Towers/VoidTower.png";
 	this->mouseHeld = false;
+	this->gridSizeF = 200.f;
 }
 
 void GUI::initTextures()
@@ -341,12 +342,57 @@ GUI::~GUI()
 {
 }
 
+const int GUI::getScoreValue() const
+{
+	return this->scoreValue;
+}
+
+const int GUI::getHealthValue() const
+{
+	return this->health;
+}
+
+const int GUI::getManaValue() const
+{
+	return this->mana;
+}
+
+void GUI::RemoveHealth(int hp)
+{
+	this->health -= hp;
+}
+
+void GUI::AddHealth(int hp)
+{
+	this->health += hp;
+}
+
+void GUI::RemoveMana(int mp)
+{
+	this->mana -= mp;
+}
+
+void GUI::AddMana(int mp)
+{
+	this->mana += mp;
+}
+
+void GUI::RemoveScore(int sr)
+{
+	this->scoreValue -= sr;
+}
+
+void GUI::AddScore(int sr)
+{
+	this->scoreValue += sr;
+}
+
 void GUI::updateResources()
 {
 	this->levelString = std::to_string(this->levelValue); // converting the int to string, so player knows the stats
 	this->scoreString = std::to_string(this->scoreValue);
-
-	this->healthString = std::to_string(this->health);
+	int actualHealth = this->health - wave.enemiesPassedGoal();
+	this->healthString = std::to_string(actualHealth);
 	this->manaString = std::to_string(this->mana);
 	this->waveString = std::to_string(wave.getWaveNumber());
 

@@ -38,6 +38,18 @@ const int Wave::getWaveDifficulty() const
 	return this->waveDifficulty;
 }
 
+const int Wave::enemiesPassedGoal() const
+{
+	return this->fireEnemy.enemiesPassedGoal() + this->waterEnemy.enemiesPassedGoal() + this->windEnemy.enemiesPassedGoal() + this->iceEnemy.enemiesPassedGoal() + this->earthEnemy.enemiesPassedGoal() +
+		this->energyEnemy.enemiesPassedGoal() + this->lightEnemy.enemiesPassedGoal() + this->darkEnemy.enemiesPassedGoal() + this->voidEnemy.enemiesPassedGoal();
+}
+
+const int Wave::enemiesKilled() const
+{
+	return this->fireEnemy.enemiesKilled() + this->waterEnemy.enemiesKilled() + this->windEnemy.enemiesKilled() + this->iceEnemy.enemiesKilled() + this->earthEnemy.enemiesKilled() +
+		this->energyEnemy.enemiesKilled() + this->lightEnemy.enemiesKilled() + this->darkEnemy.enemiesKilled() + this->voidEnemy.enemiesKilled();
+}
+
 void Wave::beginWave()
 {
 	if (enemyAmount == 0 && waveBegan == false) {
