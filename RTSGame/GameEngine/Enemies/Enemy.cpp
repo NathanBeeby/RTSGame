@@ -92,11 +92,16 @@ void Enemy::updateEnemyWaypointAndMovement()
 	float enemyMoveY = 0.f;
 
 	for (int i = 0; i < enemies.size(); i++) {
-		if (this->currentPoint[i] < this->maxPoint[i]) { // if the current waypoint isn't the last waypoint, run code below
+		if (this->currentPoint[i] <= this->maxPoint[i]) { // if the current waypoint isn't the last waypoint, run code below
 			// If the enemy gets to the goal waypoint
 			if (this->enemies[i].getPosition().x == this->goalWaypoint[i].x && this->enemies[i].getPosition().y == this->goalWaypoint[i].y) {
 				this->currentPoint[i]++;
-				this->goalWaypoint[i] = sf::Vector2i(this->waypoint.waypoints[currentPoint[i] + 1].x, this->waypoint.waypoints[currentPoint[i] + 1].y);
+				if (this->currentPoint[i] < 7) {
+					this->goalWaypoint[i] = sf::Vector2i(this->waypoint.waypoints[currentPoint[i] + 1].x, this->waypoint.waypoints[currentPoint[i] + 1].y);
+				}
+				else {
+					this->DeleteEnemy(i);
+				}
 			}
 			else {
 
@@ -117,11 +122,11 @@ void Enemy::updateEnemyWaypointAndMovement()
 			}
 		}
 
-		if (maxPoint[i] == 8) {
-			if (this->currentPoint[i] == this->maxPoint[i]) {
-				this->DeleteEnemy(i);
-			}
-		}
+		//if (maxPoint[i] == 8) {
+		//	if (this->currentPoint[i] == 7) {
+		//		this->DeleteEnemy(i);
+		//	}
+		//}
 		//else {
 		//	// Remove enemy here and Remove lives from hud here
 		//	this->enemies.erase(this->enemies.begin() + i);
