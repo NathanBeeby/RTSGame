@@ -4,16 +4,17 @@
 // Initialization
 void Enemy::initVariables()
 {
+	// Integer Variables
 	this->enemySize.x = 150;
 	this->enemySize.y = 150;
 	this->enemyNum = 0;
+
+	// Enemies array size initialization
 	this->enemies.resize(enemyNum);
 
-	// Waypoints
+	// Waypoints initialization
 	this->currentPoint.resize(enemyNum);
 	this->maxPoint.resize(enemyNum);
-
-	this->currentWaypoint.resize(enemyNum);
 	this->goalWaypoint.resize(enemyNum);
 }
 
@@ -21,7 +22,7 @@ void Enemy::initTextures()
 {
 }
 
-void Enemy::initSprites()
+void Enemy::initWaypoints()
 {
 	waypoint.AddWayPoint(sf::Vector2i(0, (200 * 14) + 20));
 	waypoint.AddWayPoint(sf::Vector2i((200 * 6) + 20, (200 * 14) + 20));
@@ -31,6 +32,10 @@ void Enemy::initSprites()
 	waypoint.AddWayPoint(sf::Vector2i((200 * 22) + 20, (200 * 22) + 20));
 	waypoint.AddWayPoint(sf::Vector2i((200 * 22) + 20, (200 * 15) + 20));
 	waypoint.AddWayPoint(sf::Vector2i((200 * 33) + 20, (200 * 15) + 20));
+}
+
+void Enemy::initSprites()
+{
 	for (int i = 0; i < enemies.size(); i++) {
 		this->enemies[i].setSize(sf::Vector2f(enemySize.x, enemySize.y));
 		this->enemies[i].setTexture(&enemyTextures[0]);
@@ -43,6 +48,7 @@ Enemy::Enemy()
 {
 	this->initVariables();
 	this->initTextures();
+	this->initWaypoints();
 	this->initSprites();
 }
 
@@ -51,37 +57,55 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::CreateEnemy(sf::Vector2i enemyPos)
+void Enemy::ResizeArrays()
 {
-	// ENEMY CODE
-	this->enemyNum++;
 	this->enemies.resize(enemyNum);
 	this->currentPoint.resize(enemyNum);
 	this->maxPoint.resize(enemyNum);
-
-	this->currentWaypoint.resize(enemyNum);
 	this->goalWaypoint.resize(enemyNum);
+}
+
+void Enemy::pushBackEnemy(sf::Vector2i enemyPos)
+{
 	this->enemy.setSize(sf::Vector2f(enemySize.x, enemySize.y));
 	this->enemy.setPosition(sf::Vector2f(enemyPos.x, enemyPos.y));
 	this->enemy.setTexture(&enemyTextures[0]);
 	this->enemies.push_back(this->enemy);
-	// WAYPOINTS CODE
+}
+
+void Enemy::pushBackWaypoints()
+{
 	this->currentPoint.push_back(0);
 	this->maxPoint.push_back(this->waypoint.waypoints.size());
-	this->currentWaypoint.push_back(sf::Vector2i(this->waypoint.waypoints[0].x, this->waypoint.waypoints[0].y));
 	this->goalWaypoint.push_back(sf::Vector2i(this->waypoint.waypoints[1].x, this->waypoint.waypoints[1].y));
+}
+
+void Enemy::CreateEnemy(sf::Vector2i enemyPos)
+{
+	// ENEMY CODE
+	this->enemyNum++; // Incrementing the enemy number which will be used to resize the arrays
+	this->ResizeArrays(); // resizing the arrays 
+	this->pushBackEnemy(enemyPos); // Creating the enemy
+	// WAYPOINTS CODE
+	this->pushBackWaypoints(); // pushing back the waypoints which the enemy will require to follow the path
 
 }
 
 void Enemy::DeleteEnemy(int enemyId)
 {
 	this->enemies.erase(enemies.begin() + enemyId);
+	this->goalWaypoint.erase(goalWaypoint.begin() + enemyId);
+	this->currentPoint.erase(currentPoint.begin() + enemyId);
+	this->maxPoint.erase(maxPoint.begin() + enemyId);
 }
 
 void Enemy::DeleteAllEnemies()
 {
 	for (int i = 0; i < enemies.size(); i++) {
 		this->enemies.erase(enemies.begin() + i);
+		this->goalWaypoint.erase(goalWaypoint.begin() + i);
+		this->currentPoint.erase(currentPoint.begin() + i);
+		this->maxPoint.erase(maxPoint.begin() + i);
 	}
 }
 

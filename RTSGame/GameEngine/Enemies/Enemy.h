@@ -3,6 +3,11 @@
 #include <iostream>
 #include <vector>
 #include "../Map/PathWaypoints.h"
+/*
+	- Split up functions into sub-functions which serve one purpose each
+	- Create Parent Class for enemy movement (AI class)
+
+*/
 class Enemy
 {
 private:
@@ -17,8 +22,6 @@ private:
 	std::vector<int> currentPoint;
 	std::vector<int> maxPoint;
 
-
-	std::vector<sf::Vector2i> currentWaypoint;
 	std::vector<sf::Vector2i> goalWaypoint;
 	PathWaypoints waypoint;
 
@@ -29,6 +32,7 @@ private:
 	// Initialization
 	void initVariables();
 	void initTextures();
+	void initWaypoints();
 	void initSprites();
 public:
 	// Constructor / Destructor
@@ -41,6 +45,10 @@ public:
 	// Accessors
 
 	// Public Functions
+	void ResizeArrays();
+	void pushBackEnemy(sf::Vector2i enemyPos);
+	void pushBackWaypoints();
+
 	void CreateEnemy(sf::Vector2i enemyPos);
 	void DeleteEnemy(int enemyId);
 	void DeleteAllEnemies();

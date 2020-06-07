@@ -4,7 +4,7 @@
 
 void Wave::initVariables()
 {
-	this->enemyPerWave = 20;
+	this->enemyPerWave = 5;
 	this->waveNum = 0;
 	this->waveDifficulty = 1;
 	this->enemyAmount = 0;
@@ -45,7 +45,7 @@ void Wave::beginWave()
 		this->waveBegan = true;
 		this->element = (rand() % 8 + 1);
 		this->waveNum++;
-		this->enemyAmount = (waveNum + waveDifficulty) * enemyPerWave;
+		this->enemyAmount = (waveNum * waveDifficulty) * enemyPerWave;
 	}
 }
 
