@@ -2,7 +2,8 @@
 
 void WindTower::initVariables()
 {
-	this->towerCost = 155;
+	this->towerCost = 255;
+	this->radius = 600.f;
 }
 
 void WindTower::initTextures()

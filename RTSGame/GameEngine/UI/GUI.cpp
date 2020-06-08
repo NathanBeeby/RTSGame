@@ -19,6 +19,7 @@ void GUI::initVariables()
 	// Boolean Variables
 	this->isLevelWon = false;
 	this->isLevelLost = false;
+	this->towerMenuOpen = true;
 
 	// Vector2f Variables
 	this->screenSize = sf::Vector2f(1920, 1080);
@@ -99,7 +100,9 @@ void GUI::initTextures()
 	if (!this->inventoryBoxTexture[13].loadFromFile(this->towerStrings[13])) {
 		std::cout << "Error: loading void tower" << std::endl;
 	}
-
+	if (!this->towerToggleTexture.loadFromFile(this->towerCloseString)) {
+		std::cout << "Error: loading tower toggle texture" << std::endl;
+	}
 }
 
 void GUI::initSprites()
@@ -169,7 +172,9 @@ void GUI::initSprites()
 			this->invMax++;
 		}
 	}
-
+	towerMenuToggle.setSize(sf::Vector2f(20.f, 80.f));
+	towerMenuToggle.setTexture(&towerToggleTexture);
+	towerMenuToggle.setPosition(sf::Vector2f((this->guiBox[3].getPosition().x - towerMenuToggle.getSize().x), this->guiBox[3].getPosition().y + (this->guiBox[3].getSize().y / 2)));
 }
 
 void GUI::initText()
@@ -362,6 +367,12 @@ void GUI::keyHandler(sf::Keyboard::Key key)
 	if (key == sf::Keyboard::Key::E) {
 		this->health += 100;
 	}
+	if (key == sf::Keyboard::Key::C) {
+		this->towerMenuOpen = false;
+	}
+	else if (key == sf::Keyboard::Key::V) {
+		this->towerMenuOpen = true;
+	}
 }
 
 void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
@@ -370,7 +381,10 @@ void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
 		if (structInv.isFollowing() == false) {
 
 			this->uiButtonsMouseHandler(windowPos);
-			this->towerMenuMouseHandler(windowPos);
+			if (towerMenuOpen == true) {
+				this->towerMenuMouseHandler(windowPos);
+			}
+			this->towerUIMouseHandler(windowPos);
 			structInv.towerClicked(sf::Vector2i(gridPos.x * gridSizeF, gridPos.y * gridSizeF));
 		}
 		else {
@@ -381,6 +395,7 @@ void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
 				this->mouseHeld = true;
 			}
 		}
+		this->mouseHeld = true;
 	}
 	else {
 		this->mouseHeld = false;
@@ -402,6 +417,13 @@ void GUI::renderResources(sf::RenderTarget & target, sf::View & view)
 
 void GUI::renderGUI(sf::RenderTarget & target)
 {
+	if (this->towerMenuOpen == false) {
+		this->towerToggleTexture.loadFromFile(this->towerOpenString);
+	}
+	else {
+		this->towerToggleTexture.loadFromFile(this->towerCloseString);
+	}
+
 	int max = 0;
 	for (int i = 0; i < invMaxX; i++) {
 		for (int j = 0; j < invMaxY; j++) {
@@ -414,17 +436,39 @@ void GUI::renderGUI(sf::RenderTarget & target)
 		target.draw(uiButtons[i]);
 	}
 	for (int i = 0; i < guiBox.size(); i++) {
-		target.draw(guiBox[i]);
+		if (i != 3 && i != 4 && i != 5 && i != 6) {
+			target.draw(guiBox[i]);
+		}
+	}
+	if (towerMenuOpen == true) {
+		this->renderTowerMenu(target);
+	}
+	else {
+		towerMenuToggle.setPosition(sf::Vector2f((this->guiBox[3].getPosition().x + this->guiBox[3].getSize().x - towerMenuToggle.getSize().x), this->guiBox[3].getPosition().y + (this->guiBox[3].getSize().y / 2)));
+		towerMenuToggle.setTexture(&towerToggleTexture);
+		target.draw(towerMenuToggle);
 	}
 	//target.draw(miniMapBox);
+	target.draw(timerText);
+	target.draw(dayText);
+}
+
+void GUI::renderTowerMenu(sf::RenderTarget & target)
+{
+	towerMenuToggle.setPosition(sf::Vector2f((this->guiBox[3].getPosition().x - towerMenuToggle.getSize().x), this->guiBox[3].getPosition().y + (this->guiBox[3].getSize().y / 2)));
+	towerMenuToggle.setTexture(&towerToggleTexture);
+
+	target.draw(this->guiBox[3]);
+	target.draw(this->guiBox[4]);
+	target.draw(this->guiBox[5]);
+	target.draw(this->guiBox[6]);
 	for (int i = 0; i < inventoryBox.size(); i++) {
 		target.draw(inventoryBox[i]);
 	}
-	target.draw(timerText);
-	target.draw(dayText);
 	target.draw(healthText);
 	target.draw(manaText);
 	target.draw(waveText);
+	target.draw(towerMenuToggle);
 }
 
 void GUI::render(sf::RenderTarget & target, sf::View & view)

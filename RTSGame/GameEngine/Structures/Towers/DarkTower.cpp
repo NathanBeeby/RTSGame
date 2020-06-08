@@ -3,6 +3,7 @@
 void DarkTower::initVariables()
 {
 	this->towerCost = 366;
+	this->radius = 400.f;
 }
 
 void DarkTower::initTextures()

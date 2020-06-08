@@ -5,6 +5,7 @@
 void WaterTower::initVariables()
 {
 	this->towerCost = 280;
+	this->radius = 700.f;
 }
 
 void WaterTower::initTextures()

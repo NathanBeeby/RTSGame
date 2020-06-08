@@ -12,7 +12,6 @@ void Tower::initVariables()
 	this->towerPos.y = -1;
 	this->textureInt = 0;
 	// Float Variables
-	this->radius = 500.f;
 
 	// Boolean Variables
 	this->towers.resize(towerNum);

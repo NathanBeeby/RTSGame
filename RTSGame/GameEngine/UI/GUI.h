@@ -44,6 +44,7 @@ public:
 	void mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos);
 	void renderResources(sf::RenderTarget &target, sf::View &view);
 	void renderGUI(sf::RenderTarget &target);
+	void renderTowerMenu(sf::RenderTarget &target);
 	void render(sf::RenderTarget &target, sf::View &view);
 	void renderTowerSelector(sf::RenderTarget &target, sf::Vector2i pos);
 	void renderTowers(sf::RenderTarget &target);

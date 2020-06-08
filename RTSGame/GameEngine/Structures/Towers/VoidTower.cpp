@@ -4,6 +4,7 @@
 void VoidTower::initVariables()
 {
 	this->towerCost = 755;
+	this->radius = 1000.f;
 }
 
 void VoidTower::initTextures()

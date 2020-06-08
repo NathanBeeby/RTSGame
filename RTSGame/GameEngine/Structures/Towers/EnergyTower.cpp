@@ -4,6 +4,7 @@
 void EnergyTower::initVariables()
 {
 	this->towerCost = 350;
+	this->radius = 600.f;
 }
 
 void EnergyTower::initTextures()

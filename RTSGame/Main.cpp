@@ -8,10 +8,10 @@
 	TODO NEXT:
 
 	// ------- NEXT GOALS ------- //
-	- Water tiles need to be ammeneded in the tile class, so that water tiles are unplacable
-	- Implement different tower ranges depending on the tower and change the tower select radius based on tower clicked.
-	- Implement Collapsable Tower menu on GUI
 	- Implement Tower Stats Box on GUI
+	- Water tiles need to be ammeneded in the tile class, so that water tiles are unplacable
+	- Implement Enemy Health
+	- Implement enemy health bar that follows the enemy
 
 	// ------- FUTURE GOALS ------- //
 

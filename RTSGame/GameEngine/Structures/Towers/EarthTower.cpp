@@ -3,7 +3,8 @@
 
 void EarthTower::initVariables()
 {
-
+	this->towerCost = 400;
+	this->radius = 350.f;
 }
 
 void EarthTower::initTextures()

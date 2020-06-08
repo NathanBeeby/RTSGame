@@ -3,6 +3,7 @@
 void ManaAmplifierTower::initVariables()
 {
 	this->towerCost = 600;
+	this->radius = 400.f;
 }
 
 void ManaAmplifierTower::initTextures()

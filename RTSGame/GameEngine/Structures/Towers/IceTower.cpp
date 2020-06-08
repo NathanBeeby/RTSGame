@@ -3,6 +3,7 @@
 void IceTower::initVariables()
 {
 	this->towerCost = 210;
+	this->radius = 350.f;
 }
 
 void IceTower::initTextures()

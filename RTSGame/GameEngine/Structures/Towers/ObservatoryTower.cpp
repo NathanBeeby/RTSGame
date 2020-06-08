@@ -3,6 +3,7 @@
 void ObservatoryTower::initVariables()
 {
 	this->towerCost = 600;
+	this->radius = 750.f;
 }
 
 void ObservatoryTower::initTextures()

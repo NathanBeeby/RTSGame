@@ -4,6 +4,7 @@
 void RegenTower::initVariables()
 {
 	this->towerCost = 550;
+	this->radius = 240.f;
 }
 
 void RegenTower::initTextures()

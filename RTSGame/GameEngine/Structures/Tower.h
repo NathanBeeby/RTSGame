@@ -15,7 +15,6 @@ private:
 	int towerNum;
 	bool towerIsClicked;
 	bool towerSelected;
-	float radius;
 	// Private Functions
 
 	// Initialization
@@ -28,6 +27,7 @@ public:
 	virtual ~Tower();
 	// Public Variables
 	int towerCost;
+	float radius;
 	std::vector<sf::Texture> towerTextures;
 
 struct Type

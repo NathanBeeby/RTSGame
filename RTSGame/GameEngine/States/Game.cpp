@@ -151,7 +151,6 @@ void Game::updateTileView(sf::View &view)
 
 void Game::update(sf::Time deltaTime)
 {
-
 	this->tile.update();
 	this->gui.update(deltaTime);
 }

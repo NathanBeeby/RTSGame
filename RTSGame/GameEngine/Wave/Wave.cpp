@@ -11,6 +11,7 @@ void Wave::initVariables()
 	this->enemyInRound = 0;
 	this->second = sf::seconds(1);
 	this->waveBegan = false;
+	this->wavePaused = false;
 	this->element = 0; // element begins at fire
 	this->manaReturn = 0;
 
@@ -68,6 +69,11 @@ void Wave::beginWave()
 }
 
 
+void Wave::pauseWave(bool pause)
+{
+	this->wavePaused = pause;
+}
+
 void Wave::updateEnemyInWave()
 {
 	if (waveBegan == true) {
@@ -113,6 +119,7 @@ void Wave::updateEnemyInWave()
 
 void Wave::updateEnemies()
 {
+	if (this->wavePaused == false) {
 		fireEnemy.update();
 		waterEnemy.update();
 		windEnemy.update();
@@ -122,6 +129,7 @@ void Wave::updateEnemies()
 		lightEnemy.update();
 		darkEnemy.update();
 		voidEnemy.update();
+	}
 }
 
 
@@ -133,15 +141,15 @@ void Wave::update()
 
 void Wave::renderEnemies(sf::RenderTarget & target)
 {
-		fireEnemy.render(target);
-		waterEnemy.render(target);
-		windEnemy.render(target);
-		iceEnemy.render(target);
-		earthEnemy.render(target);
-		energyEnemy.render(target);
-		lightEnemy.render(target);
-		darkEnemy.render(target);
-		voidEnemy.render(target);
+	fireEnemy.render(target);
+	waterEnemy.render(target);
+	windEnemy.render(target);
+	iceEnemy.render(target);
+	earthEnemy.render(target);
+	energyEnemy.render(target);
+	lightEnemy.render(target);
+	darkEnemy.render(target);
+	voidEnemy.render(target);
 }
 
 void Wave::render(sf::RenderTarget & target)

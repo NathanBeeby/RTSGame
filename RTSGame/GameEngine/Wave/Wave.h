@@ -27,7 +27,7 @@ private:
 	sf::Clock waveClock;
 	sf::Vector2i enemyStartPos;
 	sf::Time second;
-	bool waveBegan;
+	bool waveBegan, wavePaused;
 	int element;
 
 	FireEnemy fireEnemy;
@@ -59,6 +59,7 @@ public:
 	// Public Functions
 	void beginWave();
 
+	void pauseWave(bool pause);
 	void updateEnemyInWave();
 	void updateEnemies();
 	void update();

@@ -3,6 +3,7 @@
 void FireTower::initVariables()
 {
 	this->towerCost = 300;
+	this->radius = 600.f;
 }
 
 void FireTower::initTextures()

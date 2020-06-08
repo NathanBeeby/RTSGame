@@ -3,6 +3,7 @@
 void LightTower::initVariables()
 {
 	this->towerCost = 230;
+	this->radius = 350.f;
 }
 
 void LightTower::initTextures()

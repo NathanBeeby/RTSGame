@@ -134,12 +134,8 @@ void Enemy::DeleteAllEnemies()
 	}
 }
 
-void Enemy::updateEnemyWaypointAndMovement()
+void Enemy::updateEnemyWaypoint()
 {
-	// Movement Variables (enemies X and Y)
-	float enemyMoveX = 0.f;
-	float enemyMoveY = 0.f;
-
 	for (int i = 0; i < enemies.size(); i++) {
 		if (this->currentPoint[i] <= this->maxPoint[i]) { // if the current waypoint isn't the last waypoint, run code below
 			// If the enemy gets to the goal waypoint
@@ -153,30 +149,38 @@ void Enemy::updateEnemyWaypointAndMovement()
 				}
 			}
 			else {
-
-				// If not at goal point, move the enemy until it gets there
-				if (this->enemies[i].getPosition().x < this->goalWaypoint[i].x) {
-					enemyMoveX = 10.f;
-				}
-				else if (this->enemies[i].getPosition().x > this->goalWaypoint[i].x) {
-					enemyMoveX = -10.f;
-				}
-				if (this->enemies[i].getPosition().y < this->goalWaypoint[i].y) {
-					enemyMoveY = 10.f;
-				}
-				else if (this->enemies[i].getPosition().y > this->goalWaypoint[i].y) {
-					enemyMoveY = -10.f;
-				}
-				this->enemies[i].move(enemyMoveX, enemyMoveY);
+				this->updateEnemyMovement(i);
 			}
 		}
 	}
 }
 
 
+void Enemy::updateEnemyMovement(int i)
+{
+	// Movement Variables (enemies X and Y)
+	float enemyMoveX = 0.f;
+	float enemyMoveY = 0.f;
+
+	// If not at goal point, move the enemy until it gets there
+	if (this->enemies[i].getPosition().x < this->goalWaypoint[i].x) {
+		enemyMoveX = 10.f;
+	}
+	else if (this->enemies[i].getPosition().x > this->goalWaypoint[i].x) {
+		enemyMoveX = -10.f;
+	}
+	if (this->enemies[i].getPosition().y < this->goalWaypoint[i].y) {
+		enemyMoveY = 10.f;
+	}
+	else if (this->enemies[i].getPosition().y > this->goalWaypoint[i].y) {
+		enemyMoveY = -10.f;
+	}
+	this->enemies[i].move(enemyMoveX, enemyMoveY);
+}
+
 void Enemy::update()
 {
-	this->updateEnemyWaypointAndMovement();
+	this->updateEnemyWaypoint();
 
 }
 

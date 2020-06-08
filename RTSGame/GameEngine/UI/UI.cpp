@@ -5,10 +5,12 @@ void UI::initVariables()
 {
 	// Boolean Variables
 	this->mouseHeld = false;
+	this->gamePaused = false;
 
 	// Integer Variables
 	this->towerSize = 14;
 	this->uiButtonSize = 3;
+	this->uiButtonTextureSize = 4;
 	this->uiTime = 0;
 	this->uiTimeMinute = 0;
 	this->day = 0;
@@ -21,8 +23,7 @@ void UI::initVariables()
 
 	// UI Buttons
 	this->uiButtons.resize(uiButtonSize);
-	this->uiButtonTextures.resize(uiButtonSize);
-
+	this->uiButtonTextures.resize(uiButtonTextureSize);
 }
 
 void UI::initTextures()
@@ -68,6 +69,9 @@ void UI::initTextures()
 	if (!this->uiButtonTextures[2].loadFromFile("../Assets/Image_Assets/GUI/GUIButtons/SettingsButton.png")) {
 		std::cout << "Failed to Load setting Texture" << std::endl;
 	}
+	if (!this->uiButtonTextures[3].loadFromFile("../Assets/Image_Assets/GUI/GUIButtons/UnpauseButton.png")) {
+		std::cout << "Failed to Load pause Texture" << std::endl;
+	}
 }
 
 void UI::initText()
@@ -101,6 +105,9 @@ void UI::initText()
 	this->towerNoStrings[11] = "../Assets/Image_Assets/Towers/NoTexture/Observatory.png";
 	this->towerNoStrings[12] = "../Assets/Image_Assets/Towers/NoTexture/Regenerator.png";
 	this->towerNoStrings[13] = "../Assets/Image_Assets/Towers/NoTexture/VoidTower.png";
+
+	this->towerOpenString = "../Assets/Image_Assets/GUI/GUIButtons/OpenMenu.png";
+	this->towerCloseString = "../Assets/Image_Assets/GUI/GUIButtons/CloseMenu.png";
 }
 
 void UI::initSprites()
@@ -182,6 +189,8 @@ void UI::uiButtonsMouseHandler(sf::Vector2i & windowPos)
 	if (windowPos.y >= uiButtons[0].getPosition().y && windowPos.y <= uiButtons[0].getPosition().y + uiButtons[0].getSize().y) {
 		if (windowPos.x >= uiButtons[0].getPosition().x && windowPos.x <= uiButtons[0].getPosition().x + uiButtons[0].getSize().x) {
 			// Start Round Button
+
+
 			std::cout << "Wave Began" << std::endl;
 			wave.beginWave();
 			// Change Texture to double spped
@@ -189,7 +198,22 @@ void UI::uiButtonsMouseHandler(sf::Vector2i & windowPos)
 			// if round over set back to start button
 		}
 		if (windowPos.x >= uiButtons[1].getPosition().x && windowPos.x <= uiButtons[1].getPosition().x + uiButtons[1].getSize().x) {
-			std::cout << "Wave Paused" << std::endl;
+			if (this->mouseHeld == false) {
+				if (this->gamePaused == true) {
+					std::cout << "Wave Un-Paused" << std::endl;
+					this->gamePaused = false;
+					wave.pauseWave(gamePaused);
+					this->uiButtons[1].setTexture(&this->uiButtonTextures[1]);
+				}
+				else if (this->gamePaused == false) {
+					std::cout << "Wave Paused" << std::endl;
+					this->gamePaused = true;
+					wave.pauseWave(gamePaused);
+					this->uiButtons[1].setTexture(&this->uiButtonTextures[3]);
+				}
+			}
+
+
 		}
 		if (windowPos.x >= uiButtons[2].getPosition().x && windowPos.x <= uiButtons[2].getPosition().x + uiButtons[2].getSize().x) {
 			std::cout << "Settings Clicked" << std::endl;
@@ -302,6 +326,20 @@ void UI::towerMenuMouseHandler(sf::Vector2i & windowPos)
 				std::cout << "Clicking void tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[13]);
 				this->mouseHeld = true;
+			}
+		}
+	}
+}
+
+void UI::towerUIMouseHandler(sf::Vector2i & windowPos)
+{
+	if (windowPos.x >= towerMenuToggle.getPosition().x && windowPos.x <= towerMenuToggle.getPosition().x + inventoryBox[0].getSize().x) {
+		if (windowPos.y >= towerMenuToggle.getPosition().y && windowPos.y <= towerMenuToggle.getPosition().y + inventoryBox[0].getSize().y) {
+			if (this->towerMenuOpen == false) {
+				this->towerMenuOpen = true;
+			}
+			else {
+				this->towerMenuOpen = false;
 			}
 		}
 	}

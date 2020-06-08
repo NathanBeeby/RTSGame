@@ -43,17 +43,21 @@ public:
 	// Accessors
 	const int enemiesPassedGoal() const;
 	const int enemiesKilled() const;
+	const bool getIsPaused() const;
+
 	// Public Functions
 	void ResizeArrays();
 	void pushBackEnemy(sf::Vector2i enemyPos);
 	void pushBackWaypoints();
 
 	void CreateEnemy(sf::Vector2i enemyPos);
+	void setIsPaused(bool paused);
 	void DeleteEnemy(int enemyId);
 	void EnemyPassedGoal(int enemyId);
 	void EnemyKilled(int enemyId);
 	void DeleteAllEnemies();
-	void updateEnemyWaypointAndMovement();
+	void updateEnemyWaypoint();
+	void updateEnemyMovement(int i);
 	void update();
 	void render(sf::RenderTarget &target);
 };
