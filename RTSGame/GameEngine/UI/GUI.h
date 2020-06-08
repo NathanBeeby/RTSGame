@@ -33,6 +33,7 @@ public:
 	// Accessors
 	const bool LevelWon() const;
 	const bool LevelLost() const;
+	const bool isTowerSelected() const;
 
 	// Public Functions
 	void AddUnplacablePosition(sf::Vector2i pos);
@@ -40,6 +41,7 @@ public:
 	void updateResources();
 	void update(sf::Time deltaTime);
 	void updateTowerTextures();
+	void updateTowerUpgrades();
 	void keyHandler(sf::Keyboard::Key key);
 	void mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos);
 	void renderResources(sf::RenderTarget &target, sf::View &view);
@@ -49,6 +51,7 @@ public:
 	void renderTowerSelector(sf::RenderTarget &target, sf::Vector2i pos);
 	void renderTowers(sf::RenderTarget &target);
 	void renderTowerUpgradeBox(sf::RenderTarget &target);
+	void renderTowerUpgrades(sf::RenderTarget &target);
 	void renderWave(sf::RenderTarget &target);
 };
 

@@ -20,7 +20,6 @@ void GUI::initVariables()
 	this->isLevelWon = false;
 	this->isLevelLost = false;
 	this->towerMenuOpen = true;
-	this->towerUpgradeMenuOpen = true;
 
 	// Vector2f Variables
 	this->screenSize = sf::Vector2f(1920, 1080);
@@ -104,9 +103,6 @@ void GUI::initTextures()
 	if (!this->towerToggleTexture.loadFromFile(this->towerCloseString)) {
 		std::cout << "Error: loading tower toggle texture" << std::endl;
 	}
-	if (!this->towerUpgradeToggleTexture.loadFromFile(this->towerUpgradeCloseString)) {
-		std::cout << "Error: loading tower Upgrade toggle texture" << std::endl;
-	}
 }
 
 void GUI::initSprites()
@@ -179,10 +175,6 @@ void GUI::initSprites()
 	towerMenuToggle.setSize(sf::Vector2f(20.f, 80.f));
 	towerMenuToggle.setTexture(&towerToggleTexture);
 	towerMenuToggle.setPosition(sf::Vector2f((this->guiBox[3].getPosition().x - towerMenuToggle.getSize().x), this->guiBox[3].getPosition().y + (this->guiBox[3].getSize().y / 2)));
-
-	towerUpgradeMenuToggle.setSize(sf::Vector2f(80.f, 20.f));
-	towerUpgradeMenuToggle.setTexture(&towerUpgradeToggleTexture);
-	towerUpgradeMenuToggle.setPosition(sf::Vector2f((this->towerUpgradeBox[1].getPosition().x + (this->towerUpgradeBox[1].getSize().x / 2)), this->towerUpgradeBox[1].getPosition().y - this->towerUpgradeMenuToggle.getSize().y));
 }
 
 void GUI::initText()
@@ -239,6 +231,19 @@ const bool GUI::LevelWon() const
 const bool GUI::LevelLost() const
 {
 	return isLevelLost;
+}
+
+const bool GUI::isTowerSelected() const
+{
+	bool isTower = false;
+
+	if (structInv.fireTower.isTowerSelected() || structInv.waterTower.isTowerSelected() || structInv.windTower.isTowerSelected() || structInv.iceTower.isTowerSelected()
+		|| structInv.earthTower.isTowerSelected() || structInv.energyTower.isTowerSelected() || structInv.lightTower.isTowerSelected() || structInv.darkTower.isTowerSelected() || structInv.elementalAmplifier.isTowerSelected()
+		|| structInv.elementalOverclocker.isTowerSelected() || structInv.manaAmplifier.isTowerSelected() || structInv.observatory.isTowerSelected() || structInv.regenTower.isTowerSelected() || structInv.voidTower.isTowerSelected()) {
+		isTower = true;
+	}
+
+	return isTower;
 }
 
 void GUI::AddUnplacablePosition(sf::Vector2i pos)
@@ -366,6 +371,10 @@ void GUI::updateTowerTextures()
 	}
 }
 
+void GUI::updateTowerUpgrades()
+{
+}
+
 void GUI::keyHandler(sf::Keyboard::Key key)
 {
 	// Testing purposes, will be removed
@@ -393,7 +402,6 @@ void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
 				this->towerMenuMouseHandler(windowPos);
 			}
 			this->towerUIMouseHandler(windowPos);
-			this->towerUpgradeUIMouseHandler(windowPos);
 			structInv.towerClicked(sf::Vector2i(gridPos.x * gridSizeF, gridPos.y * gridSizeF));
 		}
 		else {
@@ -432,12 +440,6 @@ void GUI::renderGUI(sf::RenderTarget & target)
 	else {
 		this->towerToggleTexture.loadFromFile(this->towerCloseString);
 	}
-	if (this->towerUpgradeMenuOpen == false) {
-		this->towerUpgradeToggleTexture.loadFromFile(this->towerUpgradeOpenString);
-	}
-	else {
-		this->towerUpgradeToggleTexture.loadFromFile(this->towerUpgradeCloseString);
-	}
 
 	int max = 0;
 	for (int i = 0; i < invMaxX; i++) {
@@ -463,13 +465,9 @@ void GUI::renderGUI(sf::RenderTarget & target)
 		towerMenuToggle.setTexture(&towerToggleTexture);
 		target.draw(towerMenuToggle);
 	}
-	if (towerUpgradeMenuOpen == true) {
-		this->renderTowerUpgradeBox(target);
-	}
-	else {
-		towerUpgradeMenuToggle.setPosition(sf::Vector2f(sf::Vector2f((this->towerUpgradeBox[1].getPosition().x + (this->towerUpgradeBox[1].getSize().x / 2)), this->towerUpgradeBox[1].getPosition().y + this->towerUpgradeBox[1].getSize().y - this->towerUpgradeMenuToggle.getSize().y)));
-		towerUpgradeMenuToggle.setTexture(&towerUpgradeToggleTexture);
-		target.draw(towerUpgradeMenuToggle);
+// IF TOWER IS SELECTED
+	if (isTowerSelected()) {
+			this->renderTowerUpgradeBox(target);
 	}
 	//target.draw(miniMapBox);
 	target.draw(timerText);
@@ -541,13 +539,30 @@ void GUI::renderTowers(sf::RenderTarget & target)
 
 void GUI::renderTowerUpgradeBox(sf::RenderTarget & target)
 {
-	towerUpgradeMenuToggle.setPosition(sf::Vector2f((this->towerUpgradeBox[1].getPosition().x + (this->towerUpgradeBox[1].getSize().x / 2)), this->towerUpgradeBox[1].getPosition().y - this->towerUpgradeMenuToggle.getSize().y));
-	towerUpgradeMenuToggle.setTexture(&towerUpgradeToggleTexture);
-
 	for (int i = 0; i < this->towerUpgradeBox.size(); i++) {
 		target.draw(this->towerUpgradeBox[i]);
 	}
-	target.draw(towerUpgradeMenuToggle);
+		this->renderTowerUpgrades(target);
+}
+
+void GUI::renderTowerUpgrades(sf::RenderTarget & target)
+{
+	for (int i = 0; i < upgradeImages.size(); i++) {
+		target.draw(upgradeImages[i]);
+	}
+	for (int i = 0; i < UpgradeTitleText.size(); i++) {
+		this->UpgradeTitleText[i].setPosition(sf::Vector2f(this->towerUpgradeBox[i].getPosition().x + 100, this->towerUpgradeBox[i].getPosition().y + 10));
+		target.draw(UpgradeTitleText[i]);
+	}
+	for (int i = 0; i < UpgradeDescriptionText.size(); i++) {
+		this->UpgradeDescriptionText[i].setPosition(sf::Vector2f(this->towerUpgradeBox[i].getPosition().x + 10, this->towerUpgradeBox[i].getPosition().y + 100));
+		target.draw(UpgradeDescriptionText[i]);
+	}
+	for (int i = 0; i < UpgradePriceText.size(); i++) {
+		this->UpgradePriceText[i].setPosition(sf::Vector2f(sf::Vector2f(this->towerUpgradeBox[i].getPosition().x + this->towerUpgradeBox[i].getSize().x - 80, this->towerUpgradeBox[i].getPosition().y + this->towerUpgradeBox[i].getSize().y - 50)));
+		target.draw(UpgradePriceText[i]);
+	}
+
 }
 
 void GUI::renderWave(sf::RenderTarget & target)

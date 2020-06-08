@@ -7,7 +7,7 @@ class UI
 {
 private:
 	// Private Variables
-	int towerSize, uiButtonSize, uiButtonTextureSize, towerUpgradeSize;
+	int towerSize, uiButtonSize, uiButtonTextureSize, towerUpgradeSize, upgradeImageSize;
 
 	// Initialization
 	void initVariables();
@@ -24,7 +24,7 @@ public:
 	StructureInventory structInv;
 
 	// Boolean Variables
-	bool mouseHeld, isLevelWon, isLevelLost, towerMenuOpen, towerUpgradeMenuOpen, gamePaused;
+	bool mouseHeld, isLevelWon, isLevelLost, towerMenuOpen, gamePaused;
 
 	// Font Variables
 	sf::Font font;
@@ -49,11 +49,16 @@ public:
 	std::vector<sf::RectangleShape> guiBox;
 	std::vector<sf::RectangleShape> inventoryBox;
 	std::vector<sf::RectangleShape> towerUpgradeBox;
-	sf::RectangleShape towerMenuToggle, towerUpgradeMenuToggle;
+	std::vector<sf::RectangleShape> upgradeImages;
+	sf::RectangleShape towerMenuToggle;
 
 	// String Vector Variables
 	std::vector<std::string> towerStrings;
 	std::vector<std::string> towerNoStrings;
+	std::vector<std::string> upgradeImageStrings;
+	std::vector<std::string> upgradeTitle;
+	std::vector<std::string> upgradeDescription;
+	std::vector<std::string> upgradePrice;
 
 	// String Variables
 	std::string levelString, scoreString, waveString, healthString, manaString, towerCloseString, towerOpenString, towerUpgradeCloseString, towerUpgradeOpenString;
@@ -65,7 +70,13 @@ public:
 	std::vector<sf::Texture> guiBoxTextures;
 	std::vector<sf::Texture> inventoryBoxTexture;
 	std::vector<sf::Texture> towerUpgradeBoxTexture;
-	sf::Texture towerToggleTexture, towerUpgradeToggleTexture;
+	std::vector<sf::Texture> upgradeImageTexture;
+	sf::Texture towerToggleTexture;
+
+	// Text Vector
+	std::vector<sf::Text> UpgradeTitleText;
+	std::vector<sf::Text> UpgradeDescriptionText;
+	std::vector<sf::Text> UpgradePriceText;
 
 	// Text Variables
 	sf::Text levelText, scoreText, waveText, timerText, dayText, healthText, manaText;
@@ -86,7 +97,6 @@ public:
 	void uiButtonsMouseHandler(sf::Vector2i & windowPos);
 	void towerMenuMouseHandler(sf::Vector2i &windowPos);
 	void towerUIMouseHandler(sf::Vector2i &windowPos);
-	void towerUpgradeUIMouseHandler(sf::Vector2i &windowPos);
 
 	void updateUIText();
 	void updateGameState();

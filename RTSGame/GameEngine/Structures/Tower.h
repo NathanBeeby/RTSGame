@@ -42,6 +42,7 @@ struct Type
 const int getTowerRange() const;
 const int getTowerSpeed() const;
 const int getTowerDamage() const;
+const bool isTowerSelected() const;
 
 
 	// Public Functions

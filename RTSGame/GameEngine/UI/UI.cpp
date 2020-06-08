@@ -11,6 +11,7 @@ void UI::initVariables()
 	this->towerSize = 14;
 	this->uiButtonSize = 3;
 	this->towerUpgradeSize = 3;
+	this->upgradeImageSize = 3;
 	this->uiButtonTextureSize = 4;
 	this->uiTime = 0;
 	this->uiTimeMinute = 0;
@@ -28,6 +29,15 @@ void UI::initVariables()
 	this->uiButtonTextures.resize(uiButtonTextureSize);
 	this->towerUpgradeBox.resize(towerUpgradeSize);
 	this->towerUpgradeBoxTexture.resize(towerUpgradeSize);
+	this->upgradeImages.resize(upgradeImageSize);
+	this->upgradeImageStrings.resize(upgradeImageSize * upgradeImageSize);
+	this->upgradeImageTexture.resize(upgradeImageSize * upgradeImageSize);
+	this->upgradeTitle.resize(upgradeImageSize * upgradeImageSize);
+	this->upgradeDescription.resize(upgradeImageSize * upgradeImageSize);
+	this->upgradePrice.resize(upgradeImageSize * upgradeImageSize);
+	this->UpgradeTitleText.resize(upgradeImageSize);
+	this->UpgradeDescriptionText.resize(upgradeImageSize);
+	this->UpgradePriceText.resize(upgradeImageSize);
 }
 
 void UI::initTextures()
@@ -63,6 +73,17 @@ void UI::initTextures()
 	this->towerNoTextures[11].loadFromFile(this->towerNoStrings[11]);
 	this->towerNoTextures[12].loadFromFile(this->towerNoStrings[12]);
 	this->towerNoTextures[13].loadFromFile(this->towerNoStrings[13]);
+
+	// Upgrade Image Textures
+	this->upgradeImageTexture[0].loadFromFile(this->upgradeImageStrings[0]);
+	this->upgradeImageTexture[1].loadFromFile(this->upgradeImageStrings[1]);
+	this->upgradeImageTexture[2].loadFromFile(this->upgradeImageStrings[2]);
+	this->upgradeImageTexture[3].loadFromFile(this->upgradeImageStrings[3]);
+	this->upgradeImageTexture[4].loadFromFile(this->upgradeImageStrings[4]);
+	this->upgradeImageTexture[5].loadFromFile(this->upgradeImageStrings[5]);
+	this->upgradeImageTexture[6].loadFromFile(this->upgradeImageStrings[6]);
+	this->upgradeImageTexture[7].loadFromFile(this->upgradeImageStrings[7]);
+	this->upgradeImageTexture[8].loadFromFile(this->upgradeImageStrings[8]);
 
 	if (!this->uiButtonTextures[0].loadFromFile("../Assets/Image_Assets/GUI/GUIButtons/Start.png")) {
 		std::cout << "Failed to Load Start Texture" << std::endl;
@@ -119,11 +140,82 @@ void UI::initText()
 	this->towerNoStrings[12] = "../Assets/Image_Assets/Towers/NoTexture/Regenerator.png";
 	this->towerNoStrings[13] = "../Assets/Image_Assets/Towers/NoTexture/VoidTower.png";
 
+	this->upgradeImageStrings[0] = "";
+	this->upgradeImageStrings[1] = "";
+	this->upgradeImageStrings[2] = "";
+	this->upgradeImageStrings[3] = "";
+	this->upgradeImageStrings[4] = "";
+	this->upgradeImageStrings[5] = "";
+	this->upgradeImageStrings[6] = "";
+	this->upgradeImageStrings[7] = "";
+	this->upgradeImageStrings[8] = "";
+
 	this->towerOpenString = "../Assets/Image_Assets/GUI/GUIButtons/OpenMenu.png";
 	this->towerCloseString = "../Assets/Image_Assets/GUI/GUIButtons/CloseMenu.png";
 
 	this->towerUpgradeOpenString = "../Assets/Image_Assets/GUI/GUIButtons/OpenUpgradeMenu.png";
 	this->towerUpgradeCloseString = "../Assets/Image_Assets/GUI/GUIButtons/CloseUpgradeMenu.png";
+
+	this->upgradeTitle[0] = "Range Upgrade 1";
+	this->upgradeTitle[1] = "Range Upgrade 2";
+	this->upgradeTitle[2] = "Range Upgrade 3";
+	this->upgradeTitle[3] = "Damage Upgrade 1";
+	this->upgradeTitle[4] = "Damage Upgrade 2";
+	this->upgradeTitle[5] = "Damage Upgrade 3";
+	this->upgradeTitle[6] = "Attack Speed Upgrade 1";
+	this->upgradeTitle[7] = "Attack Speed Upgrade 2";
+	this->upgradeTitle[8] = "Attack Speed Upgrade 3";
+
+	this->upgradeDescription[0] = "Range Increased by 10%";
+	this->upgradeDescription[1] = "Range Increased by 20%";
+	this->upgradeDescription[2] = "Range Increased by 30%";
+	this->upgradeDescription[3] = "Damage Increased by 10%";
+	this->upgradeDescription[4] = "Damage Increased by 20%";
+	this->upgradeDescription[5] = "Damage Increased by 30%";
+	this->upgradeDescription[6] = "Attack Speed Increased by 10%";
+	this->upgradeDescription[7] = "Attack Speed Increased by 20%";
+	this->upgradeDescription[8] = "Attack Speed Increased by 30%";
+
+	this->upgradePrice[0] = "125";
+	this->upgradePrice[1] = "250";
+	this->upgradePrice[2] = "500";
+	this->upgradePrice[3] = "125";
+	this->upgradePrice[4] = "250";
+	this->upgradePrice[5] = "500";
+	this->upgradePrice[6] = "125";
+	this->upgradePrice[7] = "250";
+	this->upgradePrice[8] = "500";
+
+	for (int i = 0; i < UpgradeTitleText.size(); i++) {
+		this->UpgradeTitleText[i].setFont(font);
+		this->UpgradeTitleText[i].setCharacterSize(25);
+		this->UpgradeTitleText[i].setFillColor(sf::Color::Black);
+		this->UpgradeTitleText[i].setPosition(sf::Vector2f(this->towerUpgradeBox[i].getPosition().x + 100, this->towerUpgradeBox[i].getPosition().y + 10));
+	}
+	this->UpgradeTitleText[0].setString(this->upgradeTitle[0]);
+	this->UpgradeTitleText[1].setString(this->upgradeTitle[3]);
+	this->UpgradeTitleText[2].setString(this->upgradeTitle[6]);
+
+	for (int i = 0; i < UpgradeDescriptionText.size(); i++) {
+		this->UpgradeDescriptionText[i].setFont(font);
+		this->UpgradeDescriptionText[i].setCharacterSize(20);
+		this->UpgradeDescriptionText[i].setFillColor(sf::Color::Black);
+		this->UpgradeDescriptionText[i].setPosition(sf::Vector2f(this->towerUpgradeBox[i].getPosition().x + 10, this->towerUpgradeBox[i].getPosition().y + 100));
+	}
+	this->UpgradeDescriptionText[0].setString(this->upgradeDescription[0]);
+	this->UpgradeDescriptionText[1].setString(this->upgradeDescription[3]);
+	this->UpgradeDescriptionText[2].setString(this->upgradeDescription[6]);
+
+
+	for (int i = 0; i < UpgradePriceText.size(); i++) {
+		this->UpgradePriceText[i].setFont(font);
+		this->UpgradePriceText[i].setCharacterSize(35);
+		this->UpgradePriceText[i].setFillColor(sf::Color::Black);
+		this->UpgradePriceText[i].setPosition(sf::Vector2f(sf::Vector2f(this->towerUpgradeBox[i].getPosition().x + this->towerUpgradeBox[i].getSize().x - 80, this->towerUpgradeBox[i].getPosition().y + this->towerUpgradeBox[i].getSize().y - 50)));
+	}
+	this->UpgradePriceText[0].setString(this->upgradePrice[0]);
+	this->UpgradePriceText[1].setString(this->upgradePrice[3]);
+	this->UpgradePriceText[2].setString(this->upgradePrice[6]);
 }
 
 void UI::initSprites()
@@ -143,6 +235,13 @@ void UI::initSprites()
 		this->towerUpgradeBox[i].setTexture(&towerUpgradeBoxTexture[i]);
 		this->towerUpgradeBox[i].setOutlineColor(sf::Color::Yellow);
 		this->towerUpgradeBox[i].setOutlineThickness(2);
+	}
+
+	for (int i = 0; i < upgradeImages.size(); i++) {
+		this->upgradeImages[i].setSize(sf::Vector2f(75.f, 75.f));
+		this->upgradeImages[i].setPosition(sf::Vector2f(this->towerUpgradeBox[i].getPosition().x + 10, this->towerUpgradeBox[i].getPosition().y + 10));
+		this->upgradeImages[i].setOutlineColor(sf::Color::Yellow);
+		this->upgradeImages[i].setOutlineThickness(2);
 	}
 }
 
@@ -363,20 +462,6 @@ void UI::towerUIMouseHandler(sf::Vector2i & windowPos)
 			}
 			else {
 				this->towerMenuOpen = false;
-			}
-		}
-	}
-}
-
-void UI::towerUpgradeUIMouseHandler(sf::Vector2i & windowPos)
-{
-	if (windowPos.x >= towerUpgradeMenuToggle.getPosition().x && windowPos.x <= towerUpgradeMenuToggle.getPosition().x + towerUpgradeMenuToggle.getSize().x) {
-		if (windowPos.y >= towerUpgradeMenuToggle.getPosition().y && windowPos.y <= towerUpgradeMenuToggle.getPosition().y + (towerUpgradeMenuToggle.getSize().y * 2)) {
-			if (this->towerUpgradeMenuOpen == false) {
-				this->towerUpgradeMenuOpen = true;
-			}
-			else {
-				this->towerUpgradeMenuOpen = false;
 			}
 		}
 	}

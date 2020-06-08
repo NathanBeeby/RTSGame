@@ -8,8 +8,11 @@
 	TODO NEXT:
 
 	// ------- NEXT GOALS ------- //
-	- Make tower stats box show when clicked on a tower
-	- hide both the open/close button and tower upgrade box if unclicked tower
+	- Fix broken pause button
+	- Implement each tower having it's own upgrade paths
+	- Implement different elemental towers having different upgrades
+	- Impelement mouse handler for upgrade tower gui (purchase upgrades)
+	- Remove mana once purchasing upgrade (if you have enough mana)
 	- Amend new view constraints as tower menu is now hidable
 
 	// ------- AFTER GOALS ------- //

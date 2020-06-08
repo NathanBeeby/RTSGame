@@ -75,6 +75,11 @@ const int Tower::getTowerDamage() const
 	return this->towerDamage;
 }
 
+const bool Tower::isTowerSelected() const
+{
+	return this->towerSelected;
+}
+
 sf::Vector2f Tower::towerClicked(sf::Vector2i clickPos)
 {
 	this->towerPos = sf::Vector2f(-1, -1);
