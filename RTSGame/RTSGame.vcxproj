@@ -136,7 +136,6 @@
     <ClCompile Include="GameEngine\GameAssets\Animator.cpp" />
     <ClCompile Include="GameEngine\GameAssets\AssetManager.cpp" />
     <ClCompile Include="GameEngine\Map\Objects\CoalOre.cpp" />
-    <ClCompile Include="GameEngine\Characters\Character.cpp" />
     <ClCompile Include="GameEngine\Map\Tile.cpp" />
     <ClCompile Include="GameEngine\Map\TileProperties.cpp" />
     <ClCompile Include="GameEngine\UI\chatBar.cpp" />
@@ -194,7 +193,6 @@
     <ClInclude Include="GameEngine\GameAssets\Animator.h" />
     <ClInclude Include="GameEngine\GameAssets\AssetManager.h" />
     <ClInclude Include="GameEngine\Map\Objects\CoalOre.h" />
-    <ClInclude Include="GameEngine\Characters\Character.h" />
     <ClInclude Include="GameEngine\Constants.h" />
     <ClInclude Include="GameEngine\UI\chatBar.h" />
     <ClInclude Include="AudioEngine\Music\GameMusic.h" />

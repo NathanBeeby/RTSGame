@@ -8,10 +8,15 @@
 	TODO NEXT:
 
 	// ------- NEXT GOALS ------- //
-	- Implement Tower Stats Box on GUI
+	- Make tower stats box show when clicked on a tower
+	- hide both the open/close button and tower upgrade box if unclicked tower
+	- Amend new view constraints as tower menu is now hidable
+
+	// ------- AFTER GOALS ------- //
 	- Water tiles need to be ammeneded in the tile class, so that water tiles are unplacable
 	- Implement Enemy Health
 	- Implement enemy health bar that follows the enemy
+	- Change mouse cursor on grabbing and placing tower
 
 	// ------- FUTURE GOALS ------- //
 
@@ -31,6 +36,11 @@
 	- Implement enemy dying / erasing once enemy health is 0
 	- Implement multithreading into the game
 	- Implement a bloom shader into the game & set it on and off via key press
+	- Have all assets created by the asset manager
+	- Animate tower firing, bullet animation, tower rotating to follow enemy
+	- Animate enemy movement & enemy death
+	- Add particle effects or shaders to tower bullets
+	- Add shader to tilemap to give added detail
 
 	// ------- TO DO ONCE IMPLEMENTED ALL NEXT GOALS ------- //
 	- Go through existing code, and implement inheritance where possible

@@ -48,6 +48,7 @@ public:
 	void render(sf::RenderTarget &target, sf::View &view);
 	void renderTowerSelector(sf::RenderTarget &target, sf::Vector2i pos);
 	void renderTowers(sf::RenderTarget &target);
+	void renderTowerUpgradeBox(sf::RenderTarget &target);
 	void renderWave(sf::RenderTarget &target);
 };
 

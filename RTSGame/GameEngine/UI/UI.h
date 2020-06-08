@@ -7,7 +7,7 @@ class UI
 {
 private:
 	// Private Variables
-	int towerSize, uiButtonSize, uiButtonTextureSize;
+	int towerSize, uiButtonSize, uiButtonTextureSize, towerUpgradeSize;
 
 	// Initialization
 	void initVariables();
@@ -24,7 +24,7 @@ public:
 	StructureInventory structInv;
 
 	// Boolean Variables
-	bool mouseHeld, isLevelWon, isLevelLost, towerMenuOpen, gamePaused;
+	bool mouseHeld, isLevelWon, isLevelLost, towerMenuOpen, towerUpgradeMenuOpen, gamePaused;
 
 	// Font Variables
 	sf::Font font;
@@ -48,15 +48,15 @@ public:
 	std::vector<sf::RectangleShape> uiButtons;  // settings button, pause button, start round button, fast forward button etc.
 	std::vector<sf::RectangleShape> guiBox;
 	std::vector<sf::RectangleShape> inventoryBox;
-	sf::RectangleShape towerMenuToggle;
-
+	std::vector<sf::RectangleShape> towerUpgradeBox;
+	sf::RectangleShape towerMenuToggle, towerUpgradeMenuToggle;
 
 	// String Vector Variables
 	std::vector<std::string> towerStrings;
 	std::vector<std::string> towerNoStrings;
 
 	// String Variables
-	std::string levelString, scoreString, waveString, healthString, manaString, towerCloseString, towerOpenString;
+	std::string levelString, scoreString, waveString, healthString, manaString, towerCloseString, towerOpenString, towerUpgradeCloseString, towerUpgradeOpenString;
 
 	// Texture Vector Variables
 	std::vector<sf::Texture> uiButtonTextures;
@@ -64,7 +64,8 @@ public:
 	std::vector<sf::Texture> towerNoTextures;
 	std::vector<sf::Texture> guiBoxTextures;
 	std::vector<sf::Texture> inventoryBoxTexture;
-	sf::Texture towerToggleTexture;
+	std::vector<sf::Texture> towerUpgradeBoxTexture;
+	sf::Texture towerToggleTexture, towerUpgradeToggleTexture;
 
 	// Text Variables
 	sf::Text levelText, scoreText, waveText, timerText, dayText, healthText, manaText;
@@ -85,6 +86,7 @@ public:
 	void uiButtonsMouseHandler(sf::Vector2i & windowPos);
 	void towerMenuMouseHandler(sf::Vector2i &windowPos);
 	void towerUIMouseHandler(sf::Vector2i &windowPos);
+	void towerUpgradeUIMouseHandler(sf::Vector2i &windowPos);
 
 	void updateUIText();
 	void updateGameState();

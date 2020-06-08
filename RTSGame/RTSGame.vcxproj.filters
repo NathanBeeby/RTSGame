@@ -69,9 +69,6 @@
     <ClCompile Include="GameEngine\UI\StructureInventory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine\Characters\Character.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngine\MainGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -243,9 +240,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\UI\chatBar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\Characters\Character.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\MainGame.h">

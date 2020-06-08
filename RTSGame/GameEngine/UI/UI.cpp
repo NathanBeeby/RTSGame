@@ -10,11 +10,13 @@ void UI::initVariables()
 	// Integer Variables
 	this->towerSize = 14;
 	this->uiButtonSize = 3;
+	this->towerUpgradeSize = 3;
 	this->uiButtonTextureSize = 4;
 	this->uiTime = 0;
 	this->uiTimeMinute = 0;
 	this->day = 0;
 	this->minute = 60;
+
 	// Vector size
 	this->towerTextures.resize(this->towerSize);
 	this->towerNoTextures.resize(this->towerSize);
@@ -24,6 +26,8 @@ void UI::initVariables()
 	// UI Buttons
 	this->uiButtons.resize(uiButtonSize);
 	this->uiButtonTextures.resize(uiButtonTextureSize);
+	this->towerUpgradeBox.resize(towerUpgradeSize);
+	this->towerUpgradeBoxTexture.resize(towerUpgradeSize);
 }
 
 void UI::initTextures()
@@ -72,6 +76,15 @@ void UI::initTextures()
 	if (!this->uiButtonTextures[3].loadFromFile("../Assets/Image_Assets/GUI/GUIButtons/UnpauseButton.png")) {
 		std::cout << "Failed to Load pause Texture" << std::endl;
 	}
+	if (!this->towerUpgradeBoxTexture[0].loadFromFile("../Assets/Image_Assets/GUI/TowerUpgradeBox.png")) {
+		std::cout << "Failed to Load towerUpgradeBoxTexture" << std::endl;
+	}
+	if (!this->towerUpgradeBoxTexture[1].loadFromFile("../Assets/Image_Assets/GUI/TowerUpgradeBox.png")) {
+		std::cout << "Failed to Load towerUpgradeBoxTexture" << std::endl;
+	}
+	if (!this->towerUpgradeBoxTexture[2].loadFromFile("../Assets/Image_Assets/GUI/TowerUpgradeBox.png")) {
+		std::cout << "Failed to Load towerUpgradeBoxTexture" << std::endl;
+	}
 }
 
 void UI::initText()
@@ -108,6 +121,9 @@ void UI::initText()
 
 	this->towerOpenString = "../Assets/Image_Assets/GUI/GUIButtons/OpenMenu.png";
 	this->towerCloseString = "../Assets/Image_Assets/GUI/GUIButtons/CloseMenu.png";
+
+	this->towerUpgradeOpenString = "../Assets/Image_Assets/GUI/GUIButtons/OpenUpgradeMenu.png";
+	this->towerUpgradeCloseString = "../Assets/Image_Assets/GUI/GUIButtons/CloseUpgradeMenu.png";
 }
 
 void UI::initSprites()
@@ -118,6 +134,15 @@ void UI::initSprites()
 		this->uiButtons[i].setOutlineColor(sf::Color::Yellow);
 		this->uiButtons[i].setOutlineThickness(2);
 		this->uiButtons[i].setPosition(sf::Vector2f(1770.f + ((uiButtons[i].getSize().x + 10) * i), 10.f));
+	}
+
+	for (int i = 0; i < towerUpgradeBox.size(); i++)
+	{
+		this->towerUpgradeBox[i].setSize(sf::Vector2f(470.f, 175.f));
+		this->towerUpgradeBox[i].setPosition(sf::Vector2f(0.f + (towerUpgradeBox[i].getSize().x * i), 1080.f - towerUpgradeBox[i].getSize().y));
+		this->towerUpgradeBox[i].setTexture(&towerUpgradeBoxTexture[i]);
+		this->towerUpgradeBox[i].setOutlineColor(sf::Color::Yellow);
+		this->towerUpgradeBox[i].setOutlineThickness(2);
 	}
 }
 
@@ -189,8 +214,6 @@ void UI::uiButtonsMouseHandler(sf::Vector2i & windowPos)
 	if (windowPos.y >= uiButtons[0].getPosition().y && windowPos.y <= uiButtons[0].getPosition().y + uiButtons[0].getSize().y) {
 		if (windowPos.x >= uiButtons[0].getPosition().x && windowPos.x <= uiButtons[0].getPosition().x + uiButtons[0].getSize().x) {
 			// Start Round Button
-
-
 			std::cout << "Wave Began" << std::endl;
 			wave.beginWave();
 			// Change Texture to double spped
@@ -333,13 +356,27 @@ void UI::towerMenuMouseHandler(sf::Vector2i & windowPos)
 
 void UI::towerUIMouseHandler(sf::Vector2i & windowPos)
 {
-	if (windowPos.x >= towerMenuToggle.getPosition().x && windowPos.x <= towerMenuToggle.getPosition().x + inventoryBox[0].getSize().x) {
-		if (windowPos.y >= towerMenuToggle.getPosition().y && windowPos.y <= towerMenuToggle.getPosition().y + inventoryBox[0].getSize().y) {
+	if (windowPos.x >= towerMenuToggle.getPosition().x && windowPos.x <= towerMenuToggle.getPosition().x + (towerMenuToggle.getSize().x * 2)) {
+		if (windowPos.y >= towerMenuToggle.getPosition().y && windowPos.y <= towerMenuToggle.getPosition().y + towerMenuToggle.getSize().y) {
 			if (this->towerMenuOpen == false) {
 				this->towerMenuOpen = true;
 			}
 			else {
 				this->towerMenuOpen = false;
+			}
+		}
+	}
+}
+
+void UI::towerUpgradeUIMouseHandler(sf::Vector2i & windowPos)
+{
+	if (windowPos.x >= towerUpgradeMenuToggle.getPosition().x && windowPos.x <= towerUpgradeMenuToggle.getPosition().x + towerUpgradeMenuToggle.getSize().x) {
+		if (windowPos.y >= towerUpgradeMenuToggle.getPosition().y && windowPos.y <= towerUpgradeMenuToggle.getPosition().y + (towerUpgradeMenuToggle.getSize().y * 2)) {
+			if (this->towerUpgradeMenuOpen == false) {
+				this->towerUpgradeMenuOpen = true;
+			}
+			else {
+				this->towerUpgradeMenuOpen = false;
 			}
 		}
 	}
