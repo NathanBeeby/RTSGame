@@ -1,12 +1,13 @@
 #include "MainGame.h"
 
+sf::Vector2i MainGame::startLocation = sf::Vector2i(3000, 2500);
 
 void MainGame::initVariables()
 {
 	this->isRunning = true;
 	/*this->viewSpeed = 100.f;*/
-	this->startLocation.x = 3000;
-	this->startLocation.y = 2500;
+	//this->startLocation.x = 3000;
+	//this->startLocation.y = 2500;
 }
 
 void MainGame::initView()
@@ -147,14 +148,9 @@ void MainGame::updatePollEvents(sf::Time deltaTime)
 
 void MainGame::updateView()
 {
-	//std::cout << "Gamestate zoom is now: " << gameState.getZoomAmt() << std::endl;
 	this->view.zoom(gameState.getZoomAmt());
 
 	this->view.move(gameState.viewMovement.x, gameState.viewMovement.y);
-
-	//if (view.getCenter().x < m_window.GetWindowSize().x / 2 && view.getCenter().y < m_window.GetWindowSize().y / 2) {
-	//		view.setCenter(m_window.GetWindowSize().x / 2, m_window.GetWindowSize().y / 2 + 240);
-	//	}
 }
 
 void MainGame::updateMouseCursor()

@@ -3,7 +3,11 @@
 void DarkTower::initVariables()
 {
 	this->towerCost = 366;
-	this->radius = 400.f;
+	this->element = "Dark";
+	this->elementId = 7;
+	this->towerDamage = 100.f; // 0-4
+	this->towerRange = 400.f;
+	this->towerAttackSpeed = 20.f;
 }
 
 void DarkTower::initTextures()

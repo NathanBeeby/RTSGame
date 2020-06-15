@@ -106,6 +106,12 @@ void UI::initTextures()
 	if (!this->towerUpgradeBoxTexture[2].loadFromFile("../Assets/Image_Assets/GUI/TowerUpgradeBox.png")) {
 		std::cout << "Failed to Load towerUpgradeBoxTexture" << std::endl;
 	}
+	if (!this->enemyUIBoxTexture.loadFromFile(this->enemyUIBoxString)) {
+		std::cout << "Failed to Load enemyUIBoxTexture" << std::endl;
+	}
+	if (!this->enemyUIImageTexture.loadFromFile(this->enemyUIImageString)) {
+		std::cout << "Failed to Load enemyUIImageTexture" << std::endl;
+	}
 }
 
 void UI::initText()
@@ -140,21 +146,29 @@ void UI::initText()
 	this->towerNoStrings[12] = "../Assets/Image_Assets/Towers/NoTexture/Regenerator.png";
 	this->towerNoStrings[13] = "../Assets/Image_Assets/Towers/NoTexture/VoidTower.png";
 
-	this->upgradeImageStrings[0] = "";
-	this->upgradeImageStrings[1] = "";
-	this->upgradeImageStrings[2] = "";
-	this->upgradeImageStrings[3] = "";
-	this->upgradeImageStrings[4] = "";
-	this->upgradeImageStrings[5] = "";
-	this->upgradeImageStrings[6] = "";
-	this->upgradeImageStrings[7] = "";
-	this->upgradeImageStrings[8] = "";
+	this->upgradeImageStrings[0] = "../Assets/Image_Assets/GUI/UpgradeTexture/AttackUpgrade1.png";
+	this->upgradeImageStrings[1] = "../Assets/Image_Assets/GUI/UpgradeTexture/AttackUpgrade2.png";
+	this->upgradeImageStrings[2] = "../Assets/Image_Assets/GUI/UpgradeTexture/AttackUpgrade3.png";
+	this->upgradeImageStrings[3] = "../Assets/Image_Assets/GUI/UpgradeTexture/DefenseUpgrade1.png";
+	this->upgradeImageStrings[4] = "../Assets/Image_Assets/GUI/UpgradeTexture/DefenseUpgrade2.png";
+	this->upgradeImageStrings[5] = "../Assets/Image_Assets/GUI/UpgradeTexture/DefenseUpgrade3.png";
+	this->upgradeImageStrings[6] = "../Assets/Image_Assets/GUI/UpgradeTexture/RangeUpgrade1.png";
+	this->upgradeImageStrings[7] = "../Assets/Image_Assets/GUI/UpgradeTexture/RangeUpgrade2.png";
+	this->upgradeImageStrings[8] = "../Assets/Image_Assets/GUI/UpgradeTexture/RangeUpgrade3.png";
 
 	this->towerOpenString = "../Assets/Image_Assets/GUI/GUIButtons/OpenMenu.png";
 	this->towerCloseString = "../Assets/Image_Assets/GUI/GUIButtons/CloseMenu.png";
 
 	this->towerUpgradeOpenString = "../Assets/Image_Assets/GUI/GUIButtons/OpenUpgradeMenu.png";
 	this->towerUpgradeCloseString = "../Assets/Image_Assets/GUI/GUIButtons/CloseUpgradeMenu.png";
+
+	this->enemyUIBoxString = "../Assets/Image_Assets/GUI/EmptyBox.png";
+	this->enemyUIImageString = "../Assets/Image_Assets/GUI/EmptyBox.png";
+
+	this->enemyNameString = "Enemy";
+	this->enemyElementString = "Element";
+	this->enemyDescriptionString = "Description";
+	this->enemyHealthString = "25";
 
 	this->upgradeTitle[0] = "Range Upgrade 1";
 	this->upgradeTitle[1] = "Range Upgrade 2";
@@ -216,13 +230,35 @@ void UI::initText()
 	this->UpgradePriceText[0].setString(this->upgradePrice[0]);
 	this->UpgradePriceText[1].setString(this->upgradePrice[3]);
 	this->UpgradePriceText[2].setString(this->upgradePrice[6]);
+
+
+
+	this->enemyName.setFont(font);
+	this->enemyName.setCharacterSize(15);
+	this->enemyName.setFillColor(sf::Color::Black);
+	this->enemyName.setString(this->enemyNameString);
+
+	this->enemyElement.setFont(font);
+	this->enemyElement.setCharacterSize(15);
+	this->enemyElement.setFillColor(sf::Color::Black);
+	this->enemyElement.setString(this->enemyElementString);
+
+	this->enemyDescription.setFont(font);
+	this->enemyDescription.setCharacterSize(15);
+	this->enemyDescription.setFillColor(sf::Color::Black);
+	this->enemyDescription.setString(this->enemyDescriptionString);
+
+	this->enemyHealth.setFont(font);
+	this->enemyHealth.setCharacterSize(15);
+	this->enemyHealth.setFillColor(sf::Color::Black);
+	this->enemyHealth.setString(this->enemyHealthString);
 }
 
 void UI::initSprites()
 {
 	for (int i = 0; i < uiButtons.size(); i++) {
 		this->uiButtons[i].setSize(sf::Vector2f(40.f, 40.f));
-		this->uiButtons[i].setTexture(&this->uiButtonTextures[i]);
+		this->uiButtons[i].setTexture(&this->uiButtonTextures[i]); 
 		this->uiButtons[i].setOutlineColor(sf::Color::Yellow);
 		this->uiButtons[i].setOutlineThickness(2);
 		this->uiButtons[i].setPosition(sf::Vector2f(1770.f + ((uiButtons[i].getSize().x + 10) * i), 10.f));
@@ -242,7 +278,26 @@ void UI::initSprites()
 		this->upgradeImages[i].setPosition(sf::Vector2f(this->towerUpgradeBox[i].getPosition().x + 10, this->towerUpgradeBox[i].getPosition().y + 10));
 		this->upgradeImages[i].setOutlineColor(sf::Color::Yellow);
 		this->upgradeImages[i].setOutlineThickness(2);
+		this->upgradeImages[i].setTexture(&upgradeImageTexture[i]);
 	}
+
+	this->enemyUIBox.setSize(sf::Vector2f(300.f, 150.f));
+	this->enemyUIBox.setPosition(sf::Vector2f(0.f, 60.f));
+	this->enemyUIBox.setOutlineThickness(2);
+	this->enemyUIBox.setOutlineColor(sf::Color::Yellow);
+	this->enemyUIBox.setTexture(&this->enemyUIBoxTexture);
+
+	this->enemyImageBox.setSize(sf::Vector2f(50.f, 50.f));
+	this->enemyImageBox.setPosition(sf::Vector2f(enemyUIBox.getPosition().x + 20, enemyUIBox.getPosition().y + 20));
+	this->enemyImageBox.setOutlineThickness(2);
+	this->enemyImageBox.setOutlineColor(sf::Color::Yellow);
+	this->enemyImageBox.setTexture(&this->enemyUIImageTexture);
+
+	this->enemyName.setPosition(sf::Vector2f(this->enemyImageBox.getPosition().x + this->enemyImageBox.getSize().x + 20, this->enemyUIBox.getPosition().y + 15));
+	this->enemyElement.setPosition(sf::Vector2f(this->enemyImageBox.getPosition().x + this->enemyImageBox.getSize().x + 20, this->enemyName.getPosition().y + 20));
+	this->enemyHealth.setPosition(sf::Vector2f(this->enemyImageBox.getPosition().x + this->enemyImageBox.getSize().x + 20, this->enemyElement.getPosition().y + 20));
+	this->enemyDescription.setPosition(sf::Vector2f(this->enemyUIBox.getPosition().x + 10, this->enemyUIBox.getPosition().y + (this->enemyUIBox.getSize().y / 2 + 5)));
+
 }
 
 // Constructor / Destructor
@@ -306,6 +361,26 @@ void UI::RemoveScore(int sr)
 void UI::AddScore(int sr)
 {
 	this->scoreValue += sr;
+}
+
+void UI::SetEnemyName(std::string name)
+{
+	this->enemyName.setString(name);
+}
+
+void UI::SetEnemyElement(std::string element)
+{
+	this->enemyElement.setString(element);
+}
+
+void UI::SetEnemyDescription(std::string description)
+{
+	this->enemyDescription.setString(description);
+}
+
+void UI::SetEnemyHealth(std::string health)
+{
+	this->enemyHealth.setString(health);
 }
 
 void UI::uiButtonsMouseHandler(sf::Vector2i & windowPos)
@@ -465,6 +540,12 @@ void UI::towerUIMouseHandler(sf::Vector2i & windowPos)
 			}
 		}
 	}
+	
+}
+
+void UI::enemyUIMouseHandler(sf::Vector2i & windowPos, sf::Vector2i & viewPos)
+{
+
 }
 
 void UI::updateUIText()

@@ -4,7 +4,11 @@
 void VoidTower::initVariables()
 {
 	this->towerCost = 755;
-	this->radius = 1000.f;
+	this->element = "Void";
+	this->elementId = 8;
+	this->towerDamage = 100.f; // 0-4
+	this->towerRange = 1000.f;
+	this->towerAttackSpeed = 20.f;
 }
 
 void VoidTower::initTextures()

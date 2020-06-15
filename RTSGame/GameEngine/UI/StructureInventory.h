@@ -88,8 +88,8 @@ public:
 	sf::Vector2i returnUnplacablePosition(sf::Vector2i position);
 	void deleteAllTowers();
 	void updateFollowing();
-	void updateTowers();
-	void update();
+	void updateTowers(sf::Time deltaTime);
+	void update(sf::Time deltaTime);
 	
 	void mouseHandler(sf::Vector2i windowPos);
 	void render(sf::RenderTarget &target);

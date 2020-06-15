@@ -4,7 +4,11 @@
 void RegenTower::initVariables()
 {
 	this->towerCost = 550;
-	this->radius = 240.f;
+	this->element = "Void";
+	this->elementId = 8;
+	this->towerDamage = 100.f; // 0-4
+	this->towerRange = 240.f;
+	this->towerAttackSpeed = 20.f;
 }
 
 void RegenTower::initTextures()

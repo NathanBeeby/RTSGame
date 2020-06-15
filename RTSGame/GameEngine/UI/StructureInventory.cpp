@@ -286,30 +286,30 @@ void StructureInventory::updateFollowing()
 {
 }
 
-void StructureInventory::updateTowers()
+void StructureInventory::updateTowers(sf::Time deltaTime)
 {
 	// Attack Towers
-	fireTower.update();
-	waterTower.update();
-	windTower.update();
-	iceTower.update();
-	earthTower.update();
-	energyTower.update();
-	lightTower.update();
-	darkTower.update();
+	fireTower.update(deltaTime);
+	waterTower.update(deltaTime);
+	windTower.update(deltaTime);
+	iceTower.update(deltaTime);
+	earthTower.update(deltaTime);
+	energyTower.update(deltaTime);
+	lightTower.update(deltaTime);
+	darkTower.update(deltaTime);
 	// Support Towers
-	elementalAmplifier.update();
-	elementalOverclocker.update();
-	manaAmplifier.update();
-	observatory.update();
-	regenTower.update();
-	voidTower.update();
+	elementalAmplifier.update(deltaTime);
+	elementalOverclocker.update(deltaTime);
+	manaAmplifier.update(deltaTime);
+	observatory.update(deltaTime);
+	regenTower.update(deltaTime);
+	voidTower.update(deltaTime);
 }
 
-void StructureInventory::update()
+void StructureInventory::update(sf::Time deltaTime)
 {
 	this->updateFollowing();
-	this->updateTowers();
+	this->updateTowers(deltaTime);
 }
 
 void StructureInventory::mouseHandler(sf::Vector2i windowPos)

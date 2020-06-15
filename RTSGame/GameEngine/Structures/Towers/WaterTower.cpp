@@ -5,7 +5,11 @@
 void WaterTower::initVariables()
 {
 	this->towerCost = 280;
-	this->radius = 700.f;
+	this->element = "Water";
+	this->elementId = 1;
+	this->towerDamage = 100.f; // 0-4
+	this->towerRange = 700.f;
+	this->towerAttackSpeed = 20.f;
 }
 
 void WaterTower::initTextures()

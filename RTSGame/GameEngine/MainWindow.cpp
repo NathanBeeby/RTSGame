@@ -1,6 +1,5 @@
 #include "MainWindow.h"
 
-
 void MainWindow::Setup(const std::string & l_title, const sf::Vector2u & l_size)
 {
 	m_windowTitle = l_title;

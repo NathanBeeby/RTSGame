@@ -48,6 +48,7 @@ public:
 	void renderGUI(sf::RenderTarget &target);
 	void renderTowerMenu(sf::RenderTarget &target);
 	void render(sf::RenderTarget &target, sf::View &view);
+	void renderEnemyUI(sf::RenderTarget &target);
 	void renderTowerSelector(sf::RenderTarget &target, sf::Vector2i pos);
 	void renderTowers(sf::RenderTarget &target);
 	void renderTowerUpgradeBox(sf::RenderTarget &target);

@@ -3,7 +3,11 @@
 void IceTower::initVariables()
 {
 	this->towerCost = 210;
-	this->radius = 350.f;
+	this->element = "Ice";
+	this->elementId = 3;
+	this->towerDamage = 100.f; // 0-4
+	this->towerRange = 350.f;
+	this->towerAttackSpeed = 20.f;
 }
 
 void IceTower::initTextures()

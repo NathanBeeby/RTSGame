@@ -46,7 +46,7 @@ void Tower::initSprites()
 	this->radiusCircle.setFillColor(sf::Color(125, 125, 125, 15));
 	this->radiusCircle.setOutlineThickness(2);
 	this->radiusCircle.setOutlineColor(sf::Color(155, 155, 155));
-	this->radiusCircle.setRadius(this->radius);
+	this->radiusCircle.setRadius(this->towerRange);
 }
 
 Tower::Tower()
@@ -60,17 +60,17 @@ Tower::~Tower()
 {
 }
 
-const int Tower::getTowerRange() const
+const float Tower::getTowerRange() const
 {
 	return this->towerRange;
 }
 
-const int Tower::getTowerSpeed() const
+const float Tower::getTowerSpeed() const
 {
-	return this->towerSpeed;
+	return this->towerAttackSpeed;
 }
 
-const int Tower::getTowerDamage() const
+const float Tower::getTowerDamage() const
 {
 	return this->towerDamage;
 }
@@ -98,6 +98,20 @@ sf::Vector2f Tower::towerClicked(sf::Vector2i clickPos)
 	return this->towerPos;
 }
 
+//void Tower::FireBullets(sf::Time deltaTime)
+//{
+//	for (int i = 0; i < towers.size(); i++) { // NEED TO GET THE ENEMY POSITION IN VIEW SPACE & ONLY FIRE A BULLET FROM A SPECIFIC TOWER WHEN ENEMY IS IN RANGE (MADE E.G> FUNCTION BELOW)
+//		// ALSO NEED TO ADD TIME DELAY HERE
+//			bullet.CreateBullet(sf::Vector2i(towers[i].getPosition().x, towers[i].getPosition().y), sf::Vector2i(tower.getSize().x * 10, tower.getSize().y * -10), this->elementId, 0, 10, 5);
+//	}
+//}
+
+void Tower::FireBullet(int towerNum, sf::Vector2i enemyPos)
+{
+		bullet.CreateBullet(sf::Vector2i(this->towers[towerNum].getPosition().x, this->towers[towerNum].getPosition().y), sf::Vector2i(enemyPos.x, enemyPos.y), this->elementId, 0, 10, 5);
+}
+
+
 void Tower::CreateTower(sf::Vector2i towerPos)
 {
 	this->towerNum++;
@@ -113,7 +127,7 @@ void Tower::CreateTower(sf::Vector2i towerPos)
 void Tower::SelectTower(int towerID, sf::Vector2f towerCenter)
 {
 	this->towerSelected = true;
-	this->radiusCircle.setRadius(this->radius);
+	this->radiusCircle.setRadius(this->towerRange);
 	this->radiusCircle.setPosition(sf::Vector2f(towerCenter.x - (radiusCircle.getRadius()), towerCenter.y - (radiusCircle.getRadius())));
 }
 
@@ -141,10 +155,14 @@ void Tower::updateTowerSelected()
 	}
 }
 
-void Tower::update()
+void Tower::update(sf::Time deltaTime)
 {
 	if (towerIsClicked == true) {
 		this->updateTowerSelected();
+	}
+	bullet.update(deltaTime);
+	if(towers.size() >= 1){
+		this->FireBullet(1, sf::Vector2i(200 * 5, 200* -5));
 	}
 }
 
@@ -156,4 +174,5 @@ void Tower::render(sf::RenderTarget & target)
 	if (towerSelected == true) {
 		target.draw(this->radiusCircle);
 	}
+	bullet.render(target);
 }

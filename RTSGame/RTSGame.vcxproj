@@ -120,6 +120,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicAnimations.cpp" />
+    <ClCompile Include="GameEngine\Structures\Bullet\Bullet.cpp" />
     <ClCompile Include="GameEngine\Enemies\Elements\DarkEnemy.cpp" />
     <ClCompile Include="GameEngine\Enemies\Elements\EarthEnemy.cpp" />
     <ClCompile Include="GameEngine\Enemies\Enemy.cpp" />
@@ -178,6 +180,8 @@
     <ClCompile Include="GameEngine\Map\PathWaypoints.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicAnimations.h" />
+    <ClInclude Include="GameEngine\Structures\Bullet\Bullet.h" />
     <ClInclude Include="GameEngine\Enemies\Elements\DarkEnemy.h" />
     <ClInclude Include="GameEngine\Enemies\Elements\EarthEnemy.h" />
     <ClInclude Include="GameEngine\Enemies\Enemy.h" />

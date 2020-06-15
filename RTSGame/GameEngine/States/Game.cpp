@@ -88,16 +88,16 @@ void Game::keyHandler(sf::Keyboard::Key key, sf::View &view)
 	}
 	if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
 	{
-		if (view.getCenter().y > 1310) {
+		if (view.getCenter().y > 1270) {
 			view.move(0.f, -(viewSpeed * deltaTime));
 		}
 		else {
-			view.setCenter(sf::Vector2f(view.getCenter().x, 1310));
+			view.setCenter(sf::Vector2f(view.getCenter().x, 1270));
 		}
 	}
 	else if (key == sf::Keyboard::S || key == sf::Keyboard::Down)
 	{
-		if (view.getCenter().y + view.getCenter().y <= ((tile.tileMax.y + 2) * gridSizeF) + (view.getCenter().y / 2) + 100) {
+		if (view.getCenter().y + view.getCenter().y <= ((tile.tileMax.y + 2) * gridSizeF) + (view.getCenter().y / 2) + 70) {
 			view.move(0.f, (viewSpeed * deltaTime));
 		}
 		else {
@@ -106,16 +106,16 @@ void Game::keyHandler(sf::Keyboard::Key key, sf::View &view)
 	}
 	else if (key == sf::Keyboard::A || key == sf::Keyboard::Left)
 	{
-		if (view.getCenter().x > 2620) {
+		if (view.getCenter().x > 2550) {
 			view.move(-(viewSpeed * deltaTime), 0.f);
 		}
 		else {
-			view.setCenter(sf::Vector2f(2620, view.getCenter().y));
+			view.setCenter(sf::Vector2f(2550, view.getCenter().y));
 		}
 	}
 	else if (key == sf::Keyboard::D || key == sf::Keyboard::Right)
 	{
-		if (view.getCenter().x + view.getCenter().x <= ((tile.tileMax.x + 1) * gridSizeF) + (view.getCenter().x / 2) - 60) {
+		if (view.getCenter().x + view.getCenter().x <= (tile.tileMax.x * gridSizeF) + (view.getCenter().x / 2) - 650) {
 			view.move((viewSpeed * deltaTime), 0.f);
 		}
 		else {

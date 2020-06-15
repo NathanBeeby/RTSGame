@@ -4,7 +4,11 @@
 void EnergyTower::initVariables()
 {
 	this->towerCost = 350;
-	this->radius = 600.f;
+	this->element = "Energy";
+	this->elementId = 5;
+	this->towerDamage = 100.f; // 0-4
+	this->towerRange = 600.f;
+	this->towerAttackSpeed = 20.f;
 }
 
 void EnergyTower::initTextures()

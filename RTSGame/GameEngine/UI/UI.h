@@ -51,6 +51,7 @@ public:
 	std::vector<sf::RectangleShape> towerUpgradeBox;
 	std::vector<sf::RectangleShape> upgradeImages;
 	sf::RectangleShape towerMenuToggle;
+	sf::RectangleShape enemyUIBox, enemyImageBox;
 
 	// String Vector Variables
 	std::vector<std::string> towerStrings;
@@ -62,6 +63,7 @@ public:
 
 	// String Variables
 	std::string levelString, scoreString, waveString, healthString, manaString, towerCloseString, towerOpenString, towerUpgradeCloseString, towerUpgradeOpenString;
+	std::string enemyNameString, enemyElementString, enemyDescriptionString, enemyUIBoxString, enemyUIImageString, enemyHealthString;
 
 	// Texture Vector Variables
 	std::vector<sf::Texture> uiButtonTextures;
@@ -71,7 +73,7 @@ public:
 	std::vector<sf::Texture> inventoryBoxTexture;
 	std::vector<sf::Texture> towerUpgradeBoxTexture;
 	std::vector<sf::Texture> upgradeImageTexture;
-	sf::Texture towerToggleTexture;
+	sf::Texture towerToggleTexture, enemyUIBoxTexture, enemyUIImageTexture;
 
 	// Text Vector
 	std::vector<sf::Text> UpgradeTitleText;
@@ -79,7 +81,7 @@ public:
 	std::vector<sf::Text> UpgradePriceText;
 
 	// Text Variables
-	sf::Text levelText, scoreText, waveText, timerText, dayText, healthText, manaText;
+	sf::Text levelText, scoreText, waveText, timerText, dayText, healthText, manaText, enemyName, enemyElement, enemyDescription, enemyHealth;
 
 	// Accessors
 	const int getScoreValue() const;
@@ -94,9 +96,15 @@ public:
 	void RemoveScore(int sr);
 	void AddScore(int sr);
 
+	void SetEnemyName(std::string name);
+	void SetEnemyElement(std::string element);
+	void SetEnemyDescription(std::string description);
+	void SetEnemyHealth(std::string health);
+
 	void uiButtonsMouseHandler(sf::Vector2i & windowPos);
 	void towerMenuMouseHandler(sf::Vector2i &windowPos);
 	void towerUIMouseHandler(sf::Vector2i &windowPos);
+	void enemyUIMouseHandler(sf::Vector2i &windowPos, sf::Vector2i &viewPos);
 
 	void updateUIText();
 	void updateGameState();

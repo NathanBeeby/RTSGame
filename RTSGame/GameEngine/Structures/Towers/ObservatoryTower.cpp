@@ -3,7 +3,11 @@
 void ObservatoryTower::initVariables()
 {
 	this->towerCost = 600;
-	this->radius = 750.f;
+	this->element = "Void";
+	this->elementId = 8;
+	this->towerDamage = 100.f; // 0-4
+	this->towerRange = 750.f;
+	this->towerAttackSpeed = 20.f;
 }
 
 void ObservatoryTower::initTextures()

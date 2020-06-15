@@ -1,10 +1,10 @@
 #pragma once
 #include "../Tower.h"
+	
 class FireTower : virtual public Tower
 {
 private: 
 	// Private variables
-
 
 	// Initialization
 	void initVariables();

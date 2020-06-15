@@ -3,7 +3,11 @@
 void WindTower::initVariables()
 {
 	this->towerCost = 255;
-	this->radius = 600.f;
+	this->element = "Wind";
+	this->elementId = 2;
+	this->towerDamage = 100.f; // 0-4
+	this->towerRange = 600.f;
+	this->towerAttackSpeed = 20.f;
 }
 
 void WindTower::initTextures()

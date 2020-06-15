@@ -275,7 +275,7 @@ void GUI::updateResources()
 
 void GUI::update(sf::Time deltaTime)
 {
-	this->structInv.update();
+	this->structInv.update(deltaTime);
 	this->wave.update();
 	this->updateClock();
 	this->updateResources();
@@ -497,6 +497,17 @@ void GUI::render(sf::RenderTarget & target, sf::View & view)
 	this->renderResources(target, view);
 	this->renderGUI(target);
 	this->structInv.render(target);
+	//this->renderEnemyUI(target);
+}
+
+void GUI::renderEnemyUI(sf::RenderTarget &target)
+{
+	target.draw(this->enemyUIBox);
+	target.draw(this->enemyImageBox);
+	target.draw(this->enemyName);
+	target.draw(this->enemyElement);
+	target.draw(this->enemyHealth);
+	target.draw(this->enemyDescription);
 }
 
 void GUI::renderTowerSelector(sf::RenderTarget & target, sf::Vector2i pos)

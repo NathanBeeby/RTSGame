@@ -30,16 +30,6 @@ private:
 	bool waveBegan, wavePaused;
 	int element;
 
-	FireEnemy fireEnemy;
-	WaterEnemy waterEnemy;
-	WindEnemy windEnemy;
-	IceEnemy iceEnemy;
-	EarthEnemy earthEnemy;
-	EnergyEnemy energyEnemy;
-	LightEnemy lightEnemy;
-	DarkEnemy darkEnemy;
-	VoidEnemy voidEnemy;
-
 	// Initialization
 	void initVariables();
 
@@ -50,6 +40,16 @@ public:
 
 	// Public Variables
 	int mana;
+	FireEnemy fireEnemy;
+	WaterEnemy waterEnemy;
+	WindEnemy windEnemy;
+	IceEnemy iceEnemy;
+	EarthEnemy earthEnemy;
+	EnergyEnemy energyEnemy;
+	LightEnemy lightEnemy;
+	DarkEnemy darkEnemy;
+	VoidEnemy voidEnemy;
+
 	// Accessors
 	const int getWaveNumber() const;
 	const int getWaveDifficulty() const;

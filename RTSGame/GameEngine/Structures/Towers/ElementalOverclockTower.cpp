@@ -3,7 +3,11 @@
 void ElementalOverclockTower::initVariables()
 {
 	this->towerCost = 700;
-	this->radius = 500.f;
+	this->element = "Void";
+	this->elementId = 8;
+	this->towerDamage = 100.f; // 0-4
+	this->towerRange = 500.f;
+	this->towerAttackSpeed = 20.f;
 }
 
 void ElementalOverclockTower::initTextures()
