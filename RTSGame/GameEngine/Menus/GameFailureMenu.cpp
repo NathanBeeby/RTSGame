@@ -31,6 +31,14 @@ GameFailureMenu::~GameFailureMenu()
 {
 }
 
+void GameFailureMenu::Up()
+{
+}
+
+void GameFailureMenu::Down()
+{
+}
+
 void GameFailureMenu::keyHandler(sf::Keyboard::Key key)
 {
 }

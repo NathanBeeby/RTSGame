@@ -1,7 +1,7 @@
 #pragma once
 #include "MenuMaster.h"
 
-class CreditsMenu : public virtual MenuMaster
+class CreditsMenu : public MenuMaster
 {
 private:
 	// Private Variables
@@ -18,6 +18,8 @@ public:
 	virtual ~CreditsMenu();
 
 	// Public Functions
+	void Up();
+	void Down();
 	void keyHandler(sf::Keyboard::Key key);
 	void mouseHandler(sf::RenderWindow &window);
 	void update();

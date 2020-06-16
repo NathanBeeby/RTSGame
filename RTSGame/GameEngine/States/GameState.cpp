@@ -9,6 +9,10 @@ void GameState::initVariables()
 	this->zoomInt = 0;
 	this->mouseHeld = false;
 	this->viewMovement = sf::Vector2f(0, 0);
+	this->mx = 0;
+	this->my = 0;
+	this->mx0 = 0;
+	this->my0 = 0;
 }
 
 void GameState::initSprites()

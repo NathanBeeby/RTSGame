@@ -31,18 +31,17 @@ class StructureInventory
 {
 private:
 	// Private Variables
+	bool towerFollowing, towerIsPlacable;
+	int structurePrice;
 	sf::RectangleShape tower;
 	sf::Texture towerTexture;
-	bool towerFollowing;
-	bool towerIsPlacable;
 	sf::Vector2i mousePosWindow;
-	std::string towerToFollow;
-	std::string fireString, waterString, windString, iceString, earthString, energyString, lightString, darkString, voidString, regenString, observString, manaAmpString, elementOverString, elementAmpString;
-	int structurePrice;
+	sf::Vector2i unplacablePos;
+	std::string towerToFollow, fireString, waterString, windString, iceString, earthString, energyString, lightString, darkString, voidString, regenString, observString, manaAmpString, elementOverString, elementAmpString;
 	std::vector<sf::Vector2i> towerPlacementPositions;
 	std::vector<sf::Vector2i> unplacablePositions;
 	std::vector<sf::Vector2i> waterTiles;
-	sf::Vector2i unplacablePos;
+
 	// Initialization
 	void initVariables();
 	void initSprites();
@@ -74,23 +73,20 @@ public:
 	const bool isFollowing() const;
 	const std::string towerIsFollowing() const;
 	const int getTowerCost() const;
+	sf::Vector2i returnUnplacablePosition(sf::Vector2i position);
 
 	 // Public Functions
-
 	void towerFollow(std::string &towerString);
-	// Needs Tile Position & tower being placed
 	int towerPlace(sf::Vector2i position);
 	void towerClicked(sf::Vector2i position);
 	bool towerPlacable(sf::Vector2i position);
 	void unplacablePosition(sf::Vector2i position);
 	void waterTilePositions(sf::Vector2i position);
 	void DeselectTowers();
-	sf::Vector2i returnUnplacablePosition(sf::Vector2i position);
 	void deleteAllTowers();
 	void updateFollowing();
 	void updateTowers(sf::Time deltaTime);
 	void update(sf::Time deltaTime);
-	
 	void mouseHandler(sf::Vector2i windowPos);
 	void render(sf::RenderTarget &target);
 	void renderTowers(sf::RenderTarget &target);

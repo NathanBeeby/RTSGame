@@ -106,9 +106,10 @@ sf::Vector2f Tower::towerClicked(sf::Vector2i clickPos)
 //	}
 //}
 
-void Tower::FireBullet(int towerNum, sf::Vector2i enemyPos)
+void Tower::FireBullet(sf::Vector2i &enemyPos)
 {
-		bullet.CreateBullet(sf::Vector2i(this->towers[towerNum].getPosition().x, this->towers[towerNum].getPosition().y), sf::Vector2i(enemyPos.x, enemyPos.y), this->elementId, 0, 10, 5);
+		std::cout << "enemy pos: X - " << enemyPos.x << ", Y - " << enemyPos.y << std::endl;
+		bullet.CreateBullet(sf::Vector2i(this->towers[towerNum].getPosition().x + (this->towers[towerNum].getSize().x / 2), this->towers[towerNum].getPosition().y + (this->towers[towerNum].getSize().y / 2)), sf::Vector2i(this->towers[towerNum].getPosition().x + enemyPos.x, this->towers[towerNum].getPosition().y + enemyPos.y), this->elementId, 0, towerDamage, towerAttackSpeed);
 }
 
 
@@ -160,19 +161,34 @@ void Tower::update(sf::Time deltaTime)
 	if (towerIsClicked == true) {
 		this->updateTowerSelected();
 	}
-	bullet.update(deltaTime);
+	bullet.update(deltaTime, towerRange);
+
+
+
+	for (int i = 0; i < towers.size(); i++) {
+		for (int j = 0; j < bullet.bulletSprites.size(); j++) {
+		if (bullet.bulletSprites[j].getPosition().x == towers[i].getPosition().x + (towerRange)) {
+			if (bullet.bulletSprites[j].getPosition().y == towers[i].getPosition().y + (towerRange)) {
+				this->bullet.bulletSprites.erase(bullet.bulletSprites.begin() + j);
+			}
+		}
+		}
+
+	}
+
+
 	if(towers.size() >= 1){
-		this->FireBullet(1, sf::Vector2i(200 * 5, 200* -5));
+		this->FireBullet(sf::Vector2i(200 * -4, 200 * 4));
 	}
 }
 
 void Tower::render(sf::RenderTarget & target)
 {
+	bullet.render(target);
 	for (int i = 0; i < this->towers.size(); i++) {
 		target.draw(this->towers[i]);
 	}
 	if (towerSelected == true) {
 		target.draw(this->radiusCircle);
 	}
-	bullet.render(target);
 }

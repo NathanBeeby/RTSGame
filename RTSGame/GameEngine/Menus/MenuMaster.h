@@ -24,6 +24,9 @@ public:
 	sf::RectangleShape background;
 	sf::Texture backgroundTexture;
 
+	virtual void Up() = 0;
+	virtual void Down() = 0;
+
 
 	//Public functions
 	int GetPressedItem() { return selectedItemIndex; }

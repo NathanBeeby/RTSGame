@@ -6,11 +6,9 @@ class BasicAnimations
 {
 private:
 	// Private Variables
-
+	int bloodTextureSize;
 	sf::RectangleShape bloodSplat;
 	std::vector<sf::Texture> bloodTextures;
-
-	int bloodTextureSize;
 
 	// Initialization
 	void initVariables();

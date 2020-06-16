@@ -137,10 +137,8 @@
     <ClCompile Include="GameEngine\Structures\Towers\FireTower.cpp" />
     <ClCompile Include="GameEngine\GameAssets\Animator.cpp" />
     <ClCompile Include="GameEngine\GameAssets\AssetManager.cpp" />
-    <ClCompile Include="GameEngine\Map\Objects\CoalOre.cpp" />
     <ClCompile Include="GameEngine\Map\Tile.cpp" />
     <ClCompile Include="GameEngine\Map\TileProperties.cpp" />
-    <ClCompile Include="GameEngine\UI\chatBar.cpp" />
     <ClCompile Include="AudioEngine\Music\GameMusic.cpp" />
     <ClCompile Include="AudioEngine\SFX\SFX.cpp" />
     <ClCompile Include="GameEngine\Menus\CreditsMenu.cpp" />
@@ -154,7 +152,6 @@
     <ClCompile Include="GameEngine\States\Game.cpp" />
     <ClCompile Include="GameEngine\States\GameState.cpp" />
     <ClCompile Include="GameEngine\UI\GUI.cpp" />
-    <ClCompile Include="GameEngine\Map\Objects\GoldOre.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\IceTower.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\LightTower.cpp" />
     <ClCompile Include="GameEngine\Enemies\Elements\IceEnemy.cpp" />
@@ -162,11 +159,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameEngine\MainWindow.cpp" />
     <ClCompile Include="GameEngine\UI\UI.cpp" />
-    <ClCompile Include="GameEngine\UI\MiniMap.cpp" />
     <ClCompile Include="GameEngine\UI\StructureInventory.cpp" />
     <ClCompile Include="GameEngine\MainGame.cpp" />
-    <ClCompile Include="GameEngine\Map\Objects\StoneQuarry.cpp" />
-    <ClCompile Include="GameEngine\Map\Objects\Trees.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\WaterTower.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\WindTower.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\ManaAmplifierTower.cpp" />
@@ -196,9 +190,7 @@
     <ClInclude Include="GameEngine\Structures\Towers\FireTower.h" />
     <ClInclude Include="GameEngine\GameAssets\Animator.h" />
     <ClInclude Include="GameEngine\GameAssets\AssetManager.h" />
-    <ClInclude Include="GameEngine\Map\Objects\CoalOre.h" />
     <ClInclude Include="GameEngine\Constants.h" />
-    <ClInclude Include="GameEngine\UI\chatBar.h" />
     <ClInclude Include="AudioEngine\Music\GameMusic.h" />
     <ClInclude Include="AudioEngine\SFX\SFX.h" />
     <ClInclude Include="GameEngine\Map\Tile.h" />
@@ -215,12 +207,8 @@
     <ClInclude Include="GameEngine\MainWindow.h" />
     <ClInclude Include="GameEngine\UI\GUI.h" />
     <ClInclude Include="GameEngine\UI\UI.h" />
-    <ClInclude Include="GameEngine\UI\MiniMap.h" />
     <ClInclude Include="GameEngine\UI\StructureInventory.h" />
     <ClInclude Include="GameEngine\MainGame.h" />
-    <ClInclude Include="GameEngine\Map\Objects\GoldOre.h" />
-    <ClInclude Include="GameEngine\Map\Objects\StoneQuarry.h" />
-    <ClInclude Include="GameEngine\Map\Objects\Trees.h" />
     <ClInclude Include="GameEngine\Map\TileProperties.h" />
     <ClInclude Include="GameEngine\Structures\Tower.h" />
     <ClInclude Include="GameEngine\Structures\Towers\IceTower.h" />

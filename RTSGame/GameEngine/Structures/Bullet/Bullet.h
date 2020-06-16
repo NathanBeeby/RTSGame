@@ -6,22 +6,12 @@ class Bullet
 {
 private:
 	// Private Variables
-	std::vector<std::string> fireTextureStrings;
-	std::vector<std::string> waterTextureStrings;
-	std::vector<std::string> windTextureStrings;
-	std::vector<std::string> iceTextureStrings;
-	std::vector<std::string> earthTextureStrings;
-	std::vector<std::string> energyTextureStrings;
-	std::vector<std::string> lightTextureStrings;
-	std::vector<std::string> darkTextureStrings;
-	std::vector<std::string> voidTextureStrings;
-	sf::RectangleShape bulletSprite;
-	std::vector<sf::Vector2i> startPosition, goalPosition;
-	std::vector<int> damages, attackSpeeds;
-
-	std::vector<sf::Texture> fireTextures, waterTextures, windTextures, iceTextures, earthTextures, energyTextures, lightTextures, darkTextures, voidTextures;
-
 	int bulletSize;
+	sf::RectangleShape bulletSprite;
+	std::vector<std::string> fireTextureStrings, waterTextureStrings, windTextureStrings, iceTextureStrings, earthTextureStrings, energyTextureStrings, lightTextureStrings, darkTextureStrings, voidTextureStrings;
+	std::vector<int> damages, attackSpeeds;
+	std::vector<sf::Vector2i> startPosition, goalPosition;
+	std::vector<sf::Texture> fireTextures, waterTextures, windTextures, iceTextures, earthTextures, energyTextures, lightTextures, darkTextures, voidTextures;
 
 	// Initialization
 	void initVariables();
@@ -42,13 +32,13 @@ public:
 	// Accessors
 
 	// Modifiers
-	void CreateBullet(sf::Vector2i startPos, sf::Vector2i goalPos, int elementNo, int levelNo, int damage, int speed);
+	void CreateBullet(sf::Vector2i startPos, sf::Vector2i &goalPos, int elementNo, int levelNo, float damage, float speed);
 	void DestroyBullet();
 
-
 	// Public Functions
-	void updateBulletMovement(sf::Time deltaTime);
-	void update(sf::Time deltaTime);
+	void updateBulletMovement(sf::Time deltaTime, float range);
+	void updateBulletRotation();
+	void update(sf::Time deltaTime, float range);
 	void render(sf::RenderTarget &target);
 };
 

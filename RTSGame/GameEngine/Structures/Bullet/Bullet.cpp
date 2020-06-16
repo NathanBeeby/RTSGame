@@ -9,8 +9,8 @@ void Bullet::initVariables()
 
 	// Vector Sizes
 	this->bulletSprites.resize(bulletSize);
-	this->startPosition.resize(bulletSize);
 	this->goalPosition.resize(bulletSize);
+	this->startPosition.resize(bulletSize);
 	this->damages.resize(bulletSize);
 	this->attackSpeeds.resize(bulletSize);
 
@@ -74,7 +74,7 @@ void Bullet::initTextures()
 void Bullet::initSprites()
 {
 	for (int i = 0; i < bulletSprites.size(); i++) {
-		this->bulletSprites[i].setSize(sf::Vector2f(30,60));
+		this->bulletSprites[i].setSize(sf::Vector2f(30, 60));
 		this->bulletSprites[i].setPosition(sf::Vector2f(-200, -200));
 		this->bulletSprites[i].setTexture(&this->voidTextures[0]);
 	}
@@ -118,7 +118,7 @@ void Bullet::resizeStrings()
 	this->voidTextureStrings.resize(1);
 }
 
-void Bullet::CreateBullet(sf::Vector2i startPos, sf::Vector2i goalPos, int elementNo, int levelNo, int damage, int speed)
+void Bullet::CreateBullet(sf::Vector2i startPos, sf::Vector2i &goalPos, int elementNo, int levelNo, float damage, float speed)
 {
 	this->bulletSprite.setSize(sf::Vector2f(30, 60));
 	this->bulletSprite.setPosition(sf::Vector2f(startPos.x, startPos.y));
@@ -151,8 +151,8 @@ void Bullet::CreateBullet(sf::Vector2i startPos, sf::Vector2i goalPos, int eleme
 	}
 
 	this->bulletSprites.push_back(bulletSprite);
-	this->startPosition.push_back(startPos);
 	this->goalPosition.push_back(goalPos);
+	this->startPosition.push_back(startPos);
 	this->damages.push_back(damage);
 	this->attackSpeeds.push_back(speed);
 }
@@ -161,46 +161,77 @@ void Bullet::DestroyBullet()
 {
 }
 
-void Bullet::updateBulletMovement(sf::Time deltaTime)
+void Bullet::updateBulletMovement(sf::Time deltaTime, float range)
 {
 	int moveX = 0;
 	int moveY = 0;
 
 	for (int i = 0; i < bulletSprites.size(); i++) {
-
-		if (startPosition[i].x > goalPosition[i].x) {
+		if (bulletSprites[i].getPosition().x > goalPosition[i].x) {
 			moveX = -attackSpeeds[i];
 		}
-		else if (startPosition[i].x < goalPosition[i].x) {
+		else if (bulletSprites[i].getPosition().x < goalPosition[i].x) {
 			moveX = attackSpeeds[i];
 		}
 		else {
 			moveX = 0;
 		}
 
-		if (startPosition[i].y > goalPosition[i].y) {
+		if (bulletSprites[i].getPosition().y > goalPosition[i].y) {
 			moveY = -attackSpeeds[i];
 		}
-		else if (startPosition[i].y < goalPosition[i].y) {
+		else if (bulletSprites[i].getPosition().y < goalPosition[i].y) {
 			moveY = attackSpeeds[i];
 		}
 		else {
 			moveY = 0;
 		}
 
-
-		if (startPosition[i].x == goalPosition[i].x && startPosition[i].y == goalPosition[i].y) {
+		if (bulletSprites[i].getPosition().x == goalPosition[i].x && bulletSprites[i].getPosition().y == goalPosition[i].y) {
 			this->bulletSprites.erase(bulletSprites.begin() + i);
 		}
-		if(moveX != 0 || moveY != 0){
+		if (moveX != 0 || moveY != 0) {
 			this->bulletSprites[i].move(moveX, moveY);
 		}
 	}
 }
 
-void Bullet::update(sf::Time deltaTime)
+void Bullet::updateBulletRotation()
 {
-	this->updateBulletMovement(deltaTime);
+	for (int i = 0; i < bulletSprites.size(); i++) {
+		if (this->bulletSprites[i].getPosition().x > this->goalPosition[i].x && this->bulletSprites[i].getPosition().y == this->goalPosition[i].y) {
+			this->bulletSprite.setRotation(-90.f);
+		}
+		else if (this->bulletSprites[i].getPosition().x < this->goalPosition[i].x && this->bulletSprites[i].getPosition().y == this->goalPosition[i].y) {
+			this->bulletSprites[i].setRotation(90.f);
+		}
+		else if (this->bulletSprites[i].getPosition().x == this->goalPosition[i].x && this->bulletSprites[i].getPosition().y > this->goalPosition[i].y) {
+			this->bulletSprites[i].setRotation(0.f);
+		}
+		else if (this->bulletSprites[i].getPosition().x == this->goalPosition[i].x && this->bulletSprites[i].getPosition().y < this->goalPosition[i].y) {
+			this->bulletSprites[i].setRotation(180.f);
+		}
+
+		else if (this->bulletSprites[i].getPosition().x > this->goalPosition[i].x && this->bulletSprites[i].getPosition().y > this->goalPosition[i].y) {
+			this->bulletSprites[i].setRotation(-45.f);
+		}
+		else if (this->bulletSprites[i].getPosition().x < this->goalPosition[i].x && this->bulletSprites[i].getPosition().y < this->goalPosition[i].y) {
+			this->bulletSprites[i].setRotation(135.f);
+		}
+		else if (this->bulletSprites[i].getPosition().x < this->goalPosition[i].x && this->bulletSprites[i].getPosition().y > this->goalPosition[i].y) {
+			this->bulletSprites[i].setRotation(45.f);
+		}
+		else if (this->bulletSprites[i].getPosition().x > this->goalPosition[i].x && this->bulletSprites[i].getPosition().y < this->goalPosition[i].y) {
+			this->bulletSprites[i].setRotation(-135.f);
+		}
+	}
+}
+
+
+void Bullet::update(sf::Time deltaTime, float range)
+{
+	this->updateBulletMovement(deltaTime, range);
+	this->updateBulletRotation();
 }
 
 void Bullet::render(sf::RenderTarget & target)

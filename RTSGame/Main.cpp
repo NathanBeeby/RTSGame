@@ -8,12 +8,12 @@
 	TODO NEXT:
 
 	// ------- NEXT GOALS ------- //
+	- Make bullets fire from towers when an enemy is in range
 	- Implement each tower having it's own upgrade paths
 	- Implement different elemental towers having different upgrades
 	- Impelement mouse handler for upgrade tower gui (purchase upgrades)
 	- Remove mana once purchasing upgrade (if you have enough mana)
 	- Amend new view constraints as tower menu is now hidable
-	- Implement bullet firing from towers
 	// ------- AFTER GOALS ------- //
 	- Water tiles need to be ammeneded in the tile class, so that water tiles are unplacable
 	- Change mouse cursor on grabbing and placing tower
@@ -28,7 +28,6 @@
 	- When level is switched, change health and mana back to original value
 
 	// ------- DISTANT GOALS ------- //
-	- Implement tower firing (possibly through bullet class)
 	- Implement tower bullet erasing once out of tower range
 	- Implement tower bullet following enemy until deletion or collision
 	- Implement enemy health reducing if bullet collides with enemy

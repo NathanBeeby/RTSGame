@@ -17,6 +17,8 @@ public:
 	virtual ~GameSuccessMenu();
 
 	// Public Functions
+	void Up();
+	void Down();
 	void keyHandler(sf::Keyboard::Key key);
 	void mouseHandler(sf::RenderWindow &window);
 	void update();

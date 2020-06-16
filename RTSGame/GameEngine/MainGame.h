@@ -6,13 +6,15 @@ class MainGame
 {
 private:
 	// Private Variables
-	GameState gameState;
+	bool isRunning;
 	sf::Clock clock;
 	sf::View view;
 	sf::Event ev;
-	static sf::Vector2i startLocation;
+
+	GameState gameState;
 	MainWindow m_window;
-	bool isRunning;
+	static sf::Vector2i startLocation;
+
 	// Initialization
 	void initVariables();
 	void initView();
@@ -27,6 +29,7 @@ public:
 	MainWindow* GetWindow();
 	sf::Texture cursorAttack, cursor, cursorDefend, cursorGrabbed, cursorHover;
 	sf::RectangleShape cursorSprite;
+
 	// Accessors
 	const bool running() const;
 
@@ -36,9 +39,6 @@ public:
 	void mouseCursor();
 	void mouseGrabbed();
 	void mouseHover();
-
-
-
 	void keyInput(sf::Keyboard::Key key, sf::View &view);
 	void mouseInput();
 	void updateView();

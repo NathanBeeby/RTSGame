@@ -7,7 +7,6 @@ void Game::initVariables()
 	this->miniMap.setSize(sf::Vector2f(200.f, 200.f));
 	this->viewSpeed = 2.f;
 
-
 	for (int i = 0; i < tile.unplacableTiles.size(); i++) {
 		gui.AddUnplacablePosition(tile.unplacableTiles[i]);
 	}

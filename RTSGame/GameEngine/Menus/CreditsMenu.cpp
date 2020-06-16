@@ -32,6 +32,14 @@ CreditsMenu::~CreditsMenu()
 {
 }
 
+void CreditsMenu::Up()
+{
+}
+
+void CreditsMenu::Down()
+{
+}
+
 void CreditsMenu::keyHandler(sf::Keyboard::Key key)
 {
 }

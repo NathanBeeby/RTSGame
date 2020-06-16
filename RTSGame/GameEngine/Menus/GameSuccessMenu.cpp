@@ -32,6 +32,14 @@ GameSuccessMenu::~GameSuccessMenu()
 {
 }
 
+void GameSuccessMenu::Up()
+{
+}
+
+void GameSuccessMenu::Down()
+{
+}
+
 void GameSuccessMenu::keyHandler(sf::Keyboard::Key key)
 {
 }

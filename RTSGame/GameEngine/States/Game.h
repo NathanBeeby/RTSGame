@@ -4,22 +4,23 @@
 class Game {
 private:
 	// Private Variables
-	float viewSpeed;
+	float viewSpeed, deltaTime;
 	float gridSizeF = 200.f;
 	unsigned gridSizeU = static_cast<unsigned>(gridSizeF);
+
 	GUI gui;
 	Tile tile;
+
 	sf::View miniMap;
-
-	std::vector<sf::RectangleShape> sprite;
-	std::vector<sf::Texture> spriteTexture;
 	sf::RectangleShape tileSelector;
-
 	sf::Vector2i mousePosWindow;
 	sf::Vector2f mousePosView;
 	sf::Vector2u mousePosGrid;
-	float deltaTime;
 	sf::Clock clock;
+
+	std::vector<sf::RectangleShape> sprite;
+	std::vector<sf::Texture> spriteTexture;
+
 	// Initialization
 	void initVariables();
 	void initTextures();

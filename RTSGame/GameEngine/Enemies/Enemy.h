@@ -3,38 +3,21 @@
 #include <iostream>
 #include <vector>
 #include "../Map/PathWaypoints.h"
-/*
-	- Split up functions into sub-functions which serve one purpose each
-	- Create Parent Class for enemy movement (AI class)
 
-*/
 class Enemy
 {
 private:
 	// Private Variables
+	int enemiesPassed, enemiesKill, enemyNum;
 	sf::Texture enemytexture;
-	
-	std::vector<sf::RectangleShape> enemies;
-	std::vector <sf::RectangleShape> enemyHealthBar;
-	std::vector <sf::RectangleShape> enemyMaxHealthBar;
-	sf::RectangleShape enemy;
-	sf::RectangleShape healthBar;
-	sf::RectangleShape maxHealthBar;
-
+	sf::RectangleShape enemy, healthBar, maxHealthBar;
+	std::vector<sf::RectangleShape> enemies, enemyHealthBar, enemyMaxHealthBar;
 	//Waypoints code
-	std::vector<int> currentPoint;
-	std::vector<int> maxPoint;
-	std::vector<int> enemyHealth;
-	std::vector<int> enemyMaxHealth;
-	int enemiesPassed;
-	int enemiesKill;
-
+	std::vector<int> currentPoint, maxPoint, enemyHealth, enemyMaxHealth;
 	std::vector<sf::Vector2i> goalWaypoint;
 	sf::Vector2i enemySize;
-
 	PathWaypoints waypoint;
 
-	int enemyNum;
 	// Initialization
 	void initVariables();
 	void initTextures();
@@ -57,7 +40,6 @@ public:
 	void pushBackEnemy(sf::Vector2i enemyPos);
 
 	void CreateEnemy(sf::Vector2i enemyPos);
-	void setIsPaused(bool paused);
 	void DeleteEnemy(int enemyId);
 	void EnemyPassedGoal(int enemyId);
 	void EnemyKilled(int enemyId);

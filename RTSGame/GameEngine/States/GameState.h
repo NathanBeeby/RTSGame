@@ -17,7 +17,7 @@ private:
 	float zoomAmt;
 	int zoomInt;
 	bool mouseHeld;
-	double mx = 0, my = 0, mx0 = 0, my0 = 0;
+	double mx, my, mx0, my0;
 	// Menus
 	StartMenu startMenu;
 	OptionsMenu optionsMenu;

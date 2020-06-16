@@ -18,8 +18,7 @@ public:
 
 	// Public Variables
 	bool isWater;
-	int xPos;
-	int yPos;
+	int xPos, yPos;
 
 	// Accessors
 	const int& tileNum(int maxTexture) const;
