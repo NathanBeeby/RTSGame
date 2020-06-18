@@ -9,7 +9,7 @@ void GUI::initVariables()
 	this->scoreValue = 0;
 	this->invMax = 0;
 	this->health = 100;
-	this->wave.mana = 500;
+	this->structInv.wave.mana = 500;
 	this->invMaxX = 2;
 	this->invMaxY = 7;
 
@@ -276,94 +276,99 @@ void GUI::updateResources()
 void GUI::update(sf::Time deltaTime)
 {
 	this->structInv.update(deltaTime);
-	this->wave.update();
+	this->structInv.wave.update();
 	this->updateClock();
 	this->updateResources();
 	this->updateTowerTextures();
 	this->updateGUIPositions();
 }
 
+void GUI::updateMousePositions(sf::Vector2i & windowPos, sf::Vector2f & viewPos, sf::Vector2i & gridPos)
+{
+	structInv.updateMousePosition(windowPos, viewPos, gridPos);
+}
+
 void GUI::updateTowerTextures()
 {
-	if (this->wave.mana < structInv.fireTower.towerCost) {
+	if (this->structInv.wave.mana < structInv.fireTower.towerCost) {
 		inventoryBox[0].setTexture(&towerNoTextures[0]);
 	}
 	else {
 		inventoryBox[0].setTexture(&this->towerTextures[0]);
 	}
-	if (this->wave.mana < structInv.waterTower.towerCost) {
+	if (this->structInv.wave.mana < structInv.waterTower.towerCost) {
 		inventoryBox[7].setTexture(&towerNoTextures[1]);
 	}
 	else {
 		inventoryBox[7].setTexture(&this->towerTextures[1]);
 	}
-	if (this->wave.mana < structInv.windTower.towerCost) {
+	if (this->structInv.wave.mana < structInv.windTower.towerCost) {
 		inventoryBox[1].setTexture(&towerNoTextures[2]);
 	}
 	else {
 		inventoryBox[1].setTexture(&this->towerTextures[2]);
 	}
-	if (this->wave.mana < structInv.iceTower.towerCost) {
+	if (this->structInv.wave.mana < structInv.iceTower.towerCost) {
 		inventoryBox[8].setTexture(&towerNoTextures[3]);
 	}
 	else {
 		inventoryBox[8].setTexture(&this->towerTextures[3]);
 	}
-	if (this->wave.mana < structInv.earthTower.towerCost) {
+	if (this->structInv.wave.mana < structInv.earthTower.towerCost) {
 		inventoryBox[2].setTexture(&towerNoTextures[4]);
 	}
 	else {
 		inventoryBox[2].setTexture(&this->towerTextures[4]);
 	}
-	if (this->wave.mana < structInv.energyTower.towerCost) {
+	if (this->structInv.wave.mana < structInv.energyTower.towerCost) {
 		inventoryBox[9].setTexture(&towerNoTextures[5]);
 	}
 	else {
 		inventoryBox[9].setTexture(&this->towerTextures[5]);
 	}
-	if (this->wave.mana < structInv.lightTower.towerCost) {
+	if (this->structInv.wave.mana < structInv.lightTower.towerCost) {
 		inventoryBox[3].setTexture(&towerNoTextures[6]);
 	}
 	else {
 		inventoryBox[3].setTexture(&this->towerTextures[6]);
 	}
-	if (this->wave.mana < structInv.darkTower.towerCost) {
+	if (this->structInv.wave.mana < structInv.darkTower.towerCost) {
 		inventoryBox[10].setTexture(&towerNoTextures[7]);
 	}
 	else {
 		inventoryBox[10].setTexture(&this->towerTextures[7]);
 	}
-	if (this->wave.mana < structInv.elementalAmplifier.towerCost) {
+	if (this->structInv.wave.mana < structInv.elementalAmplifier.towerCost) {
 		inventoryBox[4].setTexture(&towerNoTextures[8]);
 	}
 	else {
 		inventoryBox[4].setTexture(&this->towerTextures[8]);
 	}
-	if (this->wave.mana < structInv.elementalOverclocker.towerCost) {
+	if (this->structInv.wave.mana < structInv.elementalOverclocker.towerCost) {
 		inventoryBox[5].setTexture(&towerNoTextures[9]);
 	}
 	else {
 		inventoryBox[5].setTexture(&this->towerTextures[9]);
 	}
-	if (this->wave.mana < structInv.manaAmplifier.towerCost) {
+	if (this->structInv.wave.mana < structInv.manaAmplifier.towerCost) {
 		inventoryBox[6].setTexture(&towerNoTextures[10]);
 	}
 	else {
 		inventoryBox[6].setTexture(&this->towerTextures[10]);
 	}
-	if (this->wave.mana < structInv.observatory.towerCost) {
+	if (this->structInv.wave.mana < structInv.observatory.towerCost) {
 		inventoryBox[11].setTexture(&towerNoTextures[11]);
 	}
 	else {
 		inventoryBox[11].setTexture(&this->towerTextures[11]);
 	}
-	if (this->wave.mana < structInv.regenTower.towerCost) {
+	if (this->structInv.wave.mana < structInv.regenTower.towerCost) {
 		inventoryBox[12].setTexture(&towerNoTextures[12]);
 	}
 	else {
 		inventoryBox[12].setTexture(&this->towerTextures[12]);
 	}
-	if (this->wave.mana < structInv.voidTower.towerCost) {
+	if (this->structInv.wave.mana < structInv.voidTower.towerCost) {
 		inventoryBox[13].setTexture(&towerNoTextures[13]);
 	}
 	else {
@@ -379,7 +384,7 @@ void GUI::keyHandler(sf::Keyboard::Key key)
 {
 	// Testing purposes, will be removed
 	if (key == sf::Keyboard::Key::Q) {
-		this->wave.mana += 1000;
+		this->structInv.wave.mana += 1000;
 	}
 	if (key == sf::Keyboard::Key::E) {
 		this->health += 100;
@@ -405,9 +410,9 @@ void GUI::mouseHandler(sf::Vector2i &windowPos, sf::Vector2u &gridPos)
 			structInv.towerClicked(sf::Vector2i(gridPos.x * gridSizeF, gridPos.y * gridSizeF));
 		}
 		else {
-			if (this->mouseHeld == false && this->wave.mana >= this->structInv.getTowerCost()) {
+			if (this->mouseHeld == false && this->structInv.wave.mana >= this->structInv.getTowerCost()) {
 				if (this->structInv.towerPlacable(sf::Vector2i(gridPos.x * gridSizeF, gridPos.y * gridSizeF)) == true) {
-					this->wave.mana -= this->structInv.towerPlace(sf::Vector2i(gridPos.x * gridSizeF, gridPos.y * gridSizeF));
+					this->structInv.wave.mana -= this->structInv.towerPlace(sf::Vector2i(gridPos.x * gridSizeF, gridPos.y * gridSizeF));
 				}
 				this->mouseHeld = true;
 			}
@@ -578,5 +583,5 @@ void GUI::renderTowerUpgrades(sf::RenderTarget & target)
 
 void GUI::renderWave(sf::RenderTarget & target)
 {
-	this->wave.render(target);
+	this->structInv.wave.render(target);
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include <iostream>
-#include "../Wave/Wave.h"
 #include "StructureInventory.h"
 class UI
 {
@@ -20,7 +19,6 @@ public:
 	virtual ~UI();
 
 	// Public Variables
-	Wave wave;
 	StructureInventory structInv;
 
 	// Boolean Variables

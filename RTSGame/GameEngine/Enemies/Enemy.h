@@ -10,8 +10,8 @@ private:
 	// Private Variables
 	int enemiesPassed, enemiesKill, enemyNum;
 	sf::Texture enemytexture;
-	sf::RectangleShape enemy, healthBar, maxHealthBar;
-	std::vector<sf::RectangleShape> enemies, enemyHealthBar, enemyMaxHealthBar;
+	sf::RectangleShape healthBar, maxHealthBar;
+	std::vector<sf::RectangleShape> enemyHealthBar, enemyMaxHealthBar;
 	//Waypoints code
 	std::vector<int> currentPoint, maxPoint, enemyHealth, enemyMaxHealth;
 	std::vector<sf::Vector2i> goalWaypoint;
@@ -30,7 +30,8 @@ public:
 
 	// Public Variables 
 	std::vector<sf::Texture> enemyTextures;
-
+	std::vector<sf::RectangleShape> enemies;
+	sf::RectangleShape enemy;
 	// Accessors
 	const int enemiesPassedGoal() const;
 	const int enemiesKilled() const;

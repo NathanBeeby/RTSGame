@@ -6,39 +6,49 @@ class Bullet
 {
 private:
 	// Private Variables
-	int bulletSize;
-	sf::RectangleShape bulletSprite;
-	std::vector<std::string> fireTextureStrings, waterTextureStrings, windTextureStrings, iceTextureStrings, earthTextureStrings, energyTextureStrings, lightTextureStrings, darkTextureStrings, voidTextureStrings;
-	std::vector<int> damages, attackSpeeds;
-	std::vector<sf::Vector2i> startPosition, goalPosition;
-	std::vector<sf::Texture> fireTextures, waterTextures, windTextures, iceTextures, earthTextures, energyTextures, lightTextures, darkTextures, voidTextures;
+	sf::Texture fireTexture, waterTexture, windTexture, iceTexture, earthTexture, energyTexture, lightTexture, darkTexture, voidTexture;
 
-	// Initialization
-	void initVariables();
-	void initStrings();
-	void resizeStrings();
+
 	void initTextures();
-	void initSprites();
+
 public:
-	// Constructors / Destructor
-	Bullet();
-	//Bullet(int ElementNo, int LevelNo, sf::Vector2i startPos, sf::Vector2i goalPos);
-	virtual ~Bullet();
+	sf::RectangleShape sprite;
+	sf::Vector2f currVelocity;
+	sf::Vector2f positionOfDestruction;
+	float maxSpeed;
+	int element;
+	float baseDamage;
+	float timeUntilDestruction;
 
-	// Public Variables
-	std::vector<sf::RectangleShape> bulletSprites;
-	std::vector<sf::Texture> bulletTextures;
+	Bullet(float width = 30.f, float height = 60.f)
+		: currVelocity(0.f, 0.f), maxSpeed(15.f), element(0), timeUntilDestruction(maxSpeed)
+	{
+		std::cout << "Element ID: " << this->element << std::endl;
+		this->initTextures();
+		this->sprite.setSize(sf::Vector2f(width, height));
 
-	// Accessors
+	}
 
-	// Modifiers
-	void CreateBullet(sf::Vector2i startPos, sf::Vector2i &goalPos, int elementNo, int levelNo, float damage, float speed);
-	void DestroyBullet();
+	void update();
+	//// Constructors / Destructor
+	//Bullet();
+	////Bullet(int ElementNo, int LevelNo, sf::Vector2i startPos, sf::Vector2i goalPos);
+	//virtual ~Bullet();
 
-	// Public Functions
-	void updateBulletMovement(sf::Time deltaTime, float range);
-	void updateBulletRotation();
-	void update(sf::Time deltaTime, float range);
-	void render(sf::RenderTarget &target);
+	//// Public Variables
+	//std::vector<sf::RectangleShape> bulletSprites;
+	//std::vector<sf::Texture> bulletTextures;
+
+	//// Accessors
+
+	//// Modifiers
+	//void CreateBullet(sf::Vector2i startPos, sf::Vector2i &goalPos, int elementNo, int levelNo, float damage, float speed);
+	//void DestroyBullet();
+
+	//// Public Functions
+	//void updateBulletMovement(sf::Time deltaTime, float range);
+	//void updateBulletRotation();
+	//void update(sf::Time deltaTime, float range);
+	//void render(sf::RenderTarget &target);
 };
 

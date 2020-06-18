@@ -1,6 +1,9 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include <iostream>
+
+#include "../Wave/Wave.h"
+
 #include "../Structures/Towers/FireTower.h"
 #include "../Structures/Towers/WaterTower.h"
 #include "../Structures/Towers/WindTower.h"
@@ -41,7 +44,6 @@ private:
 	std::vector<sf::Vector2i> towerPlacementPositions;
 	std::vector<sf::Vector2i> unplacablePositions;
 	std::vector<sf::Vector2i> waterTiles;
-
 	// Initialization
 	void initVariables();
 	void initSprites();
@@ -53,6 +55,7 @@ public:
 	virtual ~StructureInventory();
 
 	// Public Variables
+	Wave wave;
 	FireTower fireTower;
 	WaterTower waterTower;
 	WindTower windTower;
@@ -84,8 +87,10 @@ public:
 	void waterTilePositions(sf::Vector2i position);
 	void DeselectTowers();
 	void deleteAllTowers();
-	void updateFollowing();
+	void updateFiring();
+	void updateMousePosition(sf::Vector2i &windowPos, sf::Vector2f &viewPos, sf::Vector2i &gridPos);
 	void updateTowers(sf::Time deltaTime);
+	void updateTowerFiring(sf::Vector2i &enemyPos);
 	void update(sf::Time deltaTime);
 	void mouseHandler(sf::Vector2i windowPos);
 	void render(sf::RenderTarget &target);

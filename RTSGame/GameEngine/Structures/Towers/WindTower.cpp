@@ -8,6 +8,7 @@ void WindTower::initVariables()
 	this->towerDamage = 100.f; // 0-4
 	this->towerRange = 600.f;
 	this->towerAttackSpeed = 20.f;
+	this->bulletSpeed = 15.f;
 }
 
 void WindTower::initTextures()

@@ -133,7 +133,6 @@
     <ClCompile Include="GameEngine\Structures\Towers\DarkTower.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\EarthTower.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\EnergyTower.cpp" />
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameEngine\Structures\Towers\FireTower.cpp" />
     <ClCompile Include="GameEngine\GameAssets\Animator.cpp" />
     <ClCompile Include="GameEngine\GameAssets\AssetManager.cpp" />
@@ -186,7 +185,6 @@
     <ClInclude Include="GameEngine\Structures\Towers\DarkTower.h" />
     <ClInclude Include="GameEngine\Structures\Towers\EarthTower.h" />
     <ClInclude Include="GameEngine\Structures\Towers\EnergyTower.h" />
-    <ClInclude Include="Entity.h" />
     <ClInclude Include="GameEngine\Structures\Towers\FireTower.h" />
     <ClInclude Include="GameEngine\GameAssets\Animator.h" />
     <ClInclude Include="GameEngine\GameAssets\AssetManager.h" />

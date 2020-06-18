@@ -328,7 +328,8 @@ const int UI::getHealthValue() const
 
 const int UI::getManaValue() const
 {
-	return this->wave.mana;
+	return this->structInv.wave.mana;
+	
 }
 
 // Public Functions
@@ -345,12 +346,12 @@ void UI::AddHealth(int hp)
 
 void UI::RemoveMana(int mp)
 {
-	this->wave.mana -= mp;
+	this->structInv.wave.mana -= mp;
 }
 
 void UI::AddMana(int mp)
 {
-	this->wave.mana += mp;
+	this->structInv.wave.mana += mp;
 }
 
 void UI::RemoveScore(int sr)
@@ -389,7 +390,7 @@ void UI::uiButtonsMouseHandler(sf::Vector2i & windowPos)
 		if (windowPos.x >= uiButtons[0].getPosition().x && windowPos.x <= uiButtons[0].getPosition().x + uiButtons[0].getSize().x) {
 			// Start Round Button
 			std::cout << "Wave Began" << std::endl;
-			wave.beginWave();
+			structInv.wave.beginWave();
 			// Change Texture to double spped
 			// if clicked again make tripple speed
 			// if round over set back to start button
@@ -399,13 +400,13 @@ void UI::uiButtonsMouseHandler(sf::Vector2i & windowPos)
 				if (this->gamePaused == true) {
 					std::cout << "Wave Un-Paused" << std::endl;
 					this->gamePaused = false;
-					wave.pauseWave(gamePaused);
+					structInv.wave.pauseWave(gamePaused);
 					this->uiButtons[1].setTexture(&this->uiButtonTextures[1]);
 				}
 				else if (this->gamePaused == false) {
 					std::cout << "Wave Paused" << std::endl;
 					this->gamePaused = true;
-					wave.pauseWave(gamePaused);
+					structInv.wave.pauseWave(gamePaused);
 					this->uiButtons[1].setTexture(&this->uiButtonTextures[3]);
 				}
 			}
@@ -423,7 +424,7 @@ void UI::towerMenuMouseHandler(sf::Vector2i & windowPos)
 	if (windowPos.x >= inventoryBox[0].getPosition().x && windowPos.x <= inventoryBox[0].getPosition().x + inventoryBox[0].getSize().x) {
 
 		if (windowPos.y >= inventoryBox[0].getPosition().y && windowPos.y <= inventoryBox[0].getPosition().y + inventoryBox[0].getSize().y) {
-			if (wave.mana >= structInv.fireTower.towerCost) {
+			if (structInv.wave.mana >= structInv.fireTower.towerCost) {
 				std::cout << "Clicking Fire Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[0]);
 				this->mouseHeld = true;
@@ -433,42 +434,42 @@ void UI::towerMenuMouseHandler(sf::Vector2i & windowPos)
 			}
 		}
 		if (windowPos.y >= inventoryBox[1].getPosition().y && windowPos.y <= inventoryBox[1].getPosition().y + inventoryBox[1].getSize().y) {
-			if (wave.mana >= structInv.windTower.towerCost) {
+			if (structInv.wave.mana >= structInv.windTower.towerCost) {
 				std::cout << "Clicking Wind Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[2]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[2].getPosition().y && windowPos.y <= inventoryBox[2].getPosition().y + inventoryBox[2].getSize().y) {
-			if (wave.mana >= structInv.earthTower.towerCost) {
+			if (structInv.wave.mana >= structInv.earthTower.towerCost) {
 				std::cout << "Clicking Earth Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[4]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[3].getPosition().y && windowPos.y <= inventoryBox[3].getPosition().y + inventoryBox[3].getSize().y) {
-			if (wave.mana >= structInv.lightTower.towerCost) {
+			if (structInv.wave.mana >= structInv.lightTower.towerCost) {
 				std::cout << "Clicking Light Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[6]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[4].getPosition().y && windowPos.y <= inventoryBox[4].getPosition().y + inventoryBox[4].getSize().y) {
-			if (wave.mana >= structInv.elementalAmplifier.towerCost) {
+			if (structInv.wave.mana >= structInv.elementalAmplifier.towerCost) {
 				std::cout << "Clicking Elemental Amplifier Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[8]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[5].getPosition().y && windowPos.y <= inventoryBox[5].getPosition().y + inventoryBox[5].getSize().y) {
-			if (wave.mana >= structInv.elementalOverclocker.towerCost) {
+			if (structInv.wave.mana >= structInv.elementalOverclocker.towerCost) {
 				std::cout << "Clicking Elemental Overclocker tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[9]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[6].getPosition().y && windowPos.y <= inventoryBox[6].getPosition().y + inventoryBox[6].getSize().y) {
-			if (wave.mana >= structInv.manaAmplifier.towerCost) {
+			if (structInv.wave.mana >= structInv.manaAmplifier.towerCost) {
 				std::cout << "Clicking Mana Amplifier" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[10]);
 				this->mouseHeld = true;
@@ -477,49 +478,49 @@ void UI::towerMenuMouseHandler(sf::Vector2i & windowPos)
 	}
 	else if (windowPos.x >= inventoryBox[7].getPosition().x && windowPos.x <= inventoryBox[7].getPosition().x + inventoryBox[7].getSize().x) {
 		if (windowPos.y >= inventoryBox[7].getPosition().y && windowPos.y <= inventoryBox[7].getPosition().y + inventoryBox[7].getSize().y) {
-			if (wave.mana >= structInv.waterTower.towerCost) {
+			if (structInv.wave.mana >= structInv.waterTower.towerCost) {
 				std::cout << "Clicking Water Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[1]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[8].getPosition().y && windowPos.y <= inventoryBox[8].getPosition().y + inventoryBox[8].getSize().y) {
-			if (wave.mana >= structInv.iceTower.towerCost) {
+			if (structInv.wave.mana >= structInv.iceTower.towerCost) {
 				std::cout << "Clicking Ice Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[3]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[9].getPosition().y && windowPos.y <= inventoryBox[9].getPosition().y + inventoryBox[9].getSize().y) {
-			if (wave.mana >= structInv.energyTower.towerCost) {
+			if (structInv.wave.mana >= structInv.energyTower.towerCost) {
 				std::cout << "Clicking Energy Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[5]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[10].getPosition().y && windowPos.y <= inventoryBox[10].getPosition().y + inventoryBox[10].getSize().y) {
-			if (wave.mana >= structInv.darkTower.towerCost) {
+			if (structInv.wave.mana >= structInv.darkTower.towerCost) {
 				std::cout << "Clicking Dark Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[7]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[11].getPosition().y && windowPos.y <= inventoryBox[11].getPosition().y + inventoryBox[11].getSize().y) {
-			if (wave.mana >= structInv.observatory.towerCost) {
+			if (structInv.wave.mana >= structInv.observatory.towerCost) {
 				std::cout << "Clicking Observatory tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[11]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[12].getPosition().y && windowPos.y <= inventoryBox[12].getPosition().y + inventoryBox[12].getSize().y) {
-			if (wave.mana >= structInv.regenTower.towerCost) {
+			if (structInv.wave.mana >= structInv.regenTower.towerCost) {
 				std::cout << "Clicking regenerator tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[12]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[13].getPosition().y && windowPos.y <= inventoryBox[13].getPosition().y + inventoryBox[13].getSize().y) {
-			if (wave.mana >= structInv.voidTower.towerCost) {
+			if (structInv.wave.mana >= structInv.voidTower.towerCost) {
 				std::cout << "Clicking void tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[13]);
 				this->mouseHeld = true;
@@ -548,13 +549,14 @@ void UI::enemyUIMouseHandler(sf::Vector2i & windowPos, sf::Vector2i & viewPos)
 
 }
 
+
 void UI::updateUIText()
 {
 	this->levelString = std::to_string(this->levelValue); // converting the int to string, so player knows the stats
 	this->scoreString = std::to_string(this->scoreValue);
 	this->healthString = std::to_string(this->actualHealth);
-	this->manaString = std::to_string(this->wave.mana);
-	this->waveString = std::to_string(wave.getWaveNumber());
+	this->manaString = std::to_string(this->structInv.wave.mana);
+	this->waveString = std::to_string(this->structInv.wave.getWaveNumber());
 
 	this->levelText.setString("Level: " + levelString);
 	this->scoreText.setString("Score: " + scoreString);
@@ -565,7 +567,7 @@ void UI::updateUIText()
 
 void UI::updateGameState()
 {
-	this->actualHealth = this->health - this->wave.enemiesPassedGoal();
+	this->actualHealth = this->health - this->structInv.wave.enemiesPassedGoal();
 
 	if (actualHealth <= 0) {
 		this->isLevelLost = true;

@@ -8,6 +8,7 @@ void ElementalOverclockTower::initVariables()
 	this->towerDamage = 100.f; // 0-4
 	this->towerRange = 500.f;
 	this->towerAttackSpeed = 20.f;
+	this->bulletSpeed = 1.f;
 }
 
 void ElementalOverclockTower::initTextures()
