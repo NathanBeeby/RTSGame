@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Constants.h"
+
 
 class MainWindow
 {
@@ -12,7 +12,8 @@ private:
 	sf::Vector2f screenSize;
 	sf::Vector2u m_windowSize;
 	std::string m_windowTitle;
-
+	int height = static_cast<int>(sf::VideoMode::getDesktopMode().height);
+	int width = static_cast<int>(sf::VideoMode::getDesktopMode().width);
 	// Initialization
 	void Setup(const std::string& l_title, const sf::Vector2u& l_size);
 	void Destroy();

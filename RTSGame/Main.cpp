@@ -11,15 +11,17 @@
 	++ MAJOR ++
 	- Fix enemy class to not have first enemy in wave always be demon
 	- Fix enemy class path movement bug
-	- Clean up all code throughout projec
 	- Erase bullet and minus health from enemy when hit.
 	- When reading in the map tiles, have a line which has the enemy goal points
-	- Add Delay to bullet firing
 	- Add multiple textures to the enemies class, to have multiple elements
 	++ MAJOR ++
 
+
+
 	// ------- AFTER GOALS ------- //
-	- Make bullets fire from towers when an enemy is in range
+	- Fix first bullet in array always being fire bullet
+	- Nerf the towers to have 3 second time delay and fix all towers having between 0.1-2.9 second attack speed
+	- Make bullets fire from towers only when an enemy is in range
 	- Implement each tower having it's own upgrade paths
 	- Implement different elemental towers having different upgrades
 	- Impelement mouse handler for upgrade tower gui (purchase upgrades)
@@ -27,6 +29,7 @@
 	- Amend new view constraints as tower menu is now hidable
 	- Water tiles need to be ammeneded in the tile class, so that water tiles are unplacable
 	- Change mouse cursor on grabbing and placing tower
+	- Fix tower class to be like enemy and bullet class
 
 	// ------- FUTURE GOALS ------- //
 

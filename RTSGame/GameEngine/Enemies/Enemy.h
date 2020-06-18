@@ -19,9 +19,10 @@ public:
 	sf::Vector2i goalWayPoint;
 	PathWaypoints waypoint;
 	bool passedGoal, killed;
+	float spawnDelay;
 
 	Enemy(float width = 150.f, float height = 150.f)
-		: currVelocity(0.f, 0.f), movementSpeed(10.f), element(0), health(100)
+		: currVelocity(0.f, 0.f), movementSpeed(this->movementSpeed), element(this->element), health(100), spawnDelay(this->spawnDelay)
 	{
 		std::cout << "Enemy Element ID: " << this->element << std::endl;
 		this->initTextures();

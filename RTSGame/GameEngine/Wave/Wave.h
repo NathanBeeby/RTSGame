@@ -27,8 +27,10 @@ private:
 	int manaReturn;
 
 	sf::Clock waveClock;
+	float delayTime;
+	float elapsed;
+	std::vector<float> delayTimes;
 	sf::Vector2i enemyStartPos;
-	sf::Time second;
 	bool waveBegan, wavePaused;
 	int element;
 

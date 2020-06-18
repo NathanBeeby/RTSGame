@@ -8,7 +8,7 @@ void EarthTower::initVariables()
 	this->elementId = 4;
 	this->towerDamage = 100.f; // 0-4
 	this->towerRange = 350.f;
-	this->towerAttackSpeed = 20.f;
+	this->towerAttackSpeed = 2.f;
 	this->bulletSpeed = 5.f;
 }
 

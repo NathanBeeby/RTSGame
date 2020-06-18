@@ -197,9 +197,6 @@
     <ClInclude Include="GameEngine\MainGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngine\Constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngine\Map\TileProperties.h">
       <Filter>Header Files</Filter>
     </ClInclude>

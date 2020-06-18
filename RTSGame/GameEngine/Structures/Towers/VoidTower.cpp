@@ -8,8 +8,8 @@ void VoidTower::initVariables()
 	this->elementId = 8;
 	this->towerDamage = 100.f; // 0-4
 	this->towerRange = 1000.f;
-	this->towerAttackSpeed = 20.f;
-	this->bulletSpeed = 100.f;
+	this->towerAttackSpeed = 9.5f;
+	this->bulletSpeed = 15.f;
 }
 
 void VoidTower::initTextures()

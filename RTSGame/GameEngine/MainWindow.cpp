@@ -27,7 +27,8 @@ void MainWindow::Create()
 // Constructor / Destructor
 MainWindow::MainWindow()
 {
-	Setup("Window", sf::Vector2u(WIDTH, HEIGHT));
+	Setup("Window", sf::Vector2u(this->width, this->height));
+	std::cout << "height: " << height << ", width: " << width << std::endl;
 }
 
 MainWindow::MainWindow(const std::string & l_title, const sf::Vector2u & l_size)
@@ -43,6 +44,7 @@ MainWindow::~MainWindow()
 void MainWindow::BeginDraw()
 {
 	m_window.clear(sf::Color::Black);
+	//std::cout << "height: " << height << ", width: " << width << std::endl;
 }
 
 void MainWindow::EndDraw()

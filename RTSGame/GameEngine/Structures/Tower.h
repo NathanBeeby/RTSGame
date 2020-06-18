@@ -9,6 +9,12 @@ private:
 	// Private Variables
 	bool towerIsClicked, towerSelected;
 	int textureInt, towerNum;
+
+	sf::Clock bulletTimer;
+	float delayTime;	
+	float elapsed;
+	std::vector<float> delayTimes;
+
 	sf::CircleShape radiusCircle;
 	sf::RectangleShape tower;
 	sf::Texture towerTexture;

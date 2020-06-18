@@ -10,9 +10,11 @@ private:
 	sf::Clock clock;
 	sf::View view;
 	sf::Event ev;
-
+	int height = static_cast<int>(sf::VideoMode::getDesktopMode().height);
+	int width = static_cast<int>(sf::VideoMode::getDesktopMode().width);
 	GameState gameState;
 	MainWindow m_window;
+
 	static sf::Vector2i startLocation;
 
 	// Initialization

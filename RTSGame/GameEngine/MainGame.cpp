@@ -5,18 +5,14 @@ sf::Vector2i MainGame::startLocation = sf::Vector2i(3000, 2500);
 void MainGame::initVariables()
 {
 	this->isRunning = true;
-	/*this->viewSpeed = 100.f;*/
-	//this->startLocation.x = 3000;
-	//this->startLocation.y = 2500;
 }
 
 void MainGame::initView()
 {
-	view.reset(sf::FloatRect(0, 0, WIDTH, HEIGHT)); // setting the view to the screen
+	view.reset(sf::FloatRect(0, 0, width, height)); // setting the view to the screen
 	view.setViewport(sf::FloatRect(0, 0, 1.0f, 1.0f)); // from the left point(start point to width scale), top(start to screen height scale), screen width scale, screen height scale
 	view.setCenter(startLocation.x, startLocation.y);
 	view.zoom(gameState.getZoomAmt()); // zooming out 
-	//std::cout << "Gamestate zoom: " << gameState.getZoomAmt() << std::endl;
 }
 
 void MainGame::initCursor()
@@ -45,7 +41,7 @@ void MainGame::initCursorTextures()
 	}
 }
 
-MainGame::MainGame() : m_window("Nathans Game", sf::Vector2u(WIDTH, HEIGHT))
+MainGame::MainGame() : m_window("Nathans Game", sf::Vector2u(width, height))
 {
 	this->initVariables();
 	this->initView();

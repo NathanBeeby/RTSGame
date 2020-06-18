@@ -7,7 +7,7 @@ void DarkTower::initVariables()
 	this->elementId = 7;
 	this->towerDamage = 100.f; // 0-4
 	this->towerRange = 400.f;
-	this->towerAttackSpeed = 20.f;
+	this->towerAttackSpeed = 3.f;
 	this->bulletSpeed = 10.f;
 }
 

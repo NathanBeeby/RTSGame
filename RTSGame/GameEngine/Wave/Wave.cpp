@@ -11,14 +11,13 @@ void Wave::initVariables()
 	this->waveDifficulty = 1;
 	this->enemyAmount = 0;
 	this->enemyInRound = 0;
-	this->second = sf::seconds(1);
 	this->waveBegan = false;
 	this->wavePaused = false;
 	this->element = 0; // element begins at fire
 	this->manaReturn = 0;
-
 	// Where the enemies begin (Possibly need to make if statement for each given maps start position)
 	this->enemyStartPos = sf::Vector2i(0, (200 * 14) + 20);
+	this->delayTimes.resize(enemyAmount);
 }
 
 Wave::Wave()
@@ -44,15 +43,11 @@ const int Wave::getWaveDifficulty() const
 const int Wave::enemiesPassedGoal() const
 {
 	return this->enemiesArePassed;
-	/*return this->fireEnemy.enemiesPassedGoal() + this->waterEnemy.enemiesPassedGoal() + this->windEnemy.enemiesPassedGoal() + this->iceEnemy.enemiesPassedGoal() + this->earthEnemy.enemiesPassedGoal() +
-		this->energyEnemy.enemiesPassedGoal() + this->lightEnemy.enemiesPassedGoal() + this->darkEnemy.enemiesPassedGoal() + this->voidEnemy.enemiesPassedGoal();*/
 }
 
 const int Wave::enemiesKilled() const
 {
 	return this->enemiesAreKilled;
-	//return this->fireEnemy.enemiesKilled() + this->waterEnemy.enemiesKilled() + this->windEnemy.enemiesKilled() + this->iceEnemy.enemiesKilled() + this->earthEnemy.enemiesKilled() +
-	//	this->energyEnemy.enemiesKilled() + this->lightEnemy.enemiesKilled() + this->darkEnemy.enemiesKilled() + this->voidEnemy.enemiesKilled();
 }
 
 const int Wave::returnedMana() const
@@ -64,11 +59,13 @@ void Wave::beginWave()
 {
 	if (enemyAmount == 0 && waveBegan == false) {
 		this->mana += 150;
-		std::cout << "Element: " << this->element << std::endl;
 		this->waveBegan = true;
 		this->element = (rand() % 8 + 1);
 		this->waveNum++;
 		this->enemyAmount = (waveNum * waveDifficulty) * enemyPerWave;
+		for (int i = 0; i < enemyAmount; i++) {
+			this->delayTimes.push_back(enemy.spawnDelay);
+		}
 	}
 }
 
@@ -81,43 +78,19 @@ void Wave::pauseWave(bool pause)
 void Wave::updateEnemyInWave()
 {
 	if (waveBegan == true) {
+		elapsed += waveClock.restart().asSeconds();
 		for (int i = 0; i < enemyAmount; i++) {
-			if (this->waveClock.getElapsedTime().asSeconds() >= second.asSeconds()) {
 
-				enemy.sprite.setPosition(sf::Vector2f(enemyStartPos));
-				enemy.element = element;
-				enemies.push_back(Enemy(enemy));
-				/*if (this->element == 0) {
-					fireEnemy.CreateEnemy(enemyStartPos);
-				}
-				else if (this->element == 1) {
-					waterEnemy.CreateEnemy(enemyStartPos);
-				}
-				else if (this->element == 2) {
-					windEnemy.CreateEnemy(enemyStartPos);
-				}
-				else if (this->element == 3) {
-					iceEnemy.CreateEnemy(enemyStartPos);
-				}
-				else if (this->element == 4) {
-					earthEnemy.CreateEnemy(enemyStartPos);
-				}
-				else if (this->element == 5) {
-					energyEnemy.CreateEnemy(enemyStartPos);
-				}
-				else if (this->element == 6) {
-					lightEnemy.CreateEnemy(enemyStartPos);
-				}
-				else if (this->element == 7) {
-					darkEnemy.CreateEnemy(enemyStartPos);
-				}
-				else {
-					voidEnemy.CreateEnemy(enemyStartPos);
-				}*/
+				if (elapsed >= delayTimes[i]) {
+					std::cout << "Enemy Delay Time: " << delayTimes[i];
+					enemy.sprite.setPosition(sf::Vector2f(enemyStartPos));
+					enemy.element = element;
+					enemies.push_back(Enemy(enemy));
 
-				this->waveClock.restart();
-				this->enemyAmount--;
-			}
+					this->waveClock.restart();
+					this->enemyAmount--;
+					this->elapsed = 0;
+				}
 		}
 		if (enemyAmount <= 0) {
 			waveBegan = false;
@@ -132,7 +105,7 @@ void Wave::updateEnemies()
 		for (size_t i = 0; i < enemies.size(); i++) {
 			enemies[i].updateHealthPosition();
 			enemies[i].updateEnemyWaypoint();
-	
+
 			if (enemies[i].health <= 0) {
 				enemies.erase(enemies.begin() + i);
 				this->enemiesAreKilled++;

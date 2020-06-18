@@ -125,38 +125,47 @@ void Enemy::update()
 {
 	if (this->element == 0) {
 		this->sprite.setTexture(&fireTexture);
-		this->movementSpeed = 5.f;
+		this->movementSpeed = 4.f;
+		this->spawnDelay = 0.5f;
 	}
 	else if (this->element == 1) {
 		this->sprite.setTexture(&waterTexture);
-		this->movementSpeed = 0.5f;
+		this->movementSpeed = 2.f;
+		this->spawnDelay = 1.f;
 	}
 	else if (this->element == 2) {
 		this->sprite.setTexture(&windTexture);
 		this->movementSpeed = 2.5f;
+		this->spawnDelay = 1.5f;
 	}
 	else if (this->element == 3) {
 		this->sprite.setTexture(&iceTexture);
 		this->movementSpeed = 3.f;
+		this->spawnDelay = 1.7f;
 	}
 	else if (this->element == 4) {
 		this->sprite.setTexture(&earthTexture);
-		this->movementSpeed = 5.f;
+		this->movementSpeed = 3.f;
+		this->spawnDelay = 1.5f;
 	}
 	else if (this->element == 5) {
 		this->sprite.setTexture(&energyTexture);
-		this->movementSpeed = 7.f;
+		this->movementSpeed = 4.f;
+		this->spawnDelay = 2.5f;
 	}
 	else if (this->element == 6) {
 		this->sprite.setTexture(&lightTexture);
 		this->movementSpeed = 2.f;
+		this->spawnDelay = 1.2f;
 	}
 	else if (this->element == 7) {
 		this->sprite.setTexture(&darkTexture);
-		this->movementSpeed = 3.f;
+		this->movementSpeed = 4.f;
+		this->spawnDelay = 1.8f;
 	}
 	else if (this->element == 8) {
 		this->sprite.setTexture(&voidTexture);
-		this->movementSpeed = 10.f;
+		this->movementSpeed = 4.f;
+		this->spawnDelay = 3.f;
 	}
 }

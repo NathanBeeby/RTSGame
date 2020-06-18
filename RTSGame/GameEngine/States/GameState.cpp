@@ -231,6 +231,7 @@ void GameState::update(sf::Time deltaTime)
 	if (gState == gameOn && mouseHeld) {
 		this->updateMouseDragged();
 	}
+
 }
 
 void GameState::renderGameState(sf::RenderWindow &window, sf::View &view)

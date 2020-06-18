@@ -175,7 +175,6 @@
     <ClInclude Include="GameEngine\Structures\Towers\FireTower.h" />
     <ClInclude Include="GameEngine\GameAssets\Animator.h" />
     <ClInclude Include="GameEngine\GameAssets\AssetManager.h" />
-    <ClInclude Include="GameEngine\Constants.h" />
     <ClInclude Include="AudioEngine\Music\GameMusic.h" />
     <ClInclude Include="AudioEngine\SFX\SFX.h" />
     <ClInclude Include="GameEngine\Map\Tile.h" />

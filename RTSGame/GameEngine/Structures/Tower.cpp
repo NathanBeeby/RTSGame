@@ -12,18 +12,23 @@ void Tower::initVariables()
 	this->towerPos.y = -1;
 	this->textureInt = 0;
 	// Float Variables
-
+	this->delayTime = sf::seconds(10).asSeconds();
+	this->elapsed = 0;
 	// Boolean Variables
-	this->towers.resize(towerNum);
-	this->towerCenters.resize(towerNum);
 	this->towerIsClicked = false;
 	this->towerSelected = false;
 
 	// Vector variables
 	this->aimDir = sf::Vector2f(-1, -1);
 	this->aimDirNorm = sf::Vector2f(-1, -1);
+
+	// Resizing vectors
 	this->aimDirs.resize(towerNum);
 	this->aimDirNorms.resize(towerNum);
+	this->towers.resize(towerNum);
+	this->towerCenters.resize(towerNum);
+	this->delayTimes.resize(towerNum);
+
 }
 
 void Tower::initTextures()
@@ -90,6 +95,7 @@ sf::Vector2f Tower::towerClicked(sf::Vector2i clickPos)
 {
 	this->towerPos = sf::Vector2f(-1, -1);
 
+
 	for (int i = 0; i < this->towers.size(); i++) {
 		if (clickPos.x >= this->towers[i].getGlobalBounds().left && clickPos.x <= (this->towers[i].getGlobalBounds().left + this->towers[i].getGlobalBounds().width)) {
 			if (clickPos.y >= this->towers[i].getGlobalBounds().top && clickPos.y <= (this->towers[i].getGlobalBounds().top + this->towers[i].getGlobalBounds().height)) {
@@ -122,18 +128,29 @@ sf::Vector2f Tower::towerClicked(sf::Vector2i clickPos)
 
 void Tower::FireBullet(sf::Vector2f &enemyPos)
 {
+
+
+	elapsed += bulletTimer.restart().asSeconds();
+
+	std::cout << "Elapsed Time: " << elapsed << std::endl;
+	/*this->time += this->elapsedTime;*/
+
 	if (enemyPos.x > 0 || enemyPos.y > 0) {
 		for (int i = 0; i < aimDirs.size(); i++) {
 			this->aimDirs[i] = enemyPos - towerCenters[i];
 			this->aimDirNorms[i] = this->aimDirs[i] / sqrt(pow(aimDirs[i].x, 2) + (aimDirs[i].y, 2));
 		}
 		//if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			for (int i = 0; i < towers.size(); i++)
-			{
+		for (int i = 0; i < towers.size(); i++)
+		{
+			if (elapsed >= delayTimes[i]) {
+				std::cout << "Delay Time: " << delayTimes[i] << std::endl;
 				this->CreateBullet(i);
+				bulletTimer.restart();
+				this->elapsed = 0;
 			}
+		}
 		//}
-
 
 		//if (enemyPos.x >= tower.getPosition().x + (tower.getSize().x / 2) + towerRange || enemyPos.x <= tower.getPosition().x + (tower.getSize().x / 2) - towerRange) {
 		//	if (enemyPos.y >= tower.getPosition().y + (tower.getSize().y / 2) + towerRange || enemyPos.y <= tower.getPosition().y + (tower.getSize().y / 2) - towerRange) {
@@ -157,19 +174,19 @@ void Tower::CreateBullet(int i)
 void Tower::CreateTower(sf::Vector2i towerPos)
 {
 	this->towerNum++;
-	this->towers.resize(towerNum);
-	this->aimDirs.resize(towerNum);
-	this->aimDirNorms.resize(towerNum);
-	this->towerCenters.resize(towerNum);
+	//this->towers.resize(towerNum);
+	//this->aimDirs.resize(towerNum);
+	//this->aimDirNorms.resize(towerNum);
+	//this->towerCenters.resize(towerNum);
 	this->tower.setSize(sf::Vector2f(this->towerSize.x, this->towerSize.y));
 	this->tower.setPosition(sf::Vector2f(towerPos.x, towerPos.y));
-
 	this->tower.setTexture(&towerTextures[0]);
 
 	this->towers.push_back(this->tower);
 	this->towerCenters.push_back(sf::Vector2f(this->tower.getPosition().x + (this->tower.getSize().x / 2), this->tower.getPosition().y + (this->tower.getSize().y / 2)));
 	this->aimDirs.push_back(this->aimDir);
 	this->aimDirNorms.push_back(this->aimDirNorm);
+	this->delayTimes.push_back(this->delayTime - this->towerAttackSpeed);
 }
 
 void Tower::SelectTower(int towerID, sf::Vector2f towerCenter)
@@ -203,15 +220,15 @@ void Tower::updateMousePosition(sf::Vector2i &windowPos, sf::Vector2f &viewPos, 
 	mousePosGrid = sf::Vector2f(gridPos);
 
 	if (towerCenters.size() >= 1) {
-	for (size_t i = 0; i < bullets.size(); i++)
-	{
-		bullets[i].sprite.move(bullets[i].currVelocity);
-		if (bullets[i].sprite.getPosition().x <= bullets[i].origin.x - towerRange|| bullets[i].sprite.getPosition().x >= bullets[i].origin.x + towerRange ||
-			bullets[i].sprite.getPosition().y <= bullets[i].origin.y - towerRange || bullets[i].sprite.getPosition().y >= bullets[i].origin.y + towerRange) {
+		for (size_t i = 0; i < bullets.size(); i++)
+		{
+			bullets[i].sprite.move(bullets[i].currVelocity);
+			if (bullets[i].sprite.getPosition().x <= bullets[i].origin.x - towerRange || bullets[i].sprite.getPosition().x >= bullets[i].origin.x + towerRange ||
+				bullets[i].sprite.getPosition().y <= bullets[i].origin.y - towerRange || bullets[i].sprite.getPosition().y >= bullets[i].origin.y + towerRange) {
 				bullets.erase(bullets.begin() + i);
+			}
 		}
-	}
-	
+
 	}
 }
 
