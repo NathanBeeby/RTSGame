@@ -7,47 +7,48 @@
 class Enemy
 {
 private:
-	// Private Variables
-	int enemiesPassed, enemiesKill, enemyNum;
-	sf::Texture enemytexture;
-	sf::RectangleShape healthBar, maxHealthBar;
-	std::vector<sf::RectangleShape> enemyHealthBar, enemyMaxHealthBar;
-	//Waypoints code
-	std::vector<int> currentPoint, maxPoint, enemyHealth, enemyMaxHealth;
-	std::vector<sf::Vector2i> goalWaypoint;
-	sf::Vector2i enemySize;
-	PathWaypoints waypoint;
-
-	// Initialization
-	void initVariables();
+	sf::Texture fireTexture, waterTexture, windTexture, iceTexture, earthTexture, energyTexture, lightTexture, darkTexture, voidTexture;
+	
 	void initTextures();
 	void initWaypoints();
-	void initSprites();
 public:
-	// Constructor / Destructor
-	Enemy();
-	virtual ~Enemy();
+	sf::RectangleShape sprite, maxHealthBar, healthBar;
+	sf::Vector2f currVelocity;
+	float movementSpeed;
+	int health, element, currentPoint, maxPoint;
+	sf::Vector2i goalWayPoint;
+	PathWaypoints waypoint;
+	bool passedGoal, killed;
 
-	// Public Variables 
-	std::vector<sf::Texture> enemyTextures;
-	std::vector<sf::RectangleShape> enemies;
-	sf::RectangleShape enemy;
-	// Accessors
-	const int enemiesPassedGoal() const;
-	const int enemiesKilled() const;
+	Enemy(float width = 150.f, float height = 150.f)
+		: currVelocity(0.f, 0.f), movementSpeed(10.f), element(0), health(100)
+	{
+		std::cout << "Enemy Element ID: " << this->element << std::endl;
+		this->initTextures();
+		this->initWaypoints();
 
-	// Public Functions
-	void ResizeArrays();
-	void pushBackEnemy(sf::Vector2i enemyPos);
+		this->passedGoal = false;
 
-	void CreateEnemy(sf::Vector2i enemyPos);
-	void DeleteEnemy(int enemyId);
-	void EnemyPassedGoal(int enemyId);
-	void EnemyKilled(int enemyId);
-	void DeleteAllEnemies();
+		this->currentPoint = 0;
+		this->maxPoint = this->waypoint.waypoints.size();
+		this->goalWayPoint = sf::Vector2i(this->waypoint.waypoints[1].x, this->waypoint.waypoints[1].y);
+
+		this->sprite.setSize(sf::Vector2f(width, height));
+		
+		this->maxHealthBar.setPosition(sprite.getPosition().x, sprite.getPosition().y - 10);
+		this->maxHealthBar.setSize(sf::Vector2f(150.f, 20.f));
+		this->maxHealthBar.setFillColor(sf::Color::Red);
+		this->maxHealthBar.setOutlineColor(sf::Color::Black);
+		this->maxHealthBar.setOutlineThickness(2);
+
+		this->healthBar.setPosition(sprite.getPosition().x, sprite.getPosition().y - 10);
+		this->healthBar.setSize(sf::Vector2f(this->health, 20.f));
+		this->healthBar.setFillColor(sf::Color::Green);
+	}
+
+	void updateHealthPosition();
 	void updateEnemyWaypoint();
-	void updateEnemyMovement(int i);
+	void updateEnemyMovement();
 	void update();
-	void render(sf::RenderTarget &target);
 };
 

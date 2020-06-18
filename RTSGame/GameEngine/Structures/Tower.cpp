@@ -103,35 +103,54 @@ sf::Vector2f Tower::towerClicked(sf::Vector2i clickPos)
 
 	return this->towerPos;
 }
+//
+//void Tower::FireBullets(sf::Vector2i &enemyPos)
+//{
+//	for (int i = 0; i < towers.size(); i++) { // NEED TO GET THE ENEMY POSITION IN VIEW SPACE & ONLY FIRE A BULLET FROM A SPECIFIC TOWER WHEN ENEMY IS IN RANGE (MADE E.G> FUNCTION BELOW)
+//		// ALSO NEED TO ADD TIME DELAY HERE
+//		if (enemyPos.x > 0 || enemyPos.y > 0) {
+//			//std::cout << "Tower Center pos: X - " << tower.getPosition().x + (tower.getSize().x / 2) << ", Y - " << tower.getPosition().y + (tower.getSize().y / 2) << std::endl;
+//			if (enemyPos.x >= towers[i].getPosition().x + (towers[i].getSize().x / 2) + towerRange || enemyPos.x <= towers[i].getPosition().x + (towers[i].getSize().x / 2) - towerRange) {
+//				if (enemyPos.y >= towers[i].getPosition().y + (towers[i].getSize().y / 2) + towerRange || enemyPos.y <= towers[i].getPosition().y + (towers[i].getSize().y / 2) - towerRange) {
+//					std::cout << "Enemy in range" << std::endl;
+//					bullets.push_back(bullet);
+//				}
+//			}
+//		}
+//	}
+//}
 
-void Tower::FireBullets(sf::Vector2i &enemyPos)
+void Tower::FireBullet(sf::Vector2f &enemyPos)
 {
-	for (int i = 0; i < towers.size(); i++) { // NEED TO GET THE ENEMY POSITION IN VIEW SPACE & ONLY FIRE A BULLET FROM A SPECIFIC TOWER WHEN ENEMY IS IN RANGE (MADE E.G> FUNCTION BELOW)
-		// ALSO NEED TO ADD TIME DELAY HERE
-		if (enemyPos.x > 0 || enemyPos.y > 0) {
-			//std::cout << "Tower Center pos: X - " << tower.getPosition().x + (tower.getSize().x / 2) << ", Y - " << tower.getPosition().y + (tower.getSize().y / 2) << std::endl;
-			if (enemyPos.x >= towers[i].getPosition().x + (towers[i].getSize().x / 2) + towerRange || enemyPos.x <= towers[i].getPosition().x + (towers[i].getSize().x / 2) - towerRange) {
-				if (enemyPos.y >= towers[i].getPosition().y + (towers[i].getSize().y / 2) + towerRange || enemyPos.y <= towers[i].getPosition().y + (towers[i].getSize().y / 2) - towerRange) {
-					//bullet.CreateBullet(sf::Vector2i(this->towers[towerNum].getPosition().x + (this->towers[towerNum].getSize().x / 2), this->towers[towerNum].getPosition().y + (this->towers[towerNum].getSize().y / 2)), sf::Vector2i(enemyPos.x, enemyPos.y), this->elementId, 0, towerDamage, towerAttackSpeed);
-					std::cout << "Enemy in range" << std::endl;
-					bullets.push_back(bullet);
-				}
-			}
+	if (enemyPos.x > 0 || enemyPos.y > 0) {
+		for (int i = 0; i < aimDirs.size(); i++) {
+			this->aimDirs[i] = enemyPos - towerCenters[i];
+			this->aimDirNorms[i] = this->aimDirs[i] / sqrt(pow(aimDirs[i].x, 2) + (aimDirs[i].y, 2));
 		}
+		//if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+			for (int i = 0; i < towers.size(); i++)
+			{
+				this->CreateBullet(i);
+			}
+		//}
+
+
+		//if (enemyPos.x >= tower.getPosition().x + (tower.getSize().x / 2) + towerRange || enemyPos.x <= tower.getPosition().x + (tower.getSize().x / 2) - towerRange) {
+		//	if (enemyPos.y >= tower.getPosition().y + (tower.getSize().y / 2) + towerRange || enemyPos.y <= tower.getPosition().y + (tower.getSize().y / 2) - towerRange) {
+
+		//	}
+		//}
 	}
 }
 
-void Tower::FireBullet(sf::Vector2i &enemyPos)
+void Tower::CreateBullet(int i)
 {
-	if (enemyPos.x > 0 || enemyPos.y > 0) {
-		//std::cout << "Tower Center pos: X - " << tower.getPosition().x + (tower.getSize().x / 2) << ", Y - " << tower.getPosition().y + (tower.getSize().y / 2) << std::endl;
-		if (enemyPos.x >= tower.getPosition().x + (tower.getSize().x / 2) + towerRange || enemyPos.x <= tower.getPosition().x + (tower.getSize().x / 2) - towerRange) {
-			if (enemyPos.y >= tower.getPosition().y + (tower.getSize().y / 2) + towerRange || enemyPos.y <= tower.getPosition().y + (tower.getSize().y / 2) - towerRange) {
-				//bullet.CreateBullet(sf::Vector2i(this->towers[towerNum].getPosition().x + (this->towers[towerNum].getSize().x / 2), this->towers[towerNum].getPosition().y + (this->towers[towerNum].getSize().y / 2)), sf::Vector2i(enemyPos.x, enemyPos.y), this->elementId, 0, towerDamage, towerAttackSpeed);
-				bullets.push_back(bullet);
-			}
-		}
-	}
+	bullet.maxSpeed = bulletSpeed;
+	bullet.element = this->elementId;
+	bullet.sprite.setPosition(sf::Vector2f(towers[i].getPosition().x + (towers[i].getSize().x / 2), towers[i].getPosition().y + (towers[i].getSize().y / 2)));
+	bullet.origin = sf::Vector2f(towers[i].getPosition().x + (towers[i].getSize().x / 2), towers[i].getPosition().y + (towers[i].getSize().y / 2));
+	bullet.currVelocity = aimDirNorms[i] * bullet.maxSpeed;
+	bullets.push_back(Bullet(bullet));
 }
 
 
@@ -158,8 +177,6 @@ void Tower::SelectTower(int towerID, sf::Vector2f towerCenter)
 	this->towerSelected = true;
 	this->radiusCircle.setRadius(this->towerRange);
 	this->radiusCircle.setPosition(sf::Vector2f(towerCenter.x - (radiusCircle.getRadius()), towerCenter.y - (radiusCircle.getRadius())));
-	// TOWER SELECTED HERE
-
 }
 
 void Tower::DeselectTower()
@@ -185,54 +202,23 @@ void Tower::updateMousePosition(sf::Vector2i &windowPos, sf::Vector2f &viewPos, 
 	mousePosView = sf::Vector2f(viewPos);
 	mousePosGrid = sf::Vector2f(gridPos);
 
-	// Setting the Aim Direction from the first tower
-
 	if (towerCenters.size() >= 1) {
-		for (int i = 0; i < aimDirs.size(); i++) {
-			this->aimDirs[i] = mousePosView - towerCenters[i];
-			this->aimDirNorms[i] = this->aimDirs[i] / sqrt(pow(aimDirs[i].x, 2) + (aimDirs[i].y, 2));
-
-			//std::cout << "Aim Direction:" << i << " X - " << aimDirs[i].x << ", Y - " << aimDirs[i].y << std::endl;
-			//std::cout << "Aim Direction Normal: " << i << " X - " << aimDirNorms[i].x << ", Y - " << aimDirNorms[i].y << std::endl;
-		}
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			for (int i = 0; i < towers.size(); i++)
-			{
-				bullet.maxSpeed = bulletSpeed;
-				bullet.element = this->elementId;
-				bullet.sprite.setPosition(sf::Vector2f(towers[i].getPosition().x + (towers[i].getSize().x / 2), towers[i].getPosition().y + (towers[i].getSize().y / 2)));
-				bullet.currVelocity = aimDirNorms[i] * bullet.maxSpeed;
-				bullet.positionOfDestruction = aimDirNorms[i] * towerRange;
-				bullets.push_back(Bullet(bullet));
-			}
-		}
-
-
-		for (size_t i = 0; i < bullets.size(); i++)
-		{
-			bullets[i].sprite.move(bullets[i].currVelocity);
-			if (bullets[i].sprite.getPosition().x >= bullets[i].positionOfDestruction.x) {
-				if (bullets[i].sprite.getPosition().y >= bullets[i].positionOfDestruction.y) {
-					bullets.erase(bullets.begin() + i);
-				}
-			}
-			std::cout << "Time Until Destruction: " << bullets[i].timeUntilDestruction << std::endl;
-			if (bullets[i].timeUntilDestruction <= 0) {
+	for (size_t i = 0; i < bullets.size(); i++)
+	{
+		bullets[i].sprite.move(bullets[i].currVelocity);
+		if (bullets[i].sprite.getPosition().x <= bullets[i].origin.x - towerRange|| bullets[i].sprite.getPosition().x >= bullets[i].origin.x + towerRange ||
+			bullets[i].sprite.getPosition().y <= bullets[i].origin.y - towerRange || bullets[i].sprite.getPosition().y >= bullets[i].origin.y + towerRange) {
 				bullets.erase(bullets.begin() + i);
-			}
 		}
-
+	}
+	
 	}
 }
 
 void Tower::update(sf::Time deltaTime)
 {
-	//bullet.update(deltaTime, towerRange);
-
-	//if (towers.size() >= 1) {
-	//	this->FireBullets();
-	//}
 	bullet.update();
+
 	for (int i = 0; i < towerCenters.size(); i++) {
 		this->towerCenters[i] = sf::Vector2f(this->towers[i].getPosition().x + (this->towers[i].getSize().x / 2), this->towers[i].getPosition().y + (this->towers[i].getSize().y / 2));
 	}
@@ -240,7 +226,6 @@ void Tower::update(sf::Time deltaTime)
 
 void Tower::render(sf::RenderTarget & target)
 {
-	//bullet.render(target);
 	renderBullets(target);
 	for (int i = 0; i < this->towers.size(); i++) {
 		target.draw(this->towers[i]);

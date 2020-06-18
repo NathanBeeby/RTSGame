@@ -47,8 +47,8 @@ public:
 	// Public Functions
 	sf::Vector2f towerClicked(sf::Vector2i clickPos);
 
-	void FireBullets(sf::Vector2i & enemyPos);
-	void FireBullet(sf::Vector2i &enemyPos);
+	void FireBullet(sf::Vector2f &enemyPos);
+	void CreateBullet(int i);
 	void CreateTower(sf::Vector2i towerPos);
 	void SelectTower(int towerID, sf::Vector2f towerCenter);
 	void DeselectTower();

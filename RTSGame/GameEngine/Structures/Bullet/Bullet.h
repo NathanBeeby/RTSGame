@@ -14,16 +14,15 @@ private:
 public:
 	sf::RectangleShape sprite;
 	sf::Vector2f currVelocity;
-	sf::Vector2f positionOfDestruction;
+	sf::Vector2f origin;
 	float maxSpeed;
 	int element;
 	float baseDamage;
-	float timeUntilDestruction;
+
 
 	Bullet(float width = 30.f, float height = 60.f)
-		: currVelocity(0.f, 0.f), maxSpeed(15.f), element(0), timeUntilDestruction(maxSpeed)
+		: currVelocity(0.f, 0.f), maxSpeed(15.f), element(0)
 	{
-		std::cout << "Element ID: " << this->element << std::endl;
 		this->initTextures();
 		this->sprite.setSize(sf::Vector2f(width, height));
 

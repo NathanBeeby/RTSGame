@@ -285,53 +285,11 @@ void StructureInventory::deleteAllTowers()
 void StructureInventory::updateFiring()
 {
 	// This works - Now need to get the towers to fire at these enemies
-	if (wave.fireEnemy.enemies.size() > 0) {
-		for (int i = 0; i < wave.fireEnemy.enemies.size(); i++) {
-			this->updateTowerFiring(sf::Vector2i(wave.fireEnemy.enemies[i].getPosition().x, wave.fireEnemy.enemies[i].getPosition().y));
+	if (wave.enemies.size() > 0) {
+		//for (int i = 0; i < wave.enemies.size(); i++) {
+			this->updateTowerFiring(sf::Vector2i(wave.enemies[0].sprite.getPosition().x, wave.enemies[0].sprite.getPosition().y));
 		}
-	}
-	if (wave.waterEnemy.enemies.size() > 0) {
-		for (int i = 0; i < wave.waterEnemy.enemies.size(); i++) {
-			this->updateTowerFiring(sf::Vector2i(wave.waterEnemy.enemies[i].getPosition().x, wave.waterEnemy.enemies[i].getPosition().y));
-		}
-	}
-	if (wave.windEnemy.enemies.size() > 0) {
-		for (int i = 0; i < wave.windEnemy.enemies.size(); i++) {
-			this->updateTowerFiring(sf::Vector2i(wave.windEnemy.enemies[i].getPosition().x, wave.windEnemy.enemies[i].getPosition().y));
-		}
-	}
-	if (wave.iceEnemy.enemies.size() > 0) {
-		for (int i = 0; i < wave.iceEnemy.enemies.size(); i++) {
-			this->updateTowerFiring(sf::Vector2i(wave.iceEnemy.enemies[i].getPosition().x, wave.iceEnemy.enemies[i].getPosition().y));
-		}
-	}
-	if (wave.earthEnemy.enemies.size() > 0) {
-		for (int i = 0; i < wave.earthEnemy.enemies.size(); i++) {
-			this->updateTowerFiring(sf::Vector2i(wave.earthEnemy.enemies[i].getPosition().x, wave.earthEnemy.enemies[i].getPosition().y));
-		}
-	}
-	if (wave.energyEnemy.enemies.size() > 0) {
-		for (int i = 0; i < wave.energyEnemy.enemies.size(); i++) {
-			this->updateTowerFiring(sf::Vector2i(wave.energyEnemy.enemies[i].getPosition().x, wave.energyEnemy.enemies[i].getPosition().y));
-		}
-	}
-	if (wave.lightEnemy.enemies.size() > 0) {
-		for (int i = 0; i < wave.lightEnemy.enemies.size(); i++) {
-			this->updateTowerFiring(sf::Vector2i(wave.lightEnemy.enemies[i].getPosition().x, wave.lightEnemy.enemies[i].getPosition().y));
-		}
-	}
-	if (wave.darkEnemy.enemies.size() > 0) {
-		for (int i = 0; i < wave.darkEnemy.enemies.size(); i++) {
-			this->updateTowerFiring(sf::Vector2i(wave.darkEnemy.enemies[i].getPosition().x, wave.darkEnemy.enemies[i].getPosition().y));
-		}
-	}
-	if (wave.voidEnemy.enemies.size() > 0) {
-		for (int i = 0; i < wave.voidEnemy.enemies.size(); i++) {
-			this->updateTowerFiring(sf::Vector2i(wave.voidEnemy.enemies[i].getPosition().x, wave.voidEnemy.enemies[i].getPosition().y));
-		}
-	}
-
-
+	//}
 }
 
 void StructureInventory::updateMousePosition(sf::Vector2i &windowPos, sf::Vector2f &viewPos, sf::Vector2i &gridPos)
@@ -369,32 +327,33 @@ void StructureInventory::updateTowers(sf::Time deltaTime)
 
 void StructureInventory::updateTowerFiring(sf::Vector2i &enemyPos)
 {
+	
 	if (fireTower.getTowerAmount() > 0) {
-		fireTower.FireBullets(sf::Vector2i(enemyPos.x, enemyPos.y));
+		fireTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
 	}
 	if (waterTower.getTowerAmount() > 0) {
-		waterTower.FireBullets(sf::Vector2i(enemyPos.x, enemyPos.y));
+		waterTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
 	}
 	if (windTower.getTowerAmount() > 0) {
-		windTower.FireBullets(sf::Vector2i(enemyPos.x, enemyPos.y));
+		windTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
 	}
 	if (iceTower.getTowerAmount() > 0) {
-		iceTower.FireBullets(sf::Vector2i(enemyPos.x, enemyPos.y));
+		iceTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
 	}
 	if (earthTower.getTowerAmount() > 0) {
-		earthTower.FireBullets(sf::Vector2i(enemyPos.x, enemyPos.y));
+		earthTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
 	}
 	if (energyTower.getTowerAmount() > 0) {
-		energyTower.FireBullets(sf::Vector2i(enemyPos.x, enemyPos.y));
+		energyTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
 	}
 	if (lightTower.getTowerAmount() > 0) {
-		lightTower.FireBullets(sf::Vector2i(enemyPos.x, enemyPos.y));
+		lightTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
 	}
 	if (darkTower.getTowerAmount() > 0) {
-		darkTower.FireBullets(sf::Vector2i(enemyPos.x, enemyPos.y));
+		darkTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
 	}
 	if (voidTower.getTowerAmount() > 0) {
-		voidTower.FireBullets(sf::Vector2i(enemyPos.x, enemyPos.y));
+		voidTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
 	}
 	//std::cout << "Enemy Pos X: " << enemyPos.x << ", Y: " << enemyPos.y << std::endl;
 }

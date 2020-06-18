@@ -9,8 +9,13 @@
 
 	// ------- NEXT GOALS ------- //
 	++ MAJOR ++
-	- Delete bullets when they are out of the tower radius
-	- Make the enemy class like the bullet class, giving them a health and speed
+	- Fix enemy class to not have first enemy in wave always be demon
+	- Fix enemy class path movement bug
+	- Clean up all code throughout projec
+	- Erase bullet and minus health from enemy when hit.
+	- When reading in the map tiles, have a line which has the enemy goal points
+	- Add Delay to bullet firing
+	- Add multiple textures to the enemies class, to have multiple elements
 	++ MAJOR ++
 
 	// ------- AFTER GOALS ------- //
@@ -33,10 +38,8 @@
 	- When level is switched, change health and mana back to original value
 
 	// ------- DISTANT GOALS ------- //
-	- Implement tower bullet erasing once out of tower range
 	- Implement tower bullet following enemy until deletion or collision
 	- Implement enemy health reducing if bullet collides with enemy
-	- Implement enemy dying / erasing once enemy health is 0
 	- Implement multithreading into the game
 	- Implement a bloom shader into the game & set it on and off via key press
 	- Have all assets created by the asset manager
