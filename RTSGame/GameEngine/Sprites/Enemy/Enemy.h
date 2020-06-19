@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include "../Map/PathWaypoints.h"
+#include "../../Map/PathWaypoints.h"
 
 class Enemy
 {
@@ -16,6 +16,7 @@ public:
 	sf::Vector2f currVelocity;
 	float movementSpeed;
 	int health, element, currentPoint, maxPoint;
+
 	sf::Vector2i goalWayPoint;
 	PathWaypoints waypoint;
 	bool passedGoal, killed;

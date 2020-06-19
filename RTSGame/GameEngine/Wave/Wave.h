@@ -3,17 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <SFML/Graphics.hpp>
-#include "../Enemies/Enemy.h"
-//
-//#include "../Enemies/Elements/FireEnemy.h"
-//#include "../Enemies/Elements/WaterEnemy.h"
-//#include "../Enemies/Elements/WindEnemy.h"
-//#include "../Enemies/Elements/IceEnemy.h"
-//#include "../Enemies/Elements/EarthEnemy.h"
-//#include "../Enemies/Elements/EnergyEnemy.h"
-//#include "../Enemies/Elements/LightEnemy.h"
-//#include "../Enemies/Elements/DarkEnemy.h"
-//#include "../Enemies/Elements/VoidEnemy.h"
+#include "../Sprites/Enemy/Enemy.h"
 
 class Wave
 {

@@ -40,7 +40,6 @@ public:
 	void updateGUIPositions();
 	void updateResources();
 	void update(sf::Time deltaTime);
-	void updateMousePositions(sf::Vector2i &windowPos, sf::Vector2f &viewPos, sf::Vector2i &gridPos);
 	void updateTowerTextures();
 	void updateTowerUpgrades();
 	void keyHandler(sf::Keyboard::Key key);

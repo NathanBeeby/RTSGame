@@ -424,7 +424,7 @@ void UI::towerMenuMouseHandler(sf::Vector2i & windowPos)
 	if (windowPos.x >= inventoryBox[0].getPosition().x && windowPos.x <= inventoryBox[0].getPosition().x + inventoryBox[0].getSize().x) {
 
 		if (windowPos.y >= inventoryBox[0].getPosition().y && windowPos.y <= inventoryBox[0].getPosition().y + inventoryBox[0].getSize().y) {
-			if (structInv.wave.mana >= structInv.fireTower.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Fire Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[0]);
 				this->mouseHeld = true;
@@ -434,42 +434,42 @@ void UI::towerMenuMouseHandler(sf::Vector2i & windowPos)
 			}
 		}
 		if (windowPos.y >= inventoryBox[1].getPosition().y && windowPos.y <= inventoryBox[1].getPosition().y + inventoryBox[1].getSize().y) {
-			if (structInv.wave.mana >= structInv.windTower.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Wind Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[2]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[2].getPosition().y && windowPos.y <= inventoryBox[2].getPosition().y + inventoryBox[2].getSize().y) {
-			if (structInv.wave.mana >= structInv.earthTower.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Earth Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[4]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[3].getPosition().y && windowPos.y <= inventoryBox[3].getPosition().y + inventoryBox[3].getSize().y) {
-			if (structInv.wave.mana >= structInv.lightTower.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Light Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[6]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[4].getPosition().y && windowPos.y <= inventoryBox[4].getPosition().y + inventoryBox[4].getSize().y) {
-			if (structInv.wave.mana >= structInv.elementalAmplifier.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Elemental Amplifier Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[8]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[5].getPosition().y && windowPos.y <= inventoryBox[5].getPosition().y + inventoryBox[5].getSize().y) {
-			if (structInv.wave.mana >= structInv.elementalOverclocker.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Elemental Overclocker tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[9]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[6].getPosition().y && windowPos.y <= inventoryBox[6].getPosition().y + inventoryBox[6].getSize().y) {
-			if (structInv.wave.mana >= structInv.manaAmplifier.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Mana Amplifier" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[10]);
 				this->mouseHeld = true;
@@ -478,49 +478,49 @@ void UI::towerMenuMouseHandler(sf::Vector2i & windowPos)
 	}
 	else if (windowPos.x >= inventoryBox[7].getPosition().x && windowPos.x <= inventoryBox[7].getPosition().x + inventoryBox[7].getSize().x) {
 		if (windowPos.y >= inventoryBox[7].getPosition().y && windowPos.y <= inventoryBox[7].getPosition().y + inventoryBox[7].getSize().y) {
-			if (structInv.wave.mana >= structInv.waterTower.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Water Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[1]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[8].getPosition().y && windowPos.y <= inventoryBox[8].getPosition().y + inventoryBox[8].getSize().y) {
-			if (structInv.wave.mana >= structInv.iceTower.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Ice Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[3]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[9].getPosition().y && windowPos.y <= inventoryBox[9].getPosition().y + inventoryBox[9].getSize().y) {
-			if (structInv.wave.mana >= structInv.energyTower.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Energy Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[5]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[10].getPosition().y && windowPos.y <= inventoryBox[10].getPosition().y + inventoryBox[10].getSize().y) {
-			if (structInv.wave.mana >= structInv.darkTower.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Dark Tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[7]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[11].getPosition().y && windowPos.y <= inventoryBox[11].getPosition().y + inventoryBox[11].getSize().y) {
-			if (structInv.wave.mana >= structInv.observatory.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking Observatory tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[11]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[12].getPosition().y && windowPos.y <= inventoryBox[12].getPosition().y + inventoryBox[12].getSize().y) {
-			if (structInv.wave.mana >= structInv.regenTower.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking regenerator tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[12]);
 				this->mouseHeld = true;
 			}
 		}
 		if (windowPos.y >= inventoryBox[13].getPosition().y && windowPos.y <= inventoryBox[13].getPosition().y + inventoryBox[13].getSize().y) {
-			if (structInv.wave.mana >= structInv.voidTower.towerCost) {
+			if (structInv.wave.mana >= structInv.tower.towerCost) {
 				std::cout << "Clicking void tower" << std::endl;
 				this->structInv.towerFollow(this->towerStrings[13]);
 				this->mouseHeld = true;

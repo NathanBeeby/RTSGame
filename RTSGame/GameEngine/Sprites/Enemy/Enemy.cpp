@@ -66,6 +66,7 @@ void Enemy::initWaypoints()
 void Enemy::updateHealthPosition()
 {
 	this->maxHealthBar.setPosition(sprite.getPosition().x, sprite.getPosition().y - 10);
+	this->healthBar.setSize(sf::Vector2f(this->health, 20.f));
 	this->healthBar.setPosition(sprite.getPosition().x, sprite.getPosition().y - 10);
 }
 
@@ -168,4 +169,5 @@ void Enemy::update()
 		this->movementSpeed = 4.f;
 		this->spawnDelay = 3.f;
 	}
+	
 }

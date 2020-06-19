@@ -1,6 +1,6 @@
 #pragma once
 #include "MainWindow.h"
-#include "States/GameState.h"
+#include "../States/GameState.h"
 #include <sstream>
 class MainGame
 {

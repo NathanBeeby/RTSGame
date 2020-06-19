@@ -235,15 +235,7 @@ const bool GUI::LevelLost() const
 
 const bool GUI::isTowerSelected() const
 {
-	bool isTower = false;
-
-	if (structInv.fireTower.isTowerSelected() || structInv.waterTower.isTowerSelected() || structInv.windTower.isTowerSelected() || structInv.iceTower.isTowerSelected()
-		|| structInv.earthTower.isTowerSelected() || structInv.energyTower.isTowerSelected() || structInv.lightTower.isTowerSelected() || structInv.darkTower.isTowerSelected() || structInv.elementalAmplifier.isTowerSelected()
-		|| structInv.elementalOverclocker.isTowerSelected() || structInv.manaAmplifier.isTowerSelected() || structInv.observatory.isTowerSelected() || structInv.regenTower.isTowerSelected() || structInv.voidTower.isTowerSelected()) {
-		isTower = true;
-	}
-
-	return isTower;
+	return structInv.tower.towerSelected;
 }
 
 void GUI::AddUnplacablePosition(sf::Vector2i pos)
@@ -283,97 +275,114 @@ void GUI::update(sf::Time deltaTime)
 	this->updateGUIPositions();
 }
 
-void GUI::updateMousePositions(sf::Vector2i & windowPos, sf::Vector2f & viewPos, sf::Vector2i & gridPos)
-{
-	structInv.updateMousePosition(windowPos, viewPos, gridPos);
-}
-
 void GUI::updateTowerTextures()
 {
-	if (this->structInv.wave.mana < structInv.fireTower.towerCost) {
-		inventoryBox[0].setTexture(&towerNoTextures[0]);
-	}
-	else {
-		inventoryBox[0].setTexture(&this->towerTextures[0]);
-	}
-	if (this->structInv.wave.mana < structInv.waterTower.towerCost) {
-		inventoryBox[7].setTexture(&towerNoTextures[1]);
-	}
-	else {
-		inventoryBox[7].setTexture(&this->towerTextures[1]);
-	}
-	if (this->structInv.wave.mana < structInv.windTower.towerCost) {
-		inventoryBox[1].setTexture(&towerNoTextures[2]);
-	}
-	else {
-		inventoryBox[1].setTexture(&this->towerTextures[2]);
-	}
-	if (this->structInv.wave.mana < structInv.iceTower.towerCost) {
-		inventoryBox[8].setTexture(&towerNoTextures[3]);
-	}
-	else {
-		inventoryBox[8].setTexture(&this->towerTextures[3]);
-	}
-	if (this->structInv.wave.mana < structInv.earthTower.towerCost) {
-		inventoryBox[2].setTexture(&towerNoTextures[4]);
-	}
-	else {
-		inventoryBox[2].setTexture(&this->towerTextures[4]);
-	}
-	if (this->structInv.wave.mana < structInv.energyTower.towerCost) {
-		inventoryBox[9].setTexture(&towerNoTextures[5]);
-	}
-	else {
-		inventoryBox[9].setTexture(&this->towerTextures[5]);
-	}
-	if (this->structInv.wave.mana < structInv.lightTower.towerCost) {
-		inventoryBox[3].setTexture(&towerNoTextures[6]);
-	}
-	else {
-		inventoryBox[3].setTexture(&this->towerTextures[6]);
-	}
-	if (this->structInv.wave.mana < structInv.darkTower.towerCost) {
-		inventoryBox[10].setTexture(&towerNoTextures[7]);
-	}
-	else {
-		inventoryBox[10].setTexture(&this->towerTextures[7]);
-	}
-	if (this->structInv.wave.mana < structInv.elementalAmplifier.towerCost) {
-		inventoryBox[4].setTexture(&towerNoTextures[8]);
-	}
-	else {
-		inventoryBox[4].setTexture(&this->towerTextures[8]);
-	}
-	if (this->structInv.wave.mana < structInv.elementalOverclocker.towerCost) {
-		inventoryBox[5].setTexture(&towerNoTextures[9]);
-	}
-	else {
-		inventoryBox[5].setTexture(&this->towerTextures[9]);
-	}
-	if (this->structInv.wave.mana < structInv.manaAmplifier.towerCost) {
-		inventoryBox[6].setTexture(&towerNoTextures[10]);
-	}
-	else {
-		inventoryBox[6].setTexture(&this->towerTextures[10]);
-	}
-	if (this->structInv.wave.mana < structInv.observatory.towerCost) {
-		inventoryBox[11].setTexture(&towerNoTextures[11]);
-	}
-	else {
-		inventoryBox[11].setTexture(&this->towerTextures[11]);
-	}
-	if (this->structInv.wave.mana < structInv.regenTower.towerCost) {
-		inventoryBox[12].setTexture(&towerNoTextures[12]);
-	}
-	else {
-		inventoryBox[12].setTexture(&this->towerTextures[12]);
-	}
-	if (this->structInv.wave.mana < structInv.voidTower.towerCost) {
-		inventoryBox[13].setTexture(&towerNoTextures[13]);
-	}
-	else {
-		inventoryBox[13].setTexture(&this->towerTextures[13]);
-	}
+
+
+
+
+		if (this->structInv.wave.mana < structInv.firePrice) {
+			inventoryBox[0].setTexture(&towerNoTextures[0]);
+		}
+		else {
+			inventoryBox[0].setTexture(&this->towerTextures[0]);
+		}
+	
+
+		if (this->structInv.wave.mana < structInv.waterPrice) {
+			inventoryBox[7].setTexture(&towerNoTextures[1]);
+		}
+		else {
+			inventoryBox[7].setTexture(&this->towerTextures[1]);
+		}
+	
+
+		if (this->structInv.wave.mana < structInv.windPrice) {
+			inventoryBox[1].setTexture(&towerNoTextures[2]);
+		}
+		else {
+			inventoryBox[1].setTexture(&this->towerTextures[2]);
+		}
+	
+
+		if (this->structInv.wave.mana < structInv.icePrice) {
+			inventoryBox[8].setTexture(&towerNoTextures[3]);
+		}
+		else {
+			inventoryBox[8].setTexture(&this->towerTextures[3]);
+		}
+	
+
+		if (this->structInv.wave.mana < structInv.earthPrice) {
+			inventoryBox[2].setTexture(&towerNoTextures[4]);
+		}
+		else {
+			inventoryBox[2].setTexture(&this->towerTextures[4]);
+		}
+
+		if (this->structInv.wave.mana < structInv.energyPrice) {
+			inventoryBox[9].setTexture(&towerNoTextures[5]);
+		}
+		else {
+			inventoryBox[9].setTexture(&this->towerTextures[5]);
+		}
+
+		if (this->structInv.wave.mana < structInv.lightPrice) {
+			inventoryBox[3].setTexture(&towerNoTextures[6]);
+		}
+		else {
+			inventoryBox[3].setTexture(&this->towerTextures[6]);
+		}
+
+		if (this->structInv.wave.mana < structInv.darkPrice) {
+			inventoryBox[10].setTexture(&towerNoTextures[7]);
+		}
+		else {
+			inventoryBox[10].setTexture(&this->towerTextures[7]);
+		}
+
+		if (this->structInv.wave.mana < structInv.elemAmpPrice) {
+			inventoryBox[4].setTexture(&towerNoTextures[8]);
+		}
+		else {
+			inventoryBox[4].setTexture(&this->towerTextures[8]);
+		}
+
+		if (this->structInv.wave.mana < structInv.elemOverPrice) {
+			inventoryBox[5].setTexture(&towerNoTextures[9]);
+		}
+		else {
+			inventoryBox[5].setTexture(&this->towerTextures[9]);
+		}
+
+		if (this->structInv.wave.mana < structInv.manaAmpPrice) {
+			inventoryBox[6].setTexture(&towerNoTextures[10]);
+		}
+		else {
+			inventoryBox[6].setTexture(&this->towerTextures[10]);
+		}
+
+		if (this->structInv.wave.mana < structInv.observPrice) {
+			inventoryBox[11].setTexture(&towerNoTextures[11]);
+		}
+		else {
+			inventoryBox[11].setTexture(&this->towerTextures[11]);
+		}
+
+		if (this->structInv.wave.mana < structInv.regenPrice) {
+			inventoryBox[12].setTexture(&towerNoTextures[12]);
+		}
+		else {
+			inventoryBox[12].setTexture(&this->towerTextures[12]);
+		}
+
+		if (this->structInv.wave.mana < structInv.voidPrice) {
+			inventoryBox[13].setTexture(&towerNoTextures[13]);
+		}
+		else {
+			inventoryBox[13].setTexture(&this->towerTextures[13]);
+		}
+	
 }
 
 void GUI::updateTowerUpgrades()
@@ -470,9 +479,9 @@ void GUI::renderGUI(sf::RenderTarget & target)
 		towerMenuToggle.setTexture(&towerToggleTexture);
 		target.draw(towerMenuToggle);
 	}
-// IF TOWER IS SELECTED
+	// IF TOWER IS SELECTED
 	if (isTowerSelected()) {
-			this->renderTowerUpgradeBox(target);
+		this->renderTowerUpgradeBox(target);
 	}
 	//target.draw(miniMapBox);
 	target.draw(timerText);
@@ -558,7 +567,7 @@ void GUI::renderTowerUpgradeBox(sf::RenderTarget & target)
 	for (int i = 0; i < this->towerUpgradeBox.size(); i++) {
 		target.draw(this->towerUpgradeBox[i]);
 	}
-		this->renderTowerUpgrades(target);
+	this->renderTowerUpgrades(target);
 }
 
 void GUI::renderTowerUpgrades(sf::RenderTarget & target)

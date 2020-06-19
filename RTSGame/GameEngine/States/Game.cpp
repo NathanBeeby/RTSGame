@@ -131,8 +131,6 @@ void Game::mouseHandler(sf::RenderWindow & window, sf::View &view)
 	mousePosGrid.x = (mousePosView.x / gridSizeU);
 	mousePosGrid.y = (mousePosView.y / gridSizeU);
 	gui.mouseHandler(mousePosWindow, mousePosGrid);
-
-	gui.updateMousePositions(mousePosWindow, mousePosView, static_cast<sf::Vector2i>(mousePosGrid));
 }
 
 void Game::updateTileView(sf::View &view)

@@ -18,6 +18,7 @@ void Wave::initVariables()
 	// Where the enemies begin (Possibly need to make if statement for each given maps start position)
 	this->enemyStartPos = sf::Vector2i(0, (200 * 14) + 20);
 	this->delayTimes.resize(enemyAmount);
+	this->enemy.element = element;
 }
 
 Wave::Wave()
@@ -81,16 +82,16 @@ void Wave::updateEnemyInWave()
 		elapsed += waveClock.restart().asSeconds();
 		for (int i = 0; i < enemyAmount; i++) {
 
-				if (elapsed >= delayTimes[i]) {
-					std::cout << "Enemy Delay Time: " << delayTimes[i];
-					enemy.sprite.setPosition(sf::Vector2f(enemyStartPos));
-					enemy.element = element;
-					enemies.push_back(Enemy(enemy));
+			if (elapsed >= delayTimes[i]) {
+				std::cout << "Enemy Delay Time: " << delayTimes[i];
+				enemy.sprite.setPosition(sf::Vector2f(enemyStartPos));
+				enemy.element = element;
+				enemies.push_back(Enemy(enemy));
 
-					this->waveClock.restart();
-					this->enemyAmount--;
-					this->elapsed = 0;
-				}
+				this->waveClock.restart();
+				this->enemyAmount--;
+				this->elapsed = 0;
+			}
 		}
 		if (enemyAmount <= 0) {
 			waveBegan = false;
@@ -110,9 +111,11 @@ void Wave::updateEnemies()
 				enemies.erase(enemies.begin() + i);
 				this->enemiesAreKilled++;
 			}
-			if (enemies[i].currentPoint == enemies[i].maxPoint) {
-				enemies.erase(enemies.begin() + i);
-				this->enemiesArePassed++;
+			if (enemies.size() > 0) {
+				if (enemies[i].currentPoint == enemies[i].maxPoint) {
+					enemies.erase(enemies.begin() + i);
+					this->enemiesArePassed++;
+				}
 			}
 		}
 		//fireEnemy.update();

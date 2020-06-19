@@ -7,6 +7,22 @@ void StructureInventory::initVariables()
 	this->towerFollowing = false;
 	this->towerIsPlacable = true;
 
+	this->firePrice = 300;
+	this->waterPrice = 280;
+	this->windPrice = 255;
+	this->icePrice = 210;
+	this->earthPrice = 400;
+	this->energyPrice = 350;
+	this->lightPrice = 230;
+	this->darkPrice = 366;
+	this->elemAmpPrice = 600;
+	this->elemOverPrice = 600;
+	this->manaAmpPrice = 600;
+	this->observPrice = 600;
+	this->regenPrice = 600;
+	this->voidPrice = 755;
+
+
 	this->towerToFollow = "";
 	this->fireString = "../Assets/Image_Assets/Towers/FireTower.png";
 	this->waterString = "../Assets/Image_Assets/Towers/WaterTower.png";
@@ -25,12 +41,13 @@ void StructureInventory::initVariables()
 
 	this->unplacablePos.x = -200;
 	this->unplacablePos.y = -200;
+	this->enemyKillMana = 0;
 }
 
 void StructureInventory::initSprites()
 {
-	this->tower.setSize(sf::Vector2f(80, 80));
-	this->tower.setOrigin(this->tower.getSize().x / 2, this->tower.getSize().y / 2);
+	this->towerImage.setSize(sf::Vector2f(80, 80));
+	this->towerImage.setOrigin(this->towerImage.getSize().x / 2, this->towerImage.getSize().y / 2);
 }
 
 void StructureInventory::initFont()
@@ -39,6 +56,48 @@ void StructureInventory::initFont()
 
 void StructureInventory::initText()
 {
+	if (!this->fireTexture.loadFromFile("../Assets/Image_Assets/Towers/FireTower.png")) {
+		std::cout << "Failed to load fireTexture" << std::endl;
+	}
+	if (!this->waterTexture.loadFromFile("../Assets/Image_Assets/Towers/WaterTower.png")) {
+		std::cout << "Failed to load waterTexture" << std::endl;
+	}
+	if (!this->windTexture.loadFromFile("../Assets/Image_Assets/Towers/WindTower.png")) {
+		std::cout << "Failed to load windTexture" << std::endl;
+	}
+	if (!this->iceTexture.loadFromFile("../Assets/Image_Assets/Towers/IceTower.png")) {
+		std::cout << "Failed to load iceTexture" << std::endl;
+	}
+	if (!this->earthTexture.loadFromFile("../Assets/Image_Assets/Towers/EarthTower.png")) {
+		std::cout << "Failed to load earthTexture" << std::endl;
+	}
+	if (!this->energyTexture.loadFromFile("../Assets/Image_Assets/Towers/EnergyTower.png")) {
+		std::cout << "Failed to load energyTexture" << std::endl;
+	}
+	if (!this->lightTexture.loadFromFile("../Assets/Image_Assets/Towers/LightTower.png")) {
+		std::cout << "Failed to load lightTexture" << std::endl;
+	}
+	if (!this->darkTexture.loadFromFile("../Assets/Image_Assets/Towers/DarkTower.png")) {
+		std::cout << "Failed to load darkTexture" << std::endl;
+	}
+	if (!this->elemAmpTexture.loadFromFile("../Assets/Image_Assets/Towers/ElementalAmplifier.png")) {
+		std::cout << "Failed to load elemAmpTexture" << std::endl;
+	}
+	if (!this->elemOverTexture.loadFromFile("../Assets/Image_Assets/Towers/ElementalOverclocker.png")) {
+		std::cout << "Failed to load elemOverTexture" << std::endl;
+	}
+	if (!this->manaAmpTexture.loadFromFile("../Assets/Image_Assets/Towers/ManaAmplifier.png")) {
+		std::cout << "Failed to load manaAmpTexture" << std::endl;
+	}
+	if (!this->observTexture.loadFromFile("../Assets/Image_Assets/Towers/Observatory.png")) {
+		std::cout << "Failed to load observTexture" << std::endl;
+	}
+	if (!this->regenTexture.loadFromFile("../Assets/Image_Assets/Towers/Regenerator.png")) {
+		std::cout << "Failed to load regenTexture" << std::endl;
+	}
+	if (!this->voidTexture.loadFromFile("../Assets/Image_Assets/Towers/VoidTower.png")) {
+		std::cout << "Failed to load voidTexture" << std::endl;
+	}
 }
 
 // Constructor / Destructor
@@ -81,7 +140,7 @@ void StructureInventory::towerFollow(std::string &towerString)
 	if (!this->towerTexture.loadFromFile(towerString)) {
 		std::cout << "Couldn't load tower follow texture" << std::endl;
 	}
-	this->tower.setTexture(&towerTexture);
+	this->towerImage.setTexture(&towerTexture);
 	setFollowing(true);
 	this->towerToFollow = towerString;
 }
@@ -112,24 +171,6 @@ void StructureInventory::waterTilePositions(sf::Vector2i position)
 	waterTiles.push_back(position);
 }
 
-void StructureInventory::DeselectTowers()
-{
-	fireTower.DeselectTower();
-	waterTower.DeselectTower();
-	windTower.DeselectTower();
-	iceTower.DeselectTower();
-	earthTower.DeselectTower();
-	energyTower.DeselectTower();
-	lightTower.DeselectTower();
-	darkTower.DeselectTower();
-	elementalAmplifier.DeselectTower();
-	elementalOverclocker.DeselectTower();
-	manaAmplifier.DeselectTower();
-	observatory.DeselectTower();
-	regenTower.DeselectTower();
-	voidTower.DeselectTower();
-}
-
 sf::Vector2i StructureInventory::returnUnplacablePosition(sf::Vector2i position)
 {
 	for (int i = 0; i < towerPlacementPositions.size(); i++) {
@@ -150,90 +191,205 @@ int StructureInventory::towerPlace(sf::Vector2i position)
 {
 	if (towerPlacable(position) == true) {
 		if (towerIsFollowing() == fireString) {
-			// Create fire tower here, give parameters of tower tile position etc.
-			fireTower.CreateTower(position);
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->fireTexture);
+			tower.element = 0;
+			tower.towerDamage = 100.f;
+			tower.towerCost = firePrice;
+			tower.towerRange = 600.f;
+			tower.towerAttackSpeed = 9.99f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = fireTower.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Fire Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == waterString) {
-			waterTower.CreateTower(position);
+
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->waterTexture);
+			tower.element = 1;
+			tower.towerDamage = 100.f;
+			tower.towerCost = waterPrice;
+			tower.towerRange = 700.f;
+			tower.towerAttackSpeed = 8.01f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = waterTower.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Water Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == windString) {
-			windTower.CreateTower(position);
+
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->windTexture);
+			tower.element = 2;
+			tower.towerDamage = 100.f;
+			tower.towerCost = windPrice;
+			tower.towerRange = 600.f;
+			tower.towerAttackSpeed = 8.01f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = windTower.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Wind Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == iceString) {
-			iceTower.CreateTower(position);
+
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->iceTexture);
+			tower.element = 3;
+			tower.towerDamage = 100.f;
+			tower.towerCost = icePrice;
+			tower.towerRange = 350.f;
+			tower.towerAttackSpeed = 8.01f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = iceTower.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Ice Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == earthString) {
-			earthTower.CreateTower(position);
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->earthTexture);
+			tower.element = 4;
+			tower.towerDamage = 100.f;
+			tower.towerCost = earthPrice;
+			tower.towerRange = 350.f;
+			tower.towerAttackSpeed = 8.01f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = earthTower.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Earth Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == energyString) {
-			energyTower.CreateTower(position);
+
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->energyTexture);
+			tower.element = 5;
+			tower.towerDamage = 100.f;
+			tower.towerCost = energyPrice;
+			tower.towerRange = 600.f;
+			tower.towerAttackSpeed = 8.01f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = energyTower.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Energy Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == lightString) {
-			lightTower.CreateTower(position);
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->lightTexture);
+			tower.element = 6;
+			tower.towerDamage = 100.f;
+			tower.towerCost = lightPrice;
+			tower.towerRange = 350.f;
+			tower.towerAttackSpeed = 8.01f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = lightTower.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Light Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == darkString) {
-			darkTower.CreateTower(position);
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->darkTexture);
+			tower.element = 7;
+			tower.towerDamage = 100.f;
+			tower.towerCost = darkPrice;
+			tower.towerRange = 350.f;
+			tower.towerAttackSpeed = 8.01f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = darkTower.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Dark Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == elementAmpString) {
-			elementalAmplifier.CreateTower(position);
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->elemAmpTexture);
+			tower.element = 8;
+			tower.towerDamage = 100.f;
+			tower.towerCost = elemAmpPrice;
+			tower.towerRange = 1000.f;
+			tower.towerAttackSpeed = 9.5f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = elementalAmplifier.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Elemental Amplifier Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == elementOverString) {
-			elementalOverclocker.CreateTower(position);
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->elemOverTexture);
+			tower.element = 9;
+			tower.towerDamage = 100.f;
+			tower.towerCost = elemOverPrice;
+			tower.towerRange = 1000.f;
+			tower.towerAttackSpeed = 9.5f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = elementalOverclocker.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Elemental Overclocker Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == manaAmpString) {
-			manaAmplifier.CreateTower(position);
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->manaAmpTexture);
+			tower.element = 10;
+			tower.towerDamage = 100.f;
+			tower.towerCost = manaAmpPrice;
+			tower.towerRange = 1000.f;
+			tower.towerAttackSpeed = 9.5f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = manaAmplifier.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Mana Amplifier Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == observString) {
-			observatory.CreateTower(position);
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->observTexture);
+			tower.element = 11;
+			tower.towerDamage = 100.f;
+			tower.towerCost = observPrice;
+			tower.towerRange = 1000.f;
+			tower.towerAttackSpeed = 9.5f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = observatory.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Observatory Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == regenString) {
-			regenTower.CreateTower(position);
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->regenTexture);
+			tower.element = 12;
+			tower.towerDamage = 100.f;
+			tower.towerRange = 1000.f;
+			tower.towerAttackSpeed = 9.5f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = regenTower.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Regen Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
 		else if (towerIsFollowing() == voidString) {
-			voidTower.CreateTower(position);
+			tower.sprite.setPosition(sf::Vector2f(position));
+			tower.sprite.setTexture(&this->voidTexture);
+			tower.element = 13;
+			tower.towerDamage = 100.f;
+			tower.towerCost = voidPrice;
+			tower.towerRange = 1000.f;
+			tower.towerAttackSpeed = 9.5f;
+			tower.bulletSpeed = 50.f;
+			towers.push_back(Tower(tower));
 			towerPlacementPositions.push_back(position);
-			structurePrice = voidTower.towerCost;
+			structurePrice = tower.towerCost;
 			std::cout << "Void Tower Created! : PosX: " << position.x << " ,PosY: " << position.y << std::endl;
 		}
+
 	}
 
 	return structurePrice;
@@ -242,41 +398,16 @@ int StructureInventory::towerPlace(sf::Vector2i position)
 void StructureInventory::towerClicked(sf::Vector2i position)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-		this->DeselectTowers();
-		fireTower.towerClicked(position);
-		waterTower.towerClicked(position);
-		windTower.towerClicked(position);
-		iceTower.towerClicked(position);
-		earthTower.towerClicked(position);
-		energyTower.towerClicked(position);
-		lightTower.towerClicked(position);
-		darkTower.towerClicked(position);
-		elementalAmplifier.towerClicked(position);
-		elementalOverclocker.towerClicked(position);
-		manaAmplifier.towerClicked(position);
-		regenTower.towerClicked(position);
-		observatory.towerClicked(position);
-		voidTower.towerClicked(position);
+
+		for (int i = 0; i < towers.size(); i++) {
+			towers[i].DeselectTower();
+			towers[i].towerClicked(position);
+		}
 	}
 }
 
 void StructureInventory::deleteAllTowers()
 {
-	fireTower.deleteTowers();
-	waterTower.deleteTowers();
-	windTower.deleteTowers();
-	iceTower.deleteTowers();
-	earthTower.deleteTowers();
-	energyTower.deleteTowers();
-	lightTower.deleteTowers();
-	darkTower.deleteTowers();
-	elementalAmplifier.deleteTowers();
-	elementalOverclocker.deleteTowers();
-	manaAmplifier.deleteTowers();
-	regenTower.deleteTowers();
-	observatory.deleteTowers();
-	voidTower.deleteTowers();
-
 	for (int i = 0; i < towerPlacementPositions.size(); i++) {
 		towerPlacementPositions.erase(towerPlacementPositions.begin() + i);
 	}
@@ -287,118 +418,80 @@ void StructureInventory::updateFiring()
 	// This works - Now need to get the towers to fire at these enemies
 	if (wave.enemies.size() > 0) {
 		//for (int i = 0; i < wave.enemies.size(); i++) {
-			this->updateTowerFiring(sf::Vector2i(wave.enemies[0].sprite.getPosition().x, wave.enemies[0].sprite.getPosition().y));
-		}
+		this->updateTowerFiring(sf::Vector2i(wave.enemies[0].sprite.getPosition().x, wave.enemies[0].sprite.getPosition().y));
+	}
 	//}
-}
-
-void StructureInventory::updateMousePosition(sf::Vector2i &windowPos, sf::Vector2f &viewPos, sf::Vector2i &gridPos)
-{
-	fireTower.updateMousePosition(windowPos, viewPos, gridPos);
-	waterTower.updateMousePosition(windowPos, viewPos, gridPos);
-	windTower.updateMousePosition(windowPos, viewPos, gridPos);
-	iceTower.updateMousePosition(windowPos, viewPos, gridPos);
-	earthTower.updateMousePosition(windowPos, viewPos, gridPos);
-	energyTower.updateMousePosition(windowPos, viewPos, gridPos);
-	lightTower.updateMousePosition(windowPos, viewPos, gridPos);
-	darkTower.updateMousePosition(windowPos, viewPos, gridPos);
-	voidTower.updateMousePosition(windowPos, viewPos, gridPos);
 }
 
 void StructureInventory::updateTowers(sf::Time deltaTime)
 {
 	// Attack Towers
-	fireTower.update(deltaTime);
-	waterTower.update(deltaTime);
-	windTower.update(deltaTime);
-	iceTower.update(deltaTime);
-	earthTower.update(deltaTime);
-	energyTower.update(deltaTime);
-	lightTower.update(deltaTime);
-	darkTower.update(deltaTime);
-	// Support Towers
-	elementalAmplifier.update(deltaTime);
-	elementalOverclocker.update(deltaTime);
-	manaAmplifier.update(deltaTime);
-	observatory.update(deltaTime);
-	regenTower.update(deltaTime);
-	voidTower.update(deltaTime);
+	for (size_t i = 0; i < towers.size(); i++) {
+		towers[i].update();
+	}
+
+}
+
+void StructureInventory::updateEnemiesKilled()
+{
+	for (size_t k = 0; k < towers.size(); k++) {
+		for (size_t j = 0; j < towers[k].bullets.size(); j++) {
+			for (size_t i = 0; i < wave.enemies.size(); i++) {
+				if (towers[k].bullets.size() > 0) {
+					if (towers[k].bullets[j].sprite.getGlobalBounds().intersects(wave.enemies[i].sprite.getGlobalBounds())) {
+						wave.enemies[i].health -= towers[k].bullets[j].baseDamage;
+						towers[k].bullets.erase(towers[k].bullets.begin() + j);
+						this->enemyKillMana += 5;
+						std::cout << "fire tower hit enemy. Health = " << wave.enemies[i].health << std::endl;
+					}
+				}
+			}
+		}
+	}
+
 }
 
 void StructureInventory::updateTowerFiring(sf::Vector2i &enemyPos)
 {
-	
-	if (fireTower.getTowerAmount() > 0) {
-		fireTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
+	for (size_t i = 0; i < towers.size(); i++) {
+		towers[i].FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
 	}
-	if (waterTower.getTowerAmount() > 0) {
-		waterTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
-	}
-	if (windTower.getTowerAmount() > 0) {
-		windTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
-	}
-	if (iceTower.getTowerAmount() > 0) {
-		iceTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
-	}
-	if (earthTower.getTowerAmount() > 0) {
-		earthTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
-	}
-	if (energyTower.getTowerAmount() > 0) {
-		energyTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
-	}
-	if (lightTower.getTowerAmount() > 0) {
-		lightTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
-	}
-	if (darkTower.getTowerAmount() > 0) {
-		darkTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
-	}
-	if (voidTower.getTowerAmount() > 0) {
-		voidTower.FireBullet(sf::Vector2f(enemyPos.x, enemyPos.y));
-	}
-	//std::cout << "Enemy Pos X: " << enemyPos.x << ", Y: " << enemyPos.y << std::endl;
+
+
 }
 
 void StructureInventory::update(sf::Time deltaTime)
 {
 	this->updateFiring();
+	this->updateEnemiesKilled();
 	this->updateTowers(deltaTime);
 }
 
 void StructureInventory::mouseHandler(sf::Vector2i windowPos)
 {
 	if (this->towerFollowing == true) {
-		this->tower.setPosition(windowPos.x, windowPos.y);
+		this->towerImage.setPosition(windowPos.x, windowPos.y);
 	}
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
 		this->towerFollowing = false;
-		this->DeselectTowers();
+		for (int i = 0; i < towers.size(); i++) {
+			towers[i].DeselectTower();
+		}
 	}
 }
 
 void StructureInventory::render(sf::RenderTarget & target)
 {
 	if (towerFollowing == true) {
-		target.draw(tower);
+		target.draw(towerImage);
 	}
 }
 
 void StructureInventory::renderTowers(sf::RenderTarget & target)
 {
-	// Attack Towers
-	fireTower.render(target);
-	waterTower.render(target);
-	windTower.render(target);
-	iceTower.render(target);
-	earthTower.render(target);
-	energyTower.render(target);
-	lightTower.render(target);
-	darkTower.render(target);
-	// Support Towers
-	elementalAmplifier.render(target);
-	elementalOverclocker.render(target);
-	manaAmplifier.render(target);
-	observatory.render(target);
-	regenTower.render(target);
-	voidTower.render(target);
+
+	for (size_t i = 0; i < towers.size(); i++) {
+		towers[i].render(target);
+	}
 }

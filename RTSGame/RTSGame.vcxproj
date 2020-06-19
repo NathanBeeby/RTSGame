@@ -120,16 +120,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BasicAnimations.cpp" />
-    <ClCompile Include="GameEngine\Structures\Bullet\Bullet.cpp" />
-    <ClCompile Include="GameEngine\Enemies\Enemy.cpp" />
-    <ClCompile Include="GameEngine\Structures\Tower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\ElementalAmplifierTower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\ElementalOverclockTower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\DarkTower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\EarthTower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\EnergyTower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\FireTower.cpp" />
+    <ClCompile Include="GameEngine\Animation\BasicAnimations.cpp" />
+    <ClCompile Include="GameEngine\Sprites\Bullet\Bullet.cpp" />
+    <ClCompile Include="GameEngine\Sprites\Enemy\Enemy.cpp" />
+    <ClCompile Include="GameEngine\Sprites\Tower\Tower.cpp" />
     <ClCompile Include="GameEngine\GameAssets\Animator.cpp" />
     <ClCompile Include="GameEngine\GameAssets\AssetManager.cpp" />
     <ClCompile Include="GameEngine\Map\Tile.cpp" />
@@ -147,32 +141,19 @@
     <ClCompile Include="GameEngine\States\Game.cpp" />
     <ClCompile Include="GameEngine\States\GameState.cpp" />
     <ClCompile Include="GameEngine\UI\GUI.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\IceTower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\LightTower.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="GameEngine\MainWindow.cpp" />
+    <ClCompile Include="GameEngine\Game\MainWindow.cpp" />
     <ClCompile Include="GameEngine\UI\UI.cpp" />
     <ClCompile Include="GameEngine\UI\StructureInventory.cpp" />
-    <ClCompile Include="GameEngine\MainGame.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\WaterTower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\WindTower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\ManaAmplifierTower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\ObservatoryTower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\RegenTower.cpp" />
-    <ClCompile Include="GameEngine\Structures\Towers\VoidTower.cpp" />
+    <ClCompile Include="GameEngine\Game\MainGame.cpp" />
     <ClCompile Include="GameEngine\Wave\Wave.cpp" />
     <ClCompile Include="GameEngine\Map\PathWaypoints.cpp" />
+    <ClCompile Include="GameEngine\Sprites\pathAttack\pathAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicAnimations.h" />
-    <ClInclude Include="GameEngine\Structures\Bullet\Bullet.h" />
-    <ClInclude Include="GameEngine\Enemies\Enemy.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\ElementalAmplifierTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\ElementalOverclockTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\DarkTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\EarthTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\EnergyTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\FireTower.h" />
+    <ClInclude Include="GameEngine\Animation\BasicAnimations.h" />
+    <ClInclude Include="GameEngine\Sprites\Bullet\Bullet.h" />
+    <ClInclude Include="GameEngine\Sprites\Enemy\Enemy.h" />
     <ClInclude Include="GameEngine\GameAssets\Animator.h" />
     <ClInclude Include="GameEngine\GameAssets\AssetManager.h" />
     <ClInclude Include="AudioEngine\Music\GameMusic.h" />
@@ -188,23 +169,16 @@
     <ClInclude Include="GameEngine\Menus\StartMenu.h" />
     <ClInclude Include="GameEngine\States\Game.h" />
     <ClInclude Include="GameEngine\States\GameState.h" />
-    <ClInclude Include="GameEngine\MainWindow.h" />
+    <ClInclude Include="GameEngine\Game\MainWindow.h" />
     <ClInclude Include="GameEngine\UI\GUI.h" />
     <ClInclude Include="GameEngine\UI\UI.h" />
     <ClInclude Include="GameEngine\UI\StructureInventory.h" />
-    <ClInclude Include="GameEngine\MainGame.h" />
+    <ClInclude Include="GameEngine\Game\MainGame.h" />
     <ClInclude Include="GameEngine\Map\TileProperties.h" />
-    <ClInclude Include="GameEngine\Structures\Tower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\IceTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\LightTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\WaterTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\WindTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\ManaAmplifierTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\ObservatoryTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\RegenTower.h" />
-    <ClInclude Include="GameEngine\Structures\Towers\VoidTower.h" />
+    <ClInclude Include="GameEngine\Sprites\Tower\Tower.h" />
     <ClInclude Include="GameEngine\Wave\Wave.h" />
     <ClInclude Include="GameEngine\Map\PathWaypoints.h" />
+    <ClInclude Include="GameEngine\Sprites\pathAttack\pathAttack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

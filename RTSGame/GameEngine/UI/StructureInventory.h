@@ -3,32 +3,13 @@
 #include <iostream>
 
 #include "../Wave/Wave.h"
+#include "../Sprites/Tower/Tower.h"
 
-#include "../Structures/Towers/FireTower.h"
-#include "../Structures/Towers/WaterTower.h"
-#include "../Structures/Towers/WindTower.h"
-#include "../Structures/Towers/IceTower.h"
-#include "../Structures/Towers/EarthTower.h"
-#include "../Structures/Towers/EnergyTower.h"
-#include "../Structures/Towers/LightTower.h"
-#include "../Structures/Towers/DarkTower.h"
-
-#include "../Structures/Towers/ElementalAmplifierTower.h"
-#include "../Structures/Towers/ElementalOverclockTower.h"
-#include "../Structures/Towers/ManaAmplifierTower.h"
-#include "../Structures/Towers/ObservatoryTower.h"
-#include "../Structures/Towers/RegenTower.h"
-#include "../Structures/Towers/VoidTower.h"
 /*
 TODO: URGENT:
 - For each tile on the map, give a boolean value for if the tile is water or a coastal tile. Coastal tiles can't place any tile. Bodies of water can only have water and ice towers.
 - Create a Magma tile, an ice tile etc. When an ice tile is placed on a water tile, the water tile must turn to ice.
 - Only fire towers should be placable on a magma tile.
-
-
-
--------------MAIN------------------
-- Tower placement is broken, look into why and fix this
 */
 class StructureInventory
 {
@@ -36,11 +17,13 @@ private:
 	// Private Variables
 	bool towerFollowing, towerIsPlacable;
 	int structurePrice;
-	sf::RectangleShape tower;
+	int enemyKillMana;
+	sf::RectangleShape towerImage;
 	sf::Texture towerTexture;
 	sf::Vector2i mousePosWindow;
 	sf::Vector2i unplacablePos;
 	std::string towerToFollow, fireString, waterString, windString, iceString, earthString, energyString, lightString, darkString, voidString, regenString, observString, manaAmpString, elementOverString, elementAmpString;
+	sf::Texture fireTexture, waterTexture, windTexture, iceTexture, earthTexture, energyTexture, lightTexture, darkTexture, voidTexture, elemAmpTexture, elemOverTexture, regenTexture, observTexture, manaAmpTexture;
 	std::vector<sf::Vector2i> towerPlacementPositions;
 	std::vector<sf::Vector2i> unplacablePositions;
 	std::vector<sf::Vector2i> waterTiles;
@@ -56,20 +39,10 @@ public:
 
 	// Public Variables
 	Wave wave;
-	FireTower fireTower;
-	WaterTower waterTower;
-	WindTower windTower;
-	IceTower iceTower;
-	EarthTower earthTower;
-	EnergyTower energyTower;
-	LightTower lightTower;
-	DarkTower darkTower;
-	ElementalAmplifierTower elementalAmplifier;
-	ElementalOverclockTower elementalOverclocker;
-	ManaAmplifierTower manaAmplifier;
-	ObservatoryTower observatory;
-	RegenTower regenTower;
-	VoidTower voidTower;
+	std::vector<Tower> towers;
+	Tower tower;
+
+	int firePrice, waterPrice, windPrice, icePrice, earthPrice, energyPrice, lightPrice, darkPrice, elemAmpPrice, elemOverPrice, manaAmpPrice, observPrice, regenPrice, voidPrice;
 
 	// Accessors
 	void setFollowing(bool follow);
@@ -85,11 +58,10 @@ public:
 	bool towerPlacable(sf::Vector2i position);
 	void unplacablePosition(sf::Vector2i position);
 	void waterTilePositions(sf::Vector2i position);
-	void DeselectTowers();
 	void deleteAllTowers();
 	void updateFiring();
-	void updateMousePosition(sf::Vector2i &windowPos, sf::Vector2f &viewPos, sf::Vector2i &gridPos);
 	void updateTowers(sf::Time deltaTime);
+	void updateEnemiesKilled();
 	void updateTowerFiring(sf::Vector2i &enemyPos);
 	void update(sf::Time deltaTime);
 	void mouseHandler(sf::Vector2i windowPos);
